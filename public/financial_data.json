@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-11 10:07:10",
-  "version": 1789101430,
+  "last_updated": "2026-09-11 14:49:46",
+  "version": 1789118386,
   "society": {
     "name": "Janpriya Greenfield Apartment Owners Welfare Association (JGAOWA)",
     "registration_number": "DRO/BLR/SOR/1138/2014-15",
@@ -542,7 +542,7 @@
       {
         "flat": "A5-332",
         "block": "A5",
-        "description": "August month pending",
+        "description": "Only one Month",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
