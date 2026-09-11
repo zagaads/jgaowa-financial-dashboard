@@ -3,7 +3,9 @@
  * EMI Wise Payment Status & Amount Metrics (Collected Amount, Amount to be Collected, % of Amount)
  */
 
-let financialData = (typeof EMBEDDED_JGAOWA_DATA !== 'undefined') ? EMBEDDED_JGAOWA_DATA : null;
+let financialData = (typeof EMBEDDED_JGAOWA_DATA !== 'undefined' && EMBEDDED_JGAOWA_DATA) 
+  ? EMBEDDED_JGAOWA_DATA 
+  : ((typeof window !== 'undefined' && window.EMBEDDED_JGAOWA_DATA) ? window.EMBEDDED_JGAOWA_DATA : null);
 let currentTab = 'overview';
 let overviewChart = null;
 let donutChart = null;
@@ -54,20 +56,36 @@ function setElHTML(id, html) {
 document.addEventListener('DOMContentLoaded', () => {
   try { if (window.lucide) lucide.createIcons(); } catch(e){}
   startLiveClock();
-  startLiveWatcherPolling();
   setupHoverProtection();
   
-  if (financialData) {
-    renderAll();
+  // 1. If embedded data is present, render immediately
+  if (financialData && Object.keys(financialData).length > 0) {
+    try { renderAll(); } catch(e) { console.error('Render error:', e); }
   }
   
+  // 2. Try fetching from local live server API, fallback to static financial_data.json (for GitHub Pages)
   fetch('/api/financials')
-    .then(r => r.json())
+    .then(r => {
+      if (!r.ok) throw new Error('Local API not running');
+      return r.json();
+    })
     .then(d => {
       financialData = d;
       renderAll();
+      startLiveWatcherPolling();
     })
-    .catch(e => console.log("Using embedded/cached data."));
+    .catch(() => {
+      // Running on GitHub Pages or static host -> load local static JSON
+      if (!financialData || Object.keys(financialData).length === 0) {
+        fetch('./financial_data.json')
+          .then(r => r.json())
+          .then(d => {
+            financialData = d;
+            renderAll();
+          })
+          .catch(e => console.log('Static data loaded from bundle.'));
+      }
+    });
 });
 
 function startLiveClock() {

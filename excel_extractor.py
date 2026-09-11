@@ -240,24 +240,32 @@ def extract_and_update_all():
         try:
             with open(os.path.join(PUBLIC_DIR, "app.js"), "r", encoding="utf-8") as f:
                 app_js = f.read()
+
             with open(os.path.join(PUBLIC_DIR, "index.html"), "r", encoding="utf-8") as f:
                 raw_html = f.read()
 
-            if "<script>\nconst EMBEDDED_JGAOWA_DATA =" in raw_html:
-                raw_html = raw_html.split("<script>\nconst EMBEDDED_JGAOWA_DATA =")[0] + '<script src="app.js"></script>\n</body>\n</html>'
+            # Separate base HTML from app scripts
+            script_start_idx = raw_html.find('// --- JGAOWA Master Dashboard Core Logic ---')
+            if script_start_idx != -1:
+                preceding_script = raw_html.rfind('<script>', 0, script_start_idx)
+                base_html = raw_html[:preceding_script]
+            else:
+                last_script = raw_html.rfind('<script>')
+                base_html = raw_html[:last_script]
 
-            fin_json_str = json.dumps(fin_data)
-            standalone_html = raw_html.replace(
-                '<script src="app.js"></script>',
-                f'<script>\nconst EMBEDDED_JGAOWA_DATA = {fin_json_str};\n{app_js}\n</script>'
-            )
+            fin_json_str = json.dumps(fin_data, ensure_ascii=False)
+            bundle_script = f"\n<script>\nconst EMBEDDED_JGAOWA_DATA = {fin_json_str};\n{app_js}\n</script>\n</body>\n</html>"
+            standalone_html = base_html.rstrip() + bundle_script
 
             with open(os.path.join(WORKSPACE, "JGAOWA_Apartment_Dashboard_Drive_Ready.html"), "w", encoding="utf-8") as f:
                 f.write(standalone_html)
+            with open(os.path.join(WORKSPACE, "index.html"), "w", encoding="utf-8") as f:
+                f.write(standalone_html)
             with open(os.path.join(PUBLIC_DIR, "index.html"), "w", encoding="utf-8") as f:
                 f.write(standalone_html)
+            print("[BUNDLE SUCCESS] Generated standalone bundles for Drive and GitHub Pages!")
         except Exception as ex_bundle:
-            print("Bundle write note:", ex_bundle)
+            print("[BUNDLE ERROR]:", ex_bundle)
 
         dur = round((time.time() - t0) * 1000)
         print(f"[LIVE SYNC SUCCESS] Re-extracted all Excel data in {dur}ms (Version {fin_data['version']})")
@@ -268,3 +276,4 @@ def extract_and_update_all():
 
 if __name__ == '__main__':
     extract_and_update_all()
+
