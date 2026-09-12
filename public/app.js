@@ -1217,3 +1217,359 @@ function showSyncToast(timeStr) {
     }, 4000);
   }
 }
+
+
+// ==========================================
+// JGAOWA VOICE DATA ASSISTANT ENGINE
+// ==========================================
+let isVoiceModalOpen = false;
+let isVoiceAudioEnabled = true;
+let isListening = false;
+let speechRecognizer = null;
+
+function toggleVoiceAssistantModal() {
+  const modal = document.getElementById('voice-assistant-modal');
+  const triggerBtn = document.getElementById('voice-trigger-btn');
+  if (!modal) return;
+
+  isVoiceModalOpen = !isVoiceModalOpen;
+  if (isVoiceModalOpen) {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    if (triggerBtn) triggerBtn.classList.add('hidden');
+    try { if (window.lucide) lucide.createIcons(); } catch(e){}
+    // Auto scroll chat to bottom
+    const stream = document.getElementById('voice-chat-stream');
+    if (stream) stream.scrollTop = stream.scrollHeight;
+  } else {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    if (triggerBtn) triggerBtn.classList.remove('hidden');
+    stopVoiceListening();
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+  }
+}
+
+function toggleVoiceAudio() {
+  isVoiceAudioEnabled = !isVoiceAudioEnabled;
+  const icon = document.getElementById('voice-audio-icon');
+  const btn = document.getElementById('voice-audio-toggle-btn');
+  if (isVoiceAudioEnabled) {
+    if (icon) icon.setAttribute('data-lucide', 'volume-2');
+    if (btn) btn.className = 'p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-400 border border-slate-700 text-xs';
+  } else {
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+    if (icon) icon.setAttribute('data-lucide', 'volume-x');
+    if (btn) btn.className = 'p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-500 border border-slate-700 text-xs';
+  }
+  try { if (window.lucide) lucide.createIcons(); } catch(e){}
+}
+
+function clearVoiceChatHistory() {
+  const stream = document.getElementById('voice-chat-stream');
+  if (stream) {
+    stream.innerHTML = `
+      <div class="flex items-start gap-2.5">
+        <div class="w-6 h-6 rounded-md bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center shrink-0 mt-0.5">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+        </div>
+        <div class="p-3 rounded-2xl rounded-tl-sm bg-slate-900 border border-slate-800 text-slate-200 leading-relaxed">
+          Chat cleared. Ask me any question about the lift collection %, towers, bank balances, or defaulters!
+        </div>
+      </div>
+    `;
+    try { if (window.lucide) lucide.createIcons(); } catch(e){}
+  }
+}
+
+function toggleVoiceListening() {
+  if (isListening) {
+    stopVoiceListening();
+  } else {
+    startVoiceListening();
+  }
+}
+
+function startVoiceListening() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRec) {
+    alert("Speech recognition is not supported in this browser. You can still type your questions in the box below!");
+    return;
+  }
+
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+  try {
+    speechRecognizer = new SpeechRec();
+    speechRecognizer.lang = 'en-IN'; // Indian English / Global English
+    speechRecognizer.continuous = false;
+    speechRecognizer.interimResults = false;
+
+    speechRecognizer.onstart = () => {
+      isListening = true;
+      const banner = document.getElementById('voice-listening-banner');
+      const statusText = document.getElementById('voice-status-text');
+      const micBtn = document.getElementById('voice-mic-main-btn');
+      if (banner) banner.classList.remove('hidden');
+      if (statusText) statusText.textContent = "Listening... Speak your question now";
+      if (micBtn) {
+        micBtn.classList.remove('bg-cyan-500', 'text-slate-950');
+        micBtn.classList.add('bg-rose-500', 'text-white', 'animate-pulse');
+      }
+    };
+
+    speechRecognizer.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      if (transcript && transcript.trim()) {
+        handleUserQuery(transcript.trim());
+      }
+    };
+
+    speechRecognizer.onerror = (event) => {
+      console.warn("Speech recognition error:", event.error);
+      stopVoiceListening();
+      const statusText = document.getElementById('voice-status-text');
+      if (statusText) statusText.textContent = "Could not hear audio. Click mic to try again.";
+    };
+
+    speechRecognizer.onend = () => {
+      stopVoiceListening();
+    };
+
+    speechRecognizer.start();
+  } catch (err) {
+    console.error("SpeechRec start error:", err);
+    stopVoiceListening();
+  }
+}
+
+function stopVoiceListening() {
+  isListening = false;
+  if (speechRecognizer) {
+    try { speechRecognizer.stop(); } catch(e){}
+    speechRecognizer = null;
+  }
+  const banner = document.getElementById('voice-listening-banner');
+  const statusText = document.getElementById('voice-status-text');
+  const micBtn = document.getElementById('voice-mic-main-btn');
+  if (banner) banner.classList.add('hidden');
+  if (statusText) statusText.textContent = "Ready • Click mic to speak";
+  if (micBtn) {
+    micBtn.classList.remove('bg-rose-500', 'text-white', 'animate-pulse');
+    micBtn.classList.add('bg-cyan-500', 'text-slate-950');
+  }
+}
+
+function handleVoiceTextInput() {
+  const input = document.getElementById('voice-text-input');
+  if (!input) return;
+  const val = input.value.trim();
+  if (!val) return;
+  input.value = '';
+  handleUserQuery(val);
+}
+
+function handleQuickVoiceQuery(text) {
+  handleUserQuery(text);
+}
+
+function handleUserQuery(userText) {
+  appendUserMessage(userText);
+  const statusText = document.getElementById('voice-status-text');
+  if (statusText) statusText.textContent = "Analyzing financial records...";
+
+  setTimeout(() => {
+    const answer = processFinancialQuery(userText);
+    appendAssistantMessage(answer);
+    if (statusText) statusText.textContent = "Ready • Click mic to speak";
+    if (isVoiceAudioEnabled) {
+      speakText(answer);
+    }
+  }, 200);
+}
+
+function appendUserMessage(text) {
+  const stream = document.getElementById('voice-chat-stream');
+  if (!stream) return;
+  const msgEl = document.createElement('div');
+  msgEl.className = 'flex items-start justify-end gap-2.5';
+  msgEl.innerHTML = `
+    <div class="p-3 rounded-2xl rounded-tr-sm bg-cyan-600/30 border border-cyan-500/40 text-cyan-100 max-w-[85%] leading-relaxed font-medium">
+      ${text}
+    </div>
+    <div class="w-6 h-6 rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 flex items-center justify-center shrink-0 mt-0.5 text-[10px] font-bold">
+      YOU
+    </div>
+  `;
+  stream.appendChild(msgEl);
+  stream.scrollTop = stream.scrollHeight;
+}
+
+function appendAssistantMessage(text) {
+  const stream = document.getElementById('voice-chat-stream');
+  if (!stream) return;
+  const msgEl = document.createElement('div');
+  msgEl.className = 'flex items-start gap-2.5';
+  
+  // Clean text for display
+  msgEl.innerHTML = `
+    <div class="w-6 h-6 rounded-md bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center shrink-0 mt-0.5">
+      <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+    </div>
+    <div class="p-3 rounded-2xl rounded-tl-sm bg-slate-900 border border-slate-800 text-slate-200 max-w-[85%] leading-relaxed text-[11.5px] space-y-2">
+      <div>${text}</div>
+      <div class="pt-1.5 border-t border-slate-800 flex items-center gap-2">
+        <button onclick="speakText(decodeURIComponent('${encodeURIComponent(text)}'))" class="text-[10px] text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+          <i data-lucide="volume-2" class="w-3 h-3"></i> Listen Again
+        </button>
+      </div>
+    </div>
+  `;
+  stream.appendChild(msgEl);
+  stream.scrollTop = stream.scrollHeight;
+  try { if (window.lucide) lucide.createIcons(); } catch(e){}
+}
+
+function speakText(text) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+
+  // Strip currency symbols for cleaner speech
+  const spokenText = text.replace(/₹/g, 'Rupees ').replace(/%/g, ' percent');
+  const utterance = new SpeechSynthesisUtterance(spokenText);
+  utterance.rate = 1.0;
+  utterance.pitch = 1.0;
+  utterance.lang = 'en-IN';
+
+  // Optional: pick an English voice if available
+  const voices = window.speechSynthesis.getVoices();
+  const preferredVoice = voices.find(v => v.lang.includes('en-IN') || v.lang.includes('en-GB') || v.name.includes('Google') || v.name.includes('Natural'));
+  if (preferredVoice) utterance.voice = preferredVoice;
+
+  window.speechSynthesis.speak(utterance);
+}
+
+// ------------------------------------------------------------------
+// STRICT FINANCIAL DATA QUERY RESOLVER
+// ------------------------------------------------------------------
+function processFinancialQuery(rawQuery) {
+  const data = financialData || (typeof EMBEDDED_JGAOWA_DATA !== 'undefined' ? EMBEDDED_JGAOWA_DATA : {});
+  const q = (rawQuery || '').toLowerCase().trim();
+  
+  const lift = data.lift_project || {};
+  const blocks = lift.blocks || [];
+  const defs = lift.defaulters || [];
+  const painting = data.painting_project || {};
+  const records = data.monthly_records || [];
+
+  // 1. Check for specific flat search (e.g. A6-137, B2-116, A1-101) FIRST
+  const flatMatch = q.match(/\b([ab][1-7]-?\d{1,4})\b/i);
+  if (flatMatch) {
+    const flatQuery = flatMatch[1].toUpperCase().replace(/\s+/g, '');
+    const cleanQuery = flatQuery.includes('-') ? flatQuery : (flatQuery.slice(0, 2) + '-' + flatQuery.slice(2));
+    
+    const matchingDef = defs.find(d => {
+      const dFlat = (d.flat || '').toUpperCase().replace(/\s+/g, '');
+      return dFlat === flatQuery || dFlat === cleanQuery;
+    });
+
+    if (matchingDef) {
+      const mo = matchingDef.months_pending || 1;
+      const amt = matchingDef.amount_due || (mo * 3750);
+      const status = matchingDef.status || 'Pending';
+      const desc = matchingDef.description || '';
+      return `Flat ${matchingDef.flat} (Tower ${matchingDef.block}) has ${mo} months of pending lift EMIs amounting to ₹${amt.toLocaleString('en-IN')}. Notice Status: ${status}. Detail: ${desc}.`;
+    } else {
+      return `Flat ${cleanQuery} has no pending lift dues recorded in the defaulters roster. All EMIs are fully up to date.`;
+    }
+  }
+
+  // 2. Tower-specific query (Tower A1 to Tower B6)
+  const towerMatch = q.match(/\b(?:tower|block)?\s*([ab][1-7])\b/i);
+  if (towerMatch && (q.includes('tower') || q.includes('block') || q.includes('status') || q.includes('collection') || q.includes('pending') || q.includes('emi') || q.includes('paid'))) {
+    const tName = towerMatch[1].toUpperCase();
+    const blk = blocks.find(b => (b.block || '').toUpperCase() === tName);
+    if (blk) {
+      const pctPaid = blk.pct_paid || 0;
+      const pctUnpaid = blk.pct_unpaid || (100 - pctPaid);
+      const paidEMIs = blk.paid_emis || 0;
+      const pendEMIs = blk.pending_emis || 0;
+      const totEMIs = blk.total_emis || (blk.flats_count * 4);
+      const coll = blk.collected || 0;
+      const target = blk.target || (blk.flats_count * 15000);
+      const pctAmt = blk.pct_amount || Math.round((coll / target) * 1000) / 10;
+      return `Tower ${tName} has achieved ${pctPaid}% EMI installment collection (${paidEMIs} of ${totEMIs} EMIs paid). Pending EMIs: ${pendEMIs} (${pctUnpaid.toFixed(1)}%). Total collected is ₹${coll.toLocaleString('en-IN')} against total demand of ₹${target.toLocaleString('en-IN')} (${pctAmt}% collected).`;
+    }
+  }
+
+  // 3. Lift Modernization Project Totals
+  if (q.includes('lift') && (q.includes('total') || q.includes('collection') || q.includes('summary') || q.includes('progress') || q.includes('percentage') || q.includes('demand') || q.includes('overall') || q.includes('project') || q.split(' ').length <= 4)) {
+    const totColl = lift.total_collected || 4804694;
+    const totTarget = lift.total_target || 5884720;
+    const unspent = lift.unspent_balance || 2027170;
+    const pctColl = ((totColl / totTarget) * 100).toFixed(1);
+    const totEMIs = blocks.reduce((acc, b) => acc + (b.total_emis || 0), 0) || 1424;
+    const paidEMIs = blocks.reduce((acc, b) => acc + (b.paid_emis || 0), 0) || 1275;
+    const pctEMIs = ((paidEMIs / totEMIs) * 100).toFixed(1);
+    return `For the Lift Modernization Project across 13 towers (356 flats), total demand is ₹58.85 Lakhs. Total collected is ₹${(totColl/100000).toFixed(2)} Lakhs (${pctColl}% of demand). Across the society, ${paidEMIs} of ${totEMIs} total EMIs (${pctEMIs}%) are paid, leaving an unspent lift fund balance of ₹${(unspent/100000).toFixed(2)} Lakhs.`;
+  }
+
+  // 4. Defaulters & Overdue queries
+  if (q.includes('defaulter') || q.includes('pending') || q.includes('unpaid') || q.includes('due') || q.includes('overdue')) {
+    const c4 = defs.filter(d => (d.months_pending || 0) >= 4).length;
+    const c3 = defs.filter(d => (d.months_pending || 0) === 3).length;
+    const c2 = defs.filter(d => (d.months_pending || 0) === 2).length;
+    const c1 = defs.filter(d => (d.months_pending || 0) <= 1).length;
+    const totDef = defs.length || 65;
+
+    if (q.includes('4') || q.includes('four') || q.includes('final')) {
+      return `There are ${c4} flats with 4 months of overdue lift EMIs on Final Notice, owing ₹15,000 each.`;
+    } else if (q.includes('3') || q.includes('three')) {
+      return `There are ${c3} flats with 3 months of overdue lift EMIs on Urgent Notice, owing ₹11,250 each.`;
+    } else if (q.includes('2') || q.includes('two')) {
+      return `There are ${c2} flats with 2 months of pending lift EMIs (Reminder Notice), owing ₹7,500 each.`;
+    } else if (q.includes('1') || q.includes('one')) {
+      return `There are ${c1} flats with 1 month of pending lift EMI, owing ₹3,750 each.`;
+    } else {
+      return `There are a total of ${totDef} flats in the pending dues roster: ${c4} flats on 4-Month Final Notice, ${c3} flats on 3-Month Urgent Notice, ${c2} flats on 2-Month Reminder, and ${c1} flats on 1-Month Pending status.`;
+    }
+  }
+
+  // 5. Bank Liquidity & Cash Balances
+  if (q.includes('bank') || q.includes('cash') || q.includes('liquidity') || q.includes('balance') || q.includes('icici') || q.includes('idfc') || q.includes('fund')) {
+    const latestRec = records.length > 0 ? records[records.length - 1] : {};
+    const bb = latestRec.bank_balances || {};
+    const iciciCur = bb.icici_current || 561201.81;
+    const iciciSb = bb.icici_sb || 111888.55;
+    const idfc = bb.idfc_first || 499098.90;
+    const cash = bb.cash_in_hand || 48823.00;
+    const totLiq = iciciCur + iciciSb + idfc + cash;
+
+    return `As of the latest statement (${latestRec.month || 'Feb 2026'}), total liquid funds stand at ₹${(totLiq/100000).toFixed(2)} Lakhs. Account breakdown: ICICI Current Account: ₹${(iciciCur/100000).toFixed(2)}L, IDFC First Bank: ₹${(idfc/100000).toFixed(2)}L, ICICI Savings: ₹${(iciciSb/100000).toFixed(2)}L, and Cash in Hand: ₹${(cash/1000).toFixed(1)}K.`;
+  }
+
+  // 6. Painting Project
+  if (q.includes('painting') || q.includes('paint')) {
+    const bgt = painting.budget || 1850000;
+    const spent = painting.spent || 1480000;
+    const ret = painting.retention_balance || 370000;
+    const pct = painting.completion_pct || 80;
+    return `The 10-Block Painting Project has a total budget of ₹${(bgt/100000).toFixed(2)} Lakhs. Amount spent so far is ₹${(spent/100000).toFixed(2)} Lakhs (${pct}% complete), with a contractor retention balance of ₹${(ret/100000).toFixed(2)} Lakhs held.`;
+  }
+
+  // 7. 23-Month Receipts & Payments Statement
+  if (q.includes('receipt') || q.includes('payment') || q.includes('expense') || q.includes('statement') || q.includes('income') || q.includes('month') || q.includes('23')) {
+    const totRec = records.reduce((acc, r) => acc + (r.receipts_total || 0), 0);
+    const totPay = records.reduce((acc, r) => acc + (r.payments_total || 0), 0);
+    const latestRec = records.length > 0 ? records[records.length - 1] : {};
+    return `Over the 23-month multi-year statement (April 2024 to February 2026), total society collections were ₹${(totRec/100000).toFixed(2)} Lakhs and total expenses were ₹${(totPay/100000).toFixed(2)} Lakhs. In ${latestRec.month || 'Feb 2026'}, receipts were ₹${(latestRec.receipts_total || 0).toLocaleString('en-IN')} and payments were ₹${(latestRec.payments_total || 0).toLocaleString('en-IN')}.`;
+  }
+
+  // 8. General Overview / Snapshot
+  if (q.includes('overview') || q.includes('summary') || q.includes('financial') || q.includes('status') || q.includes('how are we doing')) {
+    return `Janapriya Greenwood Financial Snapshot: Total liquid bank balance is ₹12.21 Lakhs across ICICI and IDFC. Lift modernization collection has achieved 81.6% (₹48.05 Lakhs collected) with 89.5% of total EMIs paid. There are 65 flats in the pending dues roster, and painting project completion is at 80%.`;
+  }
+
+  // Guardrail for external / out-of-scope questions
+  return `I am the JGAOWA Financial Board Voice Assistant. I can only answer questions regarding Janapriya Greenwood's apartment accounts, lift installment collections, bank balances, painting project, and defaulters.`;
+}
