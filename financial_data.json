@@ -1,36 +1,22 @@
 {
-  "last_updated": "2026-09-14 13:39:46",
-  "version": 1789373386,
+  "last_updated": "2026-09-14 14:50:44",
+  "version": 1789377644,
   "society": {
-    "name": "Janpriya Greenfield Apartment Owners Welfare Association (JGAOWA)",
-    "registration_number": "DRO/BLR/SOR/1138/2014-15",
-    "address": "Janpriya Greenfield, Magadi Road, Kadabagere Post, Bengaluru - 562130",
-    "total_flats": 356,
-    "blocks": [
-      "A1",
-      "A2",
-      "A3",
-      "A4",
-      "A5",
-      "A6",
-      "A7",
-      "B1",
-      "B2",
-      "B3",
-      "B4",
-      "B5",
-      "B6"
-    ]
+    "name": "Janapriya Greenwood Apartment Owners Welfare Association",
+    "short_name": "JGAOWA",
+    "address": "Janapriya Greenwood, Bangalore - 560057",
+    "financial_year": "FY 2024-2026 (23-Month Comprehensive)"
   },
   "summary": {
-    "current_liquid_funds": 1400209.9399999997,
-    "total_receipts_23m": 51703103.6,
-    "total_payments_23m": 57255788.2,
-    "lift_pool_collected": 5456109.0,
-    "lift_pool_spent": 2697000.0,
-    "lift_pool_balance": 2026872.0,
-    "painting_collected": 6507000.0,
-    "total_months": 23
+    "total_flats": 356,
+    "total_blocks": 13,
+    "total_receipts_fy": 51703103.6,
+    "total_payments_fy": 57255788.2,
+    "closing_cash_bank": 1400209.9399999997,
+    "active_capex_projects": [
+      "Lift Modernization",
+      "10-Block Painting"
+    ]
   },
   "lift_project": {
     "total_flats": 356,
@@ -41,6 +27,8 @@
     "overall_pending_pct": 8.37,
     "total_target_amount": 7355900.0,
     "total_collected": 5456109.0,
+    "vendor_expenses": 2697000.0,
+    "unspent_balance": 2759109.0,
     "overall_amount_pct": 74.2,
     "blocks": [
       {

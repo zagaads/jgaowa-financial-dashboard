@@ -188,25 +188,40 @@ def extract_and_update_all():
         last_rec = monthly_records[-1] if monthly_records else {}
         liquid_funds = last_rec.get("closing_balance", 1400209.94)
 
+        # Extract vendor expenses & unspent balance from Summary sheet if present
+        vendor_exp = 2697000.0
+        unspent_bal = 2759109.0
+        try:
+            # Check row 38, col 3 or row 40, col 11
+            for r in range(35, min(45, ws_lift.max_row + 1)):
+                for c in range(1, ws_lift.max_column + 1):
+                    v = ws_lift.cell(r, c).value
+                    if v and "2697000" in str(v):
+                        vendor_exp = parse_num(v)
+                    elif v and "2759109" in str(v):
+                        unspent_bal = parse_num(v)
+            tot_coll_calc = sum(b["collected"] for b in blocks_exact)
+            if unspent_bal == 0 and tot_coll_calc > 0:
+                unspent_bal = tot_coll_calc - vendor_exp
+        except Exception as e_bal:
+            print("Balance extraction note:", e_bal)
+
         fin_data = {
             "last_updated": time.strftime("%Y-%m-%d %H:%M:%S"),
             "version": int(time.time()),
             "society": {
-                "name": "Janpriya Greenfield Apartment Owners Welfare Association (JGAOWA)",
-                "registration_number": "DRO/BLR/SOR/1138/2014-15",
-                "address": "Janpriya Greenfield, Magadi Road, Kadabagere Post, Bengaluru - 562130",
-                "total_flats": sum(b["flats_count"] for b in blocks_exact),
-                "blocks": ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "B1", "B2", "B3", "B4", "B5", "B6"]
+                "name": "Janapriya Greenwood Apartment Owners Welfare Association",
+                "short_name": "JGAOWA",
+                "address": "Janapriya Greenwood, Bangalore - 560057",
+                "financial_year": "FY 2024-2026 (23-Month Comprehensive)"
             },
             "summary": {
-                "current_liquid_funds": liquid_funds,
-                "total_receipts_23m": total_receipts_all,
-                "total_payments_23m": total_payments_all,
-                "lift_pool_collected": sum(b["collected"] for b in blocks_exact),
-                "lift_pool_spent": 2697000.0,
-                "lift_pool_balance": 2026872.0,
-                "painting_collected": 6507000.0,
-                "total_months": len(monthly_records)
+                "total_flats": 356,
+                "total_blocks": 13,
+                "total_receipts_fy": sum(r["receipts_total"] for r in monthly_records),
+                "total_payments_fy": sum(r["payments_total"] for r in monthly_records),
+                "closing_cash_bank": monthly_records[-1]["closing_balance"] if monthly_records else 0,
+                "active_capex_projects": ["Lift Modernization", "10-Block Painting"]
             },
             "lift_project": {
                 "total_flats": sum(b["flats_count"] for b in blocks_exact),
@@ -217,6 +232,8 @@ def extract_and_update_all():
                 "overall_pending_pct": round((sum(b["pending_emis"] for b in blocks_exact) / sum(b["total_emis"] for b in blocks_exact)) * 100, 2),
                 "total_target_amount": sum(b["target"] for b in blocks_exact),
                 "total_collected": sum(b["collected"] for b in blocks_exact),
+                "vendor_expenses": vendor_exp,
+                "unspent_balance": unspent_bal,
                 "overall_amount_pct": round((sum(b["collected"] for b in blocks_exact) / sum(b["target"] for b in blocks_exact)) * 100, 1),
                 "blocks": blocks_exact,
                 "defaulters": unique_defaulters

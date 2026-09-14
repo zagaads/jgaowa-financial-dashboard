@@ -175,8 +175,11 @@ function renderOverviewKPIs() {
   setElText('kpi-total-receipts', formatINR(s.total_receipts_23m));
   setElText('kpi-total-payments', formatINR(s.total_payments_23m));
   
-  setElText('kpi-lift-emi-pct', `${lift.overall_emi_pct || 89.5}%`);
-  setElText('kpi-lift-pending-emis', `${lift.total_pending_emis || 149} EMIs (${lift.overall_pending_pct || 10.5}%)`);
+  setElText('kpi-lift-emi-pct', `${lift.overall_emi_pct || 91.6}%`);
+  setElText('kpi-lift-pending-emis', `${lift.total_pending_emis || 149} EMIs (${lift.overall_pending_pct || 8.4}%)`);
+  const totColLift = lift.total_collected || 5456109;
+  const pctAmtLift = lift.overall_amount_pct || 74.2;
+  setElText('kpi-lift-pool', `${formatLakhs(totColLift)} Pool (${pctAmtLift}%)`);
 
   const avgR = s.total_receipts_23m / (s.total_months || 23);
   const avgP = s.total_payments_23m / (s.total_months || 23);
@@ -533,6 +536,15 @@ function renderLiftTab() {
   }
   const lift = financialData.lift_project || {};
   const blocks = lift.blocks || [];
+
+  // Dynamic Lift Top KPI Badges
+  const totDemand = lift.total_target_amount || lift.total_target || 7355900;
+  const totCollected = lift.total_collected || 5456109;
+  const unspentBal = lift.unspent_balance || (totCollected - (lift.vendor_expenses || 2697000));
+
+  setElText('lift-kpi-demand', formatLakhs(totDemand));
+  setElText('lift-kpi-collected', formatLakhs(totCollected));
+  setElText('lift-kpi-unspent', formatLakhs(unspentBal));
 
   // Graph as per % of EMI and Pending EMI
   const ctxLiftBar = document.getElementById('liftPaidVsUnpaidChart');
@@ -1504,14 +1516,15 @@ function processFinancialQuery(rawQuery) {
 
   // 3. Lift Modernization Project Totals
   if (q.includes('lift') && (q.includes('total') || q.includes('collection') || q.includes('summary') || q.includes('progress') || q.includes('percentage') || q.includes('demand') || q.includes('overall') || q.includes('project') || q.split(' ').length <= 4)) {
-    const totColl = lift.total_collected || 4804694;
-    const totTarget = lift.total_target || 5884720;
-    const unspent = lift.unspent_balance || 2027170;
+    const totColl = lift.total_collected || 5456109;
+    const totTarget = lift.total_target_amount || lift.total_target || 7355900;
+    const unspent = lift.unspent_balance || (totColl - (lift.vendor_expenses || 2697000));
+    const vendorExp = lift.vendor_expenses || 2697000;
     const pctColl = ((totColl / totTarget) * 100).toFixed(1);
-    const totEMIs = blocks.reduce((acc, b) => acc + (b.total_emis || 0), 0) || 1424;
-    const paidEMIs = blocks.reduce((acc, b) => acc + (b.paid_emis || 0), 0) || 1275;
-    const pctEMIs = ((paidEMIs / totEMIs) * 100).toFixed(1);
-    return `For the Lift Modernization Project across 13 towers (356 flats), total demand is ₹58.85 Lakhs. Total collected is ₹${(totColl/100000).toFixed(2)} Lakhs (${pctColl}% of demand). Across the society, ${paidEMIs} of ${totEMIs} total EMIs (${pctEMIs}%) are paid, leaving an unspent lift fund balance of ₹${(unspent/100000).toFixed(2)} Lakhs.`;
+    const totEMIs = lift.total_demand_emis || blocks.reduce((acc, b) => acc + (b.total_emis || 0), 0) || 1780;
+    const paidEMIs = lift.total_paid_emis || blocks.reduce((acc, b) => acc + (b.paid_emis || 0), 0) || 1631;
+    const pctEMIs = lift.overall_emi_pct || ((paidEMIs / totEMIs) * 100).toFixed(1);
+    return `For the Lift Modernization Project across 13 towers (356 flats), total demand so far is ₹${(totTarget/100000).toFixed(2)} Lakhs (Column Q). Total collected is ₹${(totColl/100000).toFixed(2)} Lakhs (${pctColl}% of demand). Vendor expenses paid are ₹${(vendorExp/100000).toFixed(2)} Lakhs, leaving an unspent balance of ₹${(unspent/100000).toFixed(2)} Lakhs. Across the society, ${paidEMIs} of ${totEMIs} total EMIs (${pctEMIs}%) are paid.`;
   }
 
   // 4. Defaulters & Overdue queries
