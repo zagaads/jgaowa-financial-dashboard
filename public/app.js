@@ -168,23 +168,32 @@ function renderTickers() {
 }
 
 function renderOverviewKPIs() {
-  const s = financialData.summary;
+  if (!financialData) return;
+  const s = financialData.summary || {};
   const lift = financialData.lift_project || {};
+  const records = financialData.monthly_records || [];
 
-  setElText('kpi-liquid-funds', formatINR(s.current_liquid_funds));
-  setElText('kpi-total-receipts', formatINR(s.total_receipts_23m));
-  setElText('kpi-total-payments', formatINR(s.total_payments_23m));
-  
+  const activeRecs = records.filter(r => (r.receipts_total > 0 || r.payments_total > 0 || r.opening_balance > 0));
+  const latestRec = activeRecs.length > 0 ? activeRecs[activeRecs.length - 1] : (records[records.length - 1] || {});
+
+  const totLiquid = (s.current_liquid_funds !== undefined) ? s.current_liquid_funds : (s.closing_cash_bank || latestRec.closing_balance || 1191465);
+  const totReceipts = s.total_receipts_23m || s.total_receipts_fy || activeRecs.reduce((a,r)=>a+(r.receipts_total||0), 0);
+  const totPayments = s.total_payments_23m || s.total_payments_fy || activeRecs.reduce((a,r)=>a+(r.payments_total||0), 0);
+  const numMonths = s.total_months || activeRecs.length || 26;
+  const avgR = s.avg_monthly_receipts || (totReceipts / numMonths);
+  const avgP = s.avg_monthly_payments || (totPayments / numMonths);
+
+  setElText('kpi-liquid-funds', formatINR(totLiquid));
+  setElText('kpi-total-receipts', formatINR(totReceipts));
+  setElText('kpi-total-payments', formatINR(totPayments));
+  setElText('kpi-avg-receipts', `Monthly Avg: ${formatINR(avgR)} Inflows`);
+  setElText('kpi-avg-payments', `Monthly Avg: ${formatINR(avgP)} Outflows`);
+
   setElText('kpi-lift-emi-pct', `${lift.overall_emi_pct || 91.6}%`);
   setElText('kpi-lift-pending-emis', `${lift.total_pending_emis || 149} EMIs (${lift.overall_pending_pct || 8.4}%)`);
   const totColLift = lift.total_collected || 5456109;
   const pctAmtLift = lift.overall_amount_pct || 74.2;
   setElText('kpi-lift-pool', `${formatLakhs(totColLift)} Pool (${pctAmtLift}%)`);
-
-  const avgR = s.total_receipts_23m / (s.total_months || 23);
-  const avgP = s.total_payments_23m / (s.total_months || 23);
-  setElText('kpi-avg-receipts', formatINR(avgR));
-  setElText('kpi-avg-payments', formatINR(avgP));
 }
 
 function renderOverviewCharts() {
@@ -460,13 +469,24 @@ function toggleOverviewLiftView(mode) {
 }
 
 function renderMultiYearTab() {
+  if (!financialData) return;
   const records = financialData.monthly_records || [];
   const dropdown = document.getElementById('month-dropdown');
+  
+  // Find latest active month index
+  let defaultIdx = records.length - 1;
+  for (let i = records.length - 1; i >= 0; i--) {
+    if (records[i].receipts_total > 0 || records[i].payments_total > 0) {
+      defaultIdx = i;
+      break;
+    }
+  }
+
   if (dropdown && (!dropdown.options || dropdown.options.length === 0)) {
     dropdown.innerHTML = records.map((r, i) => `<option value="${i}">${r.month}</option>`).join('');
-    dropdown.selectedIndex = records.length - 1;
+    dropdown.selectedIndex = defaultIdx;
   }
-  const idx = dropdown ? parseInt(dropdown.value, 10) || (records.length - 1) : 0;
+  const idx = dropdown ? (parseInt(dropdown.value, 10) >= 0 ? parseInt(dropdown.value, 10) : defaultIdx) : defaultIdx;
   renderSelectedMonthData(idx);
   renderFullMatrixTable();
 }

@@ -206,6 +206,19 @@ def extract_and_update_all():
         except Exception as e_bal:
             print("Balance extraction note:", e_bal)
 
+        # Calculate multi-year summary metrics across active months
+        active_records = [r for r in monthly_records if (r.get("receipts_total", 0) > 0 or r.get("payments_total", 0) > 0 or r.get("opening_balance", 0) > 0)]
+        latest_active = active_records[-1] if active_records else (monthly_records[-1] if monthly_records else {})
+        
+        tot_receipts = sum(r["receipts_total"] for r in active_records)
+        tot_payments = sum(r["payments_total"] for r in active_records)
+        num_months = len(active_records)
+        avg_receipts = round(tot_receipts / num_months, 2) if num_months > 0 else 0
+        avg_payments = round(tot_payments / num_months, 2) if num_months > 0 else 0
+        
+        bb_latest = latest_active.get("bank_balances", {})
+        tot_liquid = sum(bb_latest.values()) if bb_latest else latest_active.get("closing_balance", 0)
+
         fin_data = {
             "last_updated": time.strftime("%Y-%m-%d %H:%M:%S"),
             "version": int(time.time()),
@@ -213,15 +226,22 @@ def extract_and_update_all():
                 "name": "Janapriya Greenwood Apartment Owners Welfare Association",
                 "short_name": "JGAOWA",
                 "address": "Janapriya Greenwood, Bangalore - 560057",
-                "financial_year": "FY 2024-2026 (23-Month Comprehensive)"
+                "financial_year": f"FY 2024-2026 ({num_months}-Month Comprehensive)"
             },
             "summary": {
                 "total_flats": 356,
                 "total_blocks": 13,
-                "total_receipts_fy": sum(r["receipts_total"] for r in monthly_records),
-                "total_payments_fy": sum(r["payments_total"] for r in monthly_records),
-                "closing_cash_bank": monthly_records[-1]["closing_balance"] if monthly_records else 0,
-                "active_capex_projects": ["Lift Modernization", "10-Block Painting"]
+                "total_months": num_months,
+                "current_liquid_funds": tot_liquid,
+                "closing_cash_bank": tot_liquid,
+                "total_receipts_23m": tot_receipts,
+                "total_receipts_fy": tot_receipts,
+                "total_payments_23m": tot_payments,
+                "total_payments_fy": tot_payments,
+                "avg_monthly_receipts": avg_receipts,
+                "avg_monthly_payments": avg_payments,
+                "active_capex_projects": ["Lift Modernization", "10-Block Painting"],
+                "latest_active_month": latest_active.get("month", "May'26")
             },
             "lift_project": {
                 "total_flats": sum(b["flats_count"] for b in blocks_exact),
