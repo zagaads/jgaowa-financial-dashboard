@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-21 17:05:17",
-  "version": 1789990517,
+  "last_updated": "2026-09-21 17:53:41",
+  "version": 1789993421,
   "society": {
     "name": "Janapriya Greenwood Apartment Owners Welfare Association",
     "short_name": "JGAOWA",
@@ -271,14 +271,6 @@
         "status": "All 5 Months (Final Notice)"
       },
       {
-        "flat": "A6-440",
-        "block": "A6",
-        "description": "All 5 Months Pending",
-        "months_pending": 5,
-        "amount_due": 21925.0,
-        "status": "All 5 Months (Final Notice)"
-      },
-      {
         "flat": "A6-441",
         "block": "A6",
         "description": "All 5 Months Pending",
@@ -424,6 +416,14 @@
       },
       {
         "flat": "A6-338",
+        "block": "A6",
+        "description": "May, June and August pending",
+        "months_pending": 3,
+        "amount_due": 13155.0,
+        "status": "3 Months (Urgent Notice)"
+      },
+      {
+        "flat": "A6-440",
         "block": "A6",
         "description": "May, June and August pending",
         "months_pending": 3,
