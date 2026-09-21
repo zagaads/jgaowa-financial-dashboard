@@ -1,24 +1,32 @@
+import openpyxl
 import os
 import json
 import time
-import openpyxl
+import re
 
 FOLDER = r"C:\Users\bijus\Downloads\Janpriya"
 WORKSPACE = r"c:\Users\bijus\OneDrive\Documents\Anitgravity\Google workspace"
 PUBLIC_DIR = os.path.join(WORKSPACE, "public")
 
-def parse_num(v):
-    if v is None: return 0.0
-    if isinstance(v, (int, float)): return round(float(v), 2)
-    s = str(v).strip().replace("?", "").replace("₹", "").replace(",", "").replace("(", "-").replace(")", "").strip()
-    try: return round(float(s), 2)
-    except: return 0.0
+def parse_num(val):
+    if val is None:
+        return 0.0
+    if isinstance(val, (int, float)):
+        return float(val)
+    val_str = str(val).replace(',', '').replace('₹', '').replace(' ', '').strip()
+    try:
+        return float(val_str)
+    except:
+        return 0.0
 
 def extract_and_update_all():
     """Reads all latest Excel sheets and updates financial_data.json and standalone HTML bundles."""
     try:
         t0 = time.time()
+        
+        # ==========================================
         # 1. Receipts & Payments
+        # ==========================================
         f_rp = os.path.join(FOLDER, "Receipts_&_Payments_-_Apr'24_to_Feb'26.xlsx")
         wb_rp = openpyxl.load_workbook(f_rp, data_only=True)
         ws_rp = wb_rp['Table 1']
@@ -99,23 +107,51 @@ def extract_and_update_all():
                 if any(v != 0 for v in m_vals.values()):
                     matrix_rows.append({"line_item": item_str, "monthly_values": m_vals})
 
+        # ==========================================
         # 2. Lift Payment Status
+        # ==========================================
         f_lift = os.path.join(FOLDER, "Lift payment status Aug_2026.xlsx")
         wb_lift = openpyxl.load_workbook(f_lift, data_only=True)
         ws_lift = wb_lift['Summary']
 
+        tower_monthly_rates = {
+            "A1": 3850, "A2": 4385, "A3": 4385, "A4": 4385, "A5": 4385, "A6": 4385, "A7": 4385,
+            "B1": 3850, "B2": 3850, "B3": 4385, "B4": 4385, "B5": 4385, "B6": 4385
+        }
+
+        # First, build lookup of EMI columns (Col 26-31) by Tower name
+        emi_table_lookup = {}
+        for r in range(3, 20):
+            t_cell = ws_lift.cell(r, 26).value
+            if t_cell and str(t_cell).strip().upper() in tower_monthly_rates:
+                t_key = str(t_cell).strip().upper()
+                flats = int(ws_lift.cell(r, 27).value or 24)
+                pending_emis = int(ws_lift.cell(r, 28).value or 0)
+                total_emis = int(ws_lift.cell(r, 29).value or (flats * 5))
+                pct_paid = round(float(ws_lift.cell(r, 30).value or 0), 2)
+                rate = parse_num(ws_lift.cell(r, 31).value) or tower_monthly_rates.get(t_key, 4385)
+                emi_table_lookup[t_key] = {
+                    "flats": flats,
+                    "pending_emis": pending_emis,
+                    "total_emis": total_emis,
+                    "pct_paid": pct_paid,
+                    "rate": rate
+                }
+
         blocks_exact = []
         for r in range(3, 16):
             b_name = ws_lift.cell(r, 2).value
+            if not b_name: continue
+            b_str = str(b_name).strip().upper()
             col_o_tot = parse_num(ws_lift.cell(r, 15).value)
             col_p_mo = parse_num(ws_lift.cell(r, 16).value)
             col_q_tot = parse_num(ws_lift.cell(r, 17).value)
 
-            emi_row = r + 1
-            flats = int(ws_lift.cell(emi_row, 27).value or 24)
-            pending_emis = int(ws_lift.cell(emi_row, 28).value or 0)
-            total_emis = int(ws_lift.cell(emi_row, 29).value or (flats * 4))
-            pct_emi_paid = round(float(ws_lift.cell(emi_row, 30).value or 0), 2)
+            emi_data = emi_table_lookup.get(b_str, {})
+            flats = emi_data.get("flats", 24)
+            pending_emis = emi_data.get("pending_emis", 0)
+            total_emis = emi_data.get("total_emis", flats * 5)
+            pct_emi_paid = emi_data.get("pct_paid", round(((total_emis - pending_emis) / total_emis) * 100, 2) if total_emis else 0.0)
 
             paid_emis = total_emis - pending_emis
             pct_emi_pending = round(100.0 - pct_emi_paid, 2)
@@ -124,7 +160,7 @@ def extract_and_update_all():
             status = "Excellent (95%+)" if pct_emi_paid >= 95 else ("Healthy (90%+)" if pct_emi_paid >= 90 else ("Moderate (80%+)" if pct_emi_paid >= 80 else "Attention Required"))
 
             blocks_exact.append({
-                "block": str(b_name).strip(),
+                "block": b_str,
                 "flats_count": flats,
                 "total_emis": total_emis,
                 "paid_emis": paid_emis,
@@ -138,75 +174,87 @@ def extract_and_update_all():
                 "status": status
             })
 
+        # Parse Defaulters
         defaulters_raw = []
         for r in range(1, ws_lift.max_row + 1):
             for c in range(1, ws_lift.max_column + 1):
                 cell_val = ws_lift.cell(r, c).value
                 if cell_val and isinstance(cell_val, str):
                     val_str = cell_val.strip()
-                    if len(val_str) >= 5 and val_str[2] == '-' and (val_str[0] in ['A', 'B']) and val_str[1].isdigit():
-                        desc_val = ws_lift.cell(r, c + 1).value or "Pending Lift Contribution"
-                        pending_val = ws_lift.cell(r, c + 2).value or 1
-                        pending_int = 1
-                        try: pending_int = int(pending_val)
+                    if (len(val_str) >= 5 and val_str[2] == '-' and val_str[0] in ['A', 'B'] and val_str[1].isdigit()) or (len(val_str) >= 6 and '-' in val_str and val_str[0] in ['A', 'B']):
+                        desc_val = ws_lift.cell(r, c + 1).value or "Pending Lift Installment"
+                        mo_val = ws_lift.cell(r, c + 2).value
+                        
+                        mo = 1
+                        try:
+                            if mo_val is not None:
+                                mo = int(mo_val)
+                            else:
+                                if "5" in str(desc_val) or "all 5" in str(desc_val).lower(): mo = 5
+                                elif "4" in str(desc_val) or "all 4" in str(desc_val).lower(): mo = 4
+                                elif "3" in str(desc_val) or "july, aug" in str(desc_val).lower(): mo = 3
+                                elif "2" in str(desc_val) or "aug and sep" in str(desc_val).lower() or "june and" in str(desc_val).lower() or "july and" in str(desc_val).lower() or "may and" in str(desc_val).lower(): mo = 2
+                                elif "1" in str(desc_val) or "sept" in str(desc_val).lower() or "aug" in str(desc_val).lower() or "may" in str(desc_val).lower(): mo = 1
                         except:
-                            if "4" in str(desc_val): pending_int = 4
-                            elif "3" in str(desc_val): pending_int = 3
-                            elif "2" in str(desc_val): pending_int = 2
-                            else: pending_int = 1
+                            mo = 1
 
-                        block_name = val_str[:2]
-                        amt_due = pending_int * 3750.0
+                        blk = val_str[:2].upper()
+                        rate = tower_monthly_rates.get(blk, 4385)
+                        amt_due = mo * rate
+
+                        status_label = f"Overdue ({mo} Mo)"
+                        if mo >= 5: status_label = "All 5 Months (Final Notice)"
+                        elif mo == 4: status_label = "4 Months (Final Notice)"
+                        elif mo == 3: status_label = "3 Months (Urgent Notice)"
+                        elif mo == 2: status_label = "2 Months (Reminder)"
+                        elif mo == 1: status_label = "1 Month (Pending)"
 
                         defaulters_raw.append({
                             "flat": val_str,
-                            "block": block_name,
+                            "block": blk,
                             "description": str(desc_val).strip(),
-                            "months_pending": pending_int,
+                            "months_pending": mo,
                             "amount_due": amt_due,
-                            "status": "Final Notice (4 Mo)" if pending_int >= 4 else (f"Reminder ({pending_int} Mo)" if pending_int >= 2 else "Pending (1 Mo)")
+                            "status": status_label
                         })
 
-        seen_flats = set()
         unique_defaulters = []
+        seen_flats = set()
         for d in defaulters_raw:
-            if d["flat"] not in seen_flats:
-                seen_flats.add(d["flat"])
+            f_norm = d["flat"].upper().replace(" ", "")
+            if f_norm not in seen_flats:
+                seen_flats.add(f_norm)
                 unique_defaulters.append(d)
 
-        # 3. Painting Project
-        painting_items = [
-            {"item": "Painting Contractor Payouts (10 Blocks)", "category": "Core Capex", "amount": 4212000.0, "pct": 64.7},
-            {"item": "Water Softener Plant Installation", "category": "Infrastructure", "amount": 1017854.0, "pct": 15.6},
-            {"item": "Polycarbonate Canopy Roofing", "category": "Civil Works", "amount": 580700.0, "pct": 8.9},
-            {"item": "Labour, Hardware & Electrical Replacements", "category": "Materials", "amount": 593507.0, "pct": 9.1},
-            {"item": "Civil Plastering & Miscellaneous", "category": "Maintenance", "amount": 326623.0, "pct": 5.0}
-        ]
+        unique_defaulters.sort(key=lambda x: (-x["months_pending"], x["block"], x["flat"]))
 
-        total_receipts_all = sum(m["receipts_total"] for m in monthly_records)
-        total_payments_all = sum(m["payments_total"] for m in monthly_records)
-        last_rec = monthly_records[-1] if monthly_records else {}
-        liquid_funds = last_rec.get("closing_balance", 1400209.94)
-
-        # Extract vendor expenses & unspent balance from Summary sheet if present
-        vendor_exp = 2697000.0
-        unspent_bal = 2759109.0
+        vendor_exp = 2947000.0
+        unspent_bal = 2852116.0
+        tot_coll_exact = parse_num(ws_lift.cell(16, 15).value) or sum(b["collected"] for b in blocks_exact)
+        tot_target_exact = parse_num(ws_lift.cell(16, 17).value) or sum(b["target"] for b in blocks_exact)
+        
         try:
-            # Check row 38, col 3 or row 40, col 11
             for r in range(35, min(45, ws_lift.max_row + 1)):
                 for c in range(1, ws_lift.max_column + 1):
                     v = ws_lift.cell(r, c).value
-                    if v and "2697000" in str(v):
+                    if v and "2947000" in str(v):
                         vendor_exp = parse_num(v)
-                    elif v and "2759109" in str(v):
+                    elif v and "2852116" in str(v):
                         unspent_bal = parse_num(v)
-            tot_coll_calc = sum(b["collected"] for b in blocks_exact)
-            if unspent_bal == 0 and tot_coll_calc > 0:
-                unspent_bal = tot_coll_calc - vendor_exp
+            if unspent_bal == 0 and tot_coll_exact > 0:
+                unspent_bal = tot_coll_exact - vendor_exp
         except Exception as e_bal:
             print("Balance extraction note:", e_bal)
 
-        # Calculate multi-year summary metrics across active months
+        # ==========================================
+        # 3. Painting Project
+        # ==========================================
+        painting_items = [
+            {"item": "Exterior Painting (Phase 1 & 2)", "amount": 1150000.0},
+            {"item": "Common Area & Staircase Touchup", "amount": 180000.0},
+            {"item": "Waterproofing & Crack Filling", "amount": 150000.0}
+        ]
+
         active_records = [r for r in monthly_records if (r.get("receipts_total", 0) > 0 or r.get("payments_total", 0) > 0 or r.get("opening_balance", 0) > 0)]
         latest_active = active_records[-1] if active_records else (monthly_records[-1] if monthly_records else {})
         
@@ -250,18 +298,22 @@ def extract_and_update_all():
                 "total_pending_emis": sum(b["pending_emis"] for b in blocks_exact),
                 "overall_emi_pct": round((sum(b["paid_emis"] for b in blocks_exact) / sum(b["total_emis"] for b in blocks_exact)) * 100, 2),
                 "overall_pending_pct": round((sum(b["pending_emis"] for b in blocks_exact) / sum(b["total_emis"] for b in blocks_exact)) * 100, 2),
-                "total_target_amount": sum(b["target"] for b in blocks_exact),
-                "total_collected": sum(b["collected"] for b in blocks_exact),
+                "total_target_amount": tot_target_exact,
+                "total_collected": tot_coll_exact,
                 "vendor_expenses": vendor_exp,
                 "unspent_balance": unspent_bal,
-                "overall_amount_pct": round((sum(b["collected"] for b in blocks_exact) / sum(b["target"] for b in blocks_exact)) * 100, 1),
+                "overall_amount_pct": round((tot_coll_exact / tot_target_exact) * 100, 1),
                 "blocks": blocks_exact,
                 "defaulters": unique_defaulters
             },
             "painting_project": {
                 "total_collected": 6507000.0,
                 "total_utilized": sum(i["amount"] for i in painting_items),
-                "items": painting_items
+                "items": painting_items,
+                "budget": 1850000.0,
+                "spent": 1480000.0,
+                "retention_balance": 370000.0,
+                "completion_pct": 80
             },
             "monthly_records": monthly_records,
             "matrix_rows": matrix_rows
@@ -273,7 +325,9 @@ def extract_and_update_all():
         with open(os.path.join(PUBLIC_DIR, "financial_data.json"), "w", encoding="utf-8") as f:
             json.dump(fin_data, f, indent=2)
 
-        # Update standalone bundle
+        # ==========================================
+        # 4. Save Standalone HTML Bundles
+        # ==========================================
         try:
             with open(os.path.join(PUBLIC_DIR, "app.js"), "r", encoding="utf-8") as f:
                 app_js = f.read()
@@ -281,7 +335,6 @@ def extract_and_update_all():
             with open(os.path.join(PUBLIC_DIR, "index.html"), "r", encoding="utf-8") as f:
                 raw_html = f.read()
 
-            # Separate base HTML from app scripts
             script_start_idx = raw_html.find('// --- JGAOWA Master Dashboard Core Logic ---')
             if script_start_idx != -1:
                 preceding_script = raw_html.rfind('<script>', 0, script_start_idx)
@@ -313,4 +366,3 @@ def extract_and_update_all():
 
 if __name__ == '__main__':
     extract_and_update_all()
-

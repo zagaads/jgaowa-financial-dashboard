@@ -722,12 +722,14 @@ function renderDefaultersTable() {
   const bFilter = document.getElementById('defaulter-block-filter')?.value || 'ALL';
   const sortMode = document.getElementById('defaulter-sort-select')?.value || 'most_pending';
 
-  // Count pills across all defaulters
-  const c4 = allDefs.filter(d => d.months_pending >= 4).length;
-  const c3 = allDefs.filter(d => d.months_pending === 3).length;
-  const c2 = allDefs.filter(d => d.months_pending === 2).length;
-  const c1 = allDefs.filter(d => d.months_pending <= 1).length;
+  // Count pills across all defaulters (5Mo down to 1Mo)
+  const c5 = allDefs.filter(d => (d.months_pending || 0) >= 5).length;
+  const c4 = allDefs.filter(d => (d.months_pending || 0) === 4).length;
+  const c3 = allDefs.filter(d => (d.months_pending || 0) === 3).length;
+  const c2 = allDefs.filter(d => (d.months_pending || 0) === 2).length;
+  const c1 = allDefs.filter(d => (d.months_pending || 0) <= 1).length;
 
+  setElText('pill-count-5mo', `${c5} Flats`);
   setElText('pill-count-4mo', `${c4} Flats`);
   setElText('pill-count-3mo', `${c3} Flats`);
   setElText('pill-count-2mo', `${c2} Flats`);
@@ -768,7 +770,12 @@ function renderDefaultersTable() {
         let moColor = 'text-slate-200';
         let dotColor = 'bg-slate-500';
 
-        if (mo >= 4) {
+        if (mo >= 5) {
+          cardBg = 'bg-red-950/40 border-red-500/60 hover:border-red-500';
+          badgeBg = 'bg-red-500/20 text-red-300 border-red-500/50';
+          moColor = 'text-red-400 font-bold';
+          dotColor = 'bg-red-500';
+        } else if (mo === 4) {
           cardBg = 'bg-rose-950/30 border-rose-500/40 hover:border-rose-500/70';
           badgeBg = 'bg-rose-500/20 text-rose-300 border-rose-500/40';
           moColor = 'text-rose-400 font-bold';
