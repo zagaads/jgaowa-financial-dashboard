@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-19 11:41:40",
-  "version": 1789798300,
+  "last_updated": "2026-09-21 16:15:28",
+  "version": 1789987528,
   "society": {
     "name": "Janapriya Greenwood Apartment Owners Welfare Association",
     "short_name": "JGAOWA",
@@ -28,84 +28,84 @@
   "lift_project": {
     "total_flats": 356,
     "total_demand_emis": 1780,
-    "total_paid_emis": 1631,
-    "total_pending_emis": 149,
-    "overall_emi_pct": 91.63,
-    "overall_pending_pct": 8.37,
+    "total_paid_emis": 1611,
+    "total_pending_emis": 169,
+    "overall_emi_pct": 90.51,
+    "overall_pending_pct": 9.49,
     "total_target_amount": 7355900.0,
-    "total_collected": 5456109.0,
+    "total_collected": 5799116.0,
     "vendor_expenses": 2697000.0,
     "unspent_balance": 2759109.0,
-    "overall_amount_pct": 74.2,
+    "overall_amount_pct": 78.8,
     "blocks": [
       {
         "block": "A1",
         "flats_count": 28,
         "total_emis": 140,
-        "paid_emis": 132,
-        "pending_emis": 8,
-        "pct_paid": 94.29,
-        "pct_unpaid": 5.71,
-        "collected": 498664.0,
+        "paid_emis": 128,
+        "pending_emis": 12,
+        "pct_paid": 91.43,
+        "pct_unpaid": 8.57,
+        "collected": 525614.0,
         "monthly_target": 107800.0,
         "target": 539000.0,
-        "pct_amount": 92.5,
+        "pct_amount": 97.5,
         "status": "Healthy (90%+)"
       },
       {
         "block": "A2",
         "flats_count": 32,
         "total_emis": 160,
-        "paid_emis": 148,
-        "pending_emis": 12,
-        "pct_paid": 92.5,
-        "pct_unpaid": 7.5,
-        "collected": 546477.0,
+        "paid_emis": 144,
+        "pending_emis": 16,
+        "pct_paid": 90.0,
+        "pct_unpaid": 10.0,
+        "collected": 565727.0,
         "monthly_target": 123200.0,
         "target": 616000.0,
-        "pct_amount": 88.7,
+        "pct_amount": 91.8,
         "status": "Healthy (90%+)"
       },
       {
         "block": "A3",
         "flats_count": 32,
         "total_emis": 160,
-        "paid_emis": 148,
-        "pending_emis": 12,
-        "pct_paid": 92.5,
-        "pct_unpaid": 7.5,
-        "collected": 552215.0,
+        "paid_emis": 143,
+        "pending_emis": 17,
+        "pct_paid": 89.38,
+        "pct_unpaid": 10.62,
+        "collected": 579700.0,
         "monthly_target": 123200.0,
         "target": 616000.0,
-        "pct_amount": 89.6,
-        "status": "Healthy (90%+)"
+        "pct_amount": 94.1,
+        "status": "Moderate (80%+)"
       },
       {
         "block": "A4",
         "flats_count": 24,
         "total_emis": 120,
-        "paid_emis": 114,
-        "pending_emis": 6,
-        "pct_paid": 95.0,
-        "pct_unpaid": 5.0,
-        "collected": 361123.0,
+        "paid_emis": 113,
+        "pending_emis": 7,
+        "pct_paid": 94.17,
+        "pct_unpaid": 5.83,
+        "collected": 394620.0,
         "monthly_target": 105240.0,
         "target": 526200.0,
-        "pct_amount": 68.6,
-        "status": "Excellent (95%+)"
+        "pct_amount": 75.0,
+        "status": "Healthy (90%+)"
       },
       {
         "block": "A5",
         "flats_count": 24,
         "total_emis": 120,
-        "paid_emis": 112,
-        "pending_emis": 8,
-        "pct_paid": 93.33,
-        "pct_unpaid": 6.67,
-        "collected": 567787.0,
+        "paid_emis": 110,
+        "pending_emis": 10,
+        "pct_paid": 91.67,
+        "pct_unpaid": 8.33,
+        "collected": 594097.0,
         "monthly_target": 105240.0,
         "target": 526200.0,
-        "pct_amount": 107.9,
+        "pct_amount": 112.9,
         "status": "Healthy (90%+)"
       },
       {
@@ -116,38 +116,38 @@
         "pending_emis": 26,
         "pct_paid": 78.33,
         "pct_unpaid": 21.67,
-        "collected": 350654.0,
+        "collected": 372579.0,
         "monthly_target": 105240.0,
         "target": 526200.0,
-        "pct_amount": 66.6,
+        "pct_amount": 70.8,
         "status": "Attention Required"
       },
       {
         "block": "A7",
         "flats_count": 20,
         "total_emis": 100,
-        "paid_emis": 83,
-        "pending_emis": 17,
-        "pct_paid": 83.0,
-        "pct_unpaid": 17.0,
-        "collected": 316865.0,
+        "paid_emis": 81,
+        "pending_emis": 19,
+        "pct_paid": 81.0,
+        "pct_unpaid": 19.0,
+        "collected": 343175.0,
         "monthly_target": 87700.0,
         "target": 438500.0,
-        "pct_amount": 72.3,
+        "pct_amount": 78.3,
         "status": "Moderate (80%+)"
       },
       {
         "block": "B1",
         "flats_count": 44,
         "total_emis": 220,
-        "paid_emis": 214,
-        "pending_emis": 6,
-        "pct_paid": 97.27,
-        "pct_unpaid": 2.73,
-        "collected": 370169.0,
+        "paid_emis": 210,
+        "pending_emis": 10,
+        "pct_paid": 95.45,
+        "pct_unpaid": 4.55,
+        "collected": 389419.0,
         "monthly_target": 169400.0,
         "target": 847000.0,
-        "pct_amount": 43.7,
+        "pct_amount": 46.0,
         "status": "Excellent (95%+)"
       },
       {
@@ -158,74 +158,74 @@
         "pending_emis": 21,
         "pct_paid": 86.88,
         "pct_unpaid": 13.12,
-        "collected": 280304.0,
+        "collected": 299554.0,
         "monthly_target": 123200.0,
         "target": 616000.0,
-        "pct_amount": 45.5,
+        "pct_amount": 48.6,
         "status": "Moderate (80%+)"
       },
       {
         "block": "B3",
         "flats_count": 24,
         "total_emis": 120,
-        "paid_emis": 117,
-        "pending_emis": 3,
-        "pct_paid": 97.5,
-        "pct_unpaid": 2.5,
-        "collected": 373155.0,
+        "paid_emis": 114,
+        "pending_emis": 6,
+        "pct_paid": 95.0,
+        "pct_unpaid": 5.0,
+        "collected": 403850.0,
         "monthly_target": 105240.0,
         "target": 526200.0,
-        "pct_amount": 70.9,
+        "pct_amount": 76.7,
         "status": "Excellent (95%+)"
       },
       {
         "block": "B4",
         "flats_count": 24,
         "total_emis": 120,
-        "paid_emis": 111,
-        "pending_emis": 9,
-        "pct_paid": 92.5,
-        "pct_unpaid": 7.5,
-        "collected": 518423.0,
+        "paid_emis": 108,
+        "pending_emis": 12,
+        "pct_paid": 90.0,
+        "pct_unpaid": 10.0,
+        "collected": 549118.0,
         "monthly_target": 105240.0,
         "target": 526200.0,
-        "pct_amount": 98.5,
+        "pct_amount": 104.4,
         "status": "Healthy (90%+)"
       },
       {
         "block": "B5",
         "flats_count": 24,
         "total_emis": 120,
-        "paid_emis": 104,
-        "pending_emis": 16,
-        "pct_paid": 86.67,
-        "pct_unpaid": 13.33,
-        "collected": 363844.0,
+        "paid_emis": 111,
+        "pending_emis": 9,
+        "pct_paid": 92.5,
+        "pct_unpaid": 7.5,
+        "collected": 390154.0,
         "monthly_target": 105240.0,
         "target": 526200.0,
-        "pct_amount": 69.1,
-        "status": "Moderate (80%+)"
+        "pct_amount": 74.1,
+        "status": "Healthy (90%+)"
       },
       {
         "block": "B6",
         "flats_count": 24,
         "total_emis": 120,
-        "paid_emis": 115,
-        "pending_emis": 5,
-        "pct_paid": 95.83,
-        "pct_unpaid": 4.17,
-        "collected": 356429.0,
+        "paid_emis": 116,
+        "pending_emis": 4,
+        "pct_paid": 96.67,
+        "pct_unpaid": 3.33,
+        "collected": 391509.0,
         "monthly_target": 105240.0,
         "target": 526200.0,
-        "pct_amount": 67.7,
+        "pct_amount": 74.4,
         "status": "Excellent (95%+)"
       }
     ],
     "defaulters": [
       {
-        "flat": "A1-101",
+        "flat": "A1-106",
         "block": "A1",
-        "description": "August month pending",
+        "description": "Sept Month Pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
@@ -233,23 +233,7 @@
       {
         "flat": "B1-106",
         "block": "B1",
-        "description": "August month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "A1-202",
-        "block": "A1",
-        "description": "August month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "B1-205",
-        "block": "B1",
-        "description": "August month pending",
+        "description": "Sept Month Pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
@@ -257,15 +241,15 @@
       {
         "flat": "A1-203",
         "block": "A1",
-        "description": "2 Month pending",
-        "months_pending": 2,
-        "amount_due": 7500.0,
-        "status": "Reminder (2 Mo)"
+        "description": "July Aug and Sep Pending",
+        "months_pending": 3,
+        "amount_due": 11250.0,
+        "status": "Reminder (3 Mo)"
       },
       {
-        "flat": "B1-306",
+        "flat": "B1-107",
         "block": "B1",
-        "description": "July Month pending",
+        "description": "Sept Month Pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
@@ -273,23 +257,71 @@
       {
         "flat": "A1-303",
         "block": "A1",
-        "description": "4 Month pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
       },
       {
-        "flat": "B1-410",
+        "flat": "B1-205",
         "block": "B1",
-        "description": "June and August pending",
+        "description": "Aug and sep pending",
         "months_pending": 2,
         "amount_due": 7500.0,
         "status": "Reminder (2 Mo)"
       },
       {
-        "flat": "B1-411",
+        "flat": "A1-304",
+        "block": "A1",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "B1-309",
         "block": "B1",
-        "description": "August month pending",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "A1-403",
+        "block": "A1",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "B1-408",
+        "block": "B1",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "A1-406",
+        "block": "A1",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "B1-410",
+        "block": "B1",
+        "description": "June, Aug, and sep pending",
+        "months_pending": 3,
+        "amount_due": 11250.0,
+        "status": "Reminder (3 Mo)"
+      },
+      {
+        "flat": "B1-102",
+        "block": "B1",
+        "description": "Sept Month Pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
@@ -297,31 +329,39 @@
       {
         "flat": "A2-208",
         "block": "A2",
-        "description": "August month pending",
+        "description": "Aug Month pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
       },
       {
-        "flat": "A2-214",
-        "block": "A2",
-        "description": "4 month pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
-        "status": "Final Notice (4 Mo)"
-      },
-      {
         "flat": "B2-116",
         "block": "B2",
-        "description": "4 Month Pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
       },
       {
-        "flat": "A2-311",
+        "flat": "A2-214",
         "block": "A2",
-        "description": "August month pending",
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
+        "status": "Final Notice (4 Mo)"
+      },
+      {
+        "flat": "B2-214",
+        "block": "B2",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "A2-310",
+        "block": "A2",
+        "description": "Sept Month Pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
@@ -329,63 +369,71 @@
       {
         "flat": "B2-216",
         "block": "B2",
-        "description": "4 Month Pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
       },
       {
         "flat": "A2-315",
         "block": "A2",
-        "description": "4 month pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
       },
       {
         "flat": "B2-219",
         "block": "B2",
-        "description": "4 Month Pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
       },
       {
-        "flat": "A2-414",
+        "flat": "A2-412",
         "block": "A2",
-        "description": "2 Month pending",
-        "months_pending": 2,
-        "amount_due": 7500.0,
-        "status": "Reminder (2 Mo)"
-      },
-      {
-        "flat": "B2-316",
-        "block": "B2",
-        "description": "4 Month Pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
-        "status": "Final Notice (4 Mo)"
-      },
-      {
-        "flat": "B2-319",
-        "block": "B2",
-        "description": "August month pending",
+        "description": "Sept Month Pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
       },
       {
-        "flat": "B2-413",
+        "flat": "B2-316",
         "block": "B2",
-        "description": "4 Month Pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
       },
       {
-        "flat": "A3-317",
+        "flat": "A2-414",
+        "block": "A2",
+        "description": "July, Aug, and Sep pending",
+        "months_pending": 3,
+        "amount_due": 11250.0,
+        "status": "Reminder (3 Mo)"
+      },
+      {
+        "flat": "B3-225",
+        "block": "B3",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "A3-121",
         "block": "A3",
-        "description": "August month pending",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "B3-320",
+        "block": "B3",
+        "description": "Sept Month Pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
@@ -393,15 +441,15 @@
       {
         "flat": "A3-318",
         "block": "A3",
-        "description": "4 Month pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
       },
       {
-        "flat": "B3-322",
+        "flat": "B3-321",
         "block": "B3",
-        "description": "August month pending",
+        "description": "Sept Month Pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
@@ -417,23 +465,47 @@
       {
         "flat": "B3-422",
         "block": "B3",
-        "description": "2 Month pending",
-        "months_pending": 2,
-        "amount_due": 7500.0,
-        "status": "Reminder (2 Mo)"
+        "description": "July, Aug, and Sep pending",
+        "months_pending": 3,
+        "amount_due": 11250.0,
+        "status": "Reminder (3 Mo)"
+      },
+      {
+        "flat": "A3-322",
+        "block": "A3",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
       },
       {
         "flat": "A3-417",
         "block": "A3",
-        "description": "2 Month pending",
-        "months_pending": 2,
-        "amount_due": 7500.0,
-        "status": "Reminder (2 Mo)"
+        "description": "July, Aug and sep pending",
+        "months_pending": 3,
+        "amount_due": 11250.0,
+        "status": "Reminder (3 Mo)"
+      },
+      {
+        "flat": "B4-126",
+        "block": "B4",
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
+        "status": "Final Notice (4 Mo)"
       },
       {
         "flat": "A3-420",
         "block": "A3",
-        "description": "June and August pending",
+        "description": "June, August and sep pending",
+        "months_pending": 3,
+        "amount_due": 11250.0,
+        "status": "Reminder (3 Mo)"
+      },
+      {
+        "flat": "B4-227",
+        "block": "B4",
+        "description": "Aug and sep pending",
         "months_pending": 2,
         "amount_due": 7500.0,
         "status": "Reminder (2 Mo)"
@@ -441,127 +513,39 @@
       {
         "flat": "A3-421",
         "block": "A3",
-        "description": "July and August pending",
-        "months_pending": 2,
-        "amount_due": 7500.0,
-        "status": "Reminder (2 Mo)"
-      },
-      {
-        "flat": "B4-126",
-        "block": "B4",
-        "description": "4 Month pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
-        "status": "Final Notice (4 Mo)"
-      },
-      {
-        "flat": "A4-329",
-        "block": "A4",
-        "description": "2 Month pending",
-        "months_pending": 2,
-        "amount_due": 7500.0,
-        "status": "Reminder (2 Mo)"
-      },
-      {
-        "flat": "B4-227",
-        "block": "B4",
-        "description": "August Month Pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "A4-426",
-        "block": "A4",
-        "description": "July and August pending",
-        "months_pending": 2,
-        "amount_due": 7500.0,
-        "status": "Reminder (2 Mo)"
+        "description": "July, Aug and sep pending",
+        "months_pending": 3,
+        "amount_due": 11250.0,
+        "status": "Reminder (3 Mo)"
       },
       {
         "flat": "B4-228",
         "block": "B4",
-        "description": "4 Month Pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
-        "status": "Final Notice (4 Mo)"
-      },
-      {
-        "flat": "A4-428",
-        "block": "A4",
-        "description": "July and August pending",
-        "months_pending": 2,
-        "amount_due": 7500.0,
-        "status": "Reminder (2 Mo)"
-      },
-      {
-        "flat": "B5-132",
-        "block": "B5",
-        "description": "August month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "A5-132",
-        "block": "A5",
-        "description": "5 Months pending (All Months)",
+        "description": "All 5 Months Pending",
         "months_pending": 5,
         "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
       },
       {
-        "flat": "B5-136",
-        "block": "B5",
-        "description": "May Month pending",
+        "flat": "A4-228",
+        "block": "A4",
+        "description": "Sept Month Pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "A5-134",
-        "block": "A5",
-        "description": "2 Months Pending (Aug, Sept)",
-        "months_pending": 2,
-        "amount_due": 7500.0,
-        "status": "Reminder (2 Mo)"
-      },
-      {
-        "flat": "B5-235",
-        "block": "B5",
-        "description": "4 Month pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
-        "status": "Final Notice (4 Mo)"
-      },
-      {
-        "flat": "A5-135",
-        "block": "A5",
-        "description": "4 Months pending (June, July, August, Sept)",
-        "months_pending": 4,
-        "amount_due": 15000.0,
-        "status": "Final Notice (4 Mo)"
       },
       {
         "flat": "B5-236",
         "block": "B5",
-        "description": "August month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "B5-332",
-        "block": "B5",
-        "description": "July and August Month pending",
+        "description": "Aug and Sep pending",
         "months_pending": 2,
         "amount_due": 7500.0,
         "status": "Reminder (2 Mo)"
       },
       {
-        "flat": "A6-136",
-        "block": "A6",
-        "description": "September Month Pennding",
+        "flat": "A4-329",
+        "block": "A4",
+        "description": "Sept Month Pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
@@ -569,55 +553,31 @@
       {
         "flat": "B5-333",
         "block": "B5",
-        "description": "June and July Month pending",
+        "description": "June and July pending",
         "months_pending": 2,
         "amount_due": 7500.0,
         "status": "Reminder (2 Mo)"
       },
       {
-        "flat": "A6-140",
-        "block": "A6",
-        "description": "July, August, September Pending",
-        "months_pending": 3,
-        "amount_due": 11250.0,
-        "status": "Reminder (3 Mo)"
+        "flat": "A4-426",
+        "block": "A4",
+        "description": "May and August pending",
+        "months_pending": 2,
+        "amount_due": 7500.0,
+        "status": "Reminder (2 Mo)"
       },
       {
         "flat": "B5-334",
         "block": "B5",
-        "description": "4 Month pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
-        "status": "Final Notice (4 Mo)"
-      },
-      {
-        "flat": "A6-238",
-        "block": "A6",
-        "description": "September Month Pennding",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "B5-335",
-        "block": "B5",
-        "description": "August month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "A6-240",
-        "block": "A6",
-        "description": "5 Months pending (All Months)",
+        "description": "All 5 Months Pending",
         "months_pending": 5,
         "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
       },
       {
-        "flat": "A6-338",
-        "block": "A6",
-        "description": "3 Months pending (May, June, August)",
+        "flat": "A4-428",
+        "block": "A4",
+        "description": "July, August and sep pending",
         "months_pending": 3,
         "amount_due": 11250.0,
         "status": "Reminder (3 Mo)"
@@ -625,15 +585,15 @@
       {
         "flat": "B6-139",
         "block": "B6",
-        "description": "August month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
+        "description": "Aug and Sep Pending",
+        "months_pending": 2,
+        "amount_due": 7500.0,
+        "status": "Reminder (2 Mo)"
       },
       {
-        "flat": "A6-340",
-        "block": "A6",
-        "description": "5 Months pending (All Months)",
+        "flat": "A5-132",
+        "block": "A5",
+        "description": "All 5 Months Pending",
         "months_pending": 5,
         "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
@@ -641,31 +601,15 @@
       {
         "flat": "B6-241",
         "block": "B6",
-        "description": "August month pending",
+        "description": "Aug Month pending",
         "months_pending": 1,
         "amount_due": 3750.0,
         "status": "Pending (1 Mo)"
       },
       {
-        "flat": "A6-437",
-        "block": "A6",
-        "description": "September month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "B6-343",
-        "block": "B6",
-        "description": "August month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "A6-440",
-        "block": "A6",
-        "description": "4 Months pending (May, June, August, Sept)",
+        "flat": "A5-135",
+        "block": "A5",
+        "description": "June,July August and sep pending",
         "months_pending": 4,
         "amount_due": 15000.0,
         "status": "Final Notice (4 Mo)"
@@ -673,15 +617,87 @@
       {
         "flat": "B6-440",
         "block": "B6",
-        "description": "2 Month Pending",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "A5-233",
+        "block": "A5",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "A6-136",
+        "block": "A6",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "A6-140",
+        "block": "A6",
+        "description": "July Aug and sep pending",
+        "months_pending": 3,
+        "amount_due": 11250.0,
+        "status": "Reminder (3 Mo)"
+      },
+      {
+        "flat": "A6-238",
+        "block": "A6",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "A6-240",
+        "block": "A6",
+        "description": "Aug and sep pending",
         "months_pending": 2,
         "amount_due": 7500.0,
         "status": "Reminder (2 Mo)"
       },
       {
+        "flat": "A6-338",
+        "block": "A6",
+        "description": "May, June and August pending",
+        "months_pending": 3,
+        "amount_due": 11250.0,
+        "status": "Reminder (3 Mo)"
+      },
+      {
+        "flat": "A6-340",
+        "block": "A6",
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
+        "status": "Final Notice (4 Mo)"
+      },
+      {
+        "flat": "A6-437",
+        "block": "A6",
+        "description": "Sept Month Pending",
+        "months_pending": 1,
+        "amount_due": 3750.0,
+        "status": "Pending (1 Mo)"
+      },
+      {
+        "flat": "A6-440",
+        "block": "A6",
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
+        "status": "Final Notice (4 Mo)"
+      },
+      {
         "flat": "A6-441",
         "block": "A6",
-        "description": "5 Months pending (All Months)",
+        "description": "All 5 Months Pending",
         "months_pending": 5,
         "amount_due": 18750.0,
         "status": "Final Notice (4 Mo)"
@@ -689,50 +705,50 @@
       {
         "flat": "A7-142",
         "block": "A7",
-        "description": "August month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "A7-145",
-        "block": "A7",
-        "description": "4 Month pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
-        "status": "Final Notice (4 Mo)"
-      },
-      {
-        "flat": "A7-146",
-        "block": "A7",
-        "description": "August month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
-      },
-      {
-        "flat": "A7-344",
-        "block": "A7",
-        "description": "4 Month pending",
-        "months_pending": 4,
-        "amount_due": 15000.0,
-        "status": "Final Notice (4 Mo)"
-      },
-      {
-        "flat": "A7-346",
-        "block": "A7",
-        "description": "June and August Pending",
+        "description": "Aug and sep pending",
         "months_pending": 2,
         "amount_due": 7500.0,
         "status": "Reminder (2 Mo)"
       },
       {
+        "flat": "A7-145",
+        "block": "A7",
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
+        "status": "Final Notice (4 Mo)"
+      },
+      {
+        "flat": "A7-146",
+        "block": "A7",
+        "description": "Aug and sep pending",
+        "months_pending": 2,
+        "amount_due": 7500.0,
+        "status": "Reminder (2 Mo)"
+      },
+      {
+        "flat": "A7-344",
+        "block": "A7",
+        "description": "All 5 Months Pending",
+        "months_pending": 5,
+        "amount_due": 18750.0,
+        "status": "Final Notice (4 Mo)"
+      },
+      {
+        "flat": "A7-346",
+        "block": "A7",
+        "description": "June. August and sep pending",
+        "months_pending": 3,
+        "amount_due": 11250.0,
+        "status": "Reminder (3 Mo)"
+      },
+      {
         "flat": "A7-444",
         "block": "A7",
-        "description": "August month pending",
-        "months_pending": 1,
-        "amount_due": 3750.0,
-        "status": "Pending (1 Mo)"
+        "description": "Aug and sep pending",
+        "months_pending": 2,
+        "amount_due": 7500.0,
+        "status": "Reminder (2 Mo)"
       }
     ]
   },
