@@ -115,7 +115,7 @@ def extract_and_update_all():
         ws_lift = wb_lift['Summary']
 
         tower_monthly_rates = {
-            "A1": 3850, "A2": 4385, "A3": 4385, "A4": 4385, "A5": 4385, "A6": 4385, "A7": 4385,
+            "A1": 3850, "A2": 3850, "A3": 3850, "A4": 4385, "A5": 4385, "A6": 4385, "A7": 4385,
             "B1": 3850, "B2": 3850, "B3": 4385, "B4": 4385, "B5": 4385, "B6": 4385
         }
 
@@ -129,7 +129,8 @@ def extract_and_update_all():
                 pending_emis = int(ws_lift.cell(r, 28).value or 0)
                 total_emis = int(ws_lift.cell(r, 29).value or (flats * 5))
                 pct_paid = round(float(ws_lift.cell(r, 30).value or 0), 2)
-                rate = parse_num(ws_lift.cell(r, 31).value) or tower_monthly_rates.get(t_key, 4385)
+                rate = parse_num(ws_lift.cell(r, 31).value) or tower_monthly_rates.get(t_key, 3850 if t_key in ["A1", "A2", "A3", "B1", "B2"] else 4385)
+                tower_monthly_rates[t_key] = rate
                 emi_table_lookup[t_key] = {
                     "flats": flats,
                     "pending_emis": pending_emis,

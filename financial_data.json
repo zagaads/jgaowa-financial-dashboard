@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-09-21 16:25:40",
-  "version": 1789988140,
+  "last_updated": "2026-09-21 17:05:17",
+  "version": 1789990517,
   "society": {
     "name": "Janapriya Greenwood Apartment Owners Welfare Association",
     "short_name": "JGAOWA",
@@ -227,7 +227,7 @@
         "block": "A1",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 19250,
+        "amount_due": 19250.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -235,7 +235,7 @@
         "block": "A2",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 19250.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -243,7 +243,7 @@
         "block": "A2",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 19250.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -251,7 +251,7 @@
         "block": "A3",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 19250.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -259,7 +259,7 @@
         "block": "A5",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 21925.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -267,7 +267,7 @@
         "block": "A6",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 21925.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -275,7 +275,7 @@
         "block": "A6",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 21925.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -283,7 +283,7 @@
         "block": "A6",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 21925.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -291,7 +291,7 @@
         "block": "A7",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 21925.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -299,7 +299,7 @@
         "block": "A7",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 21925.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -307,7 +307,7 @@
         "block": "B2",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 19250,
+        "amount_due": 19250.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -315,7 +315,7 @@
         "block": "B2",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 19250,
+        "amount_due": 19250.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -323,7 +323,7 @@
         "block": "B2",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 19250,
+        "amount_due": 19250.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -331,7 +331,7 @@
         "block": "B2",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 19250,
+        "amount_due": 19250.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -339,7 +339,7 @@
         "block": "B4",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 21925.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -347,7 +347,7 @@
         "block": "B4",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 21925.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -355,7 +355,7 @@
         "block": "B5",
         "description": "All 5 Months Pending",
         "months_pending": 5,
-        "amount_due": 21925,
+        "amount_due": 21925.0,
         "status": "All 5 Months (Final Notice)"
       },
       {
@@ -363,7 +363,7 @@
         "block": "A5",
         "description": "June,July August and sep pending",
         "months_pending": 4,
-        "amount_due": 17540,
+        "amount_due": 17540.0,
         "status": "4 Months (Final Notice)"
       },
       {
@@ -371,7 +371,7 @@
         "block": "A1",
         "description": "July Aug and Sep Pending",
         "months_pending": 3,
-        "amount_due": 11550,
+        "amount_due": 11550.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -379,7 +379,7 @@
         "block": "A2",
         "description": "July, Aug, and Sep pending",
         "months_pending": 3,
-        "amount_due": 13155,
+        "amount_due": 11550.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -387,7 +387,7 @@
         "block": "A3",
         "description": "July, Aug and sep pending",
         "months_pending": 3,
-        "amount_due": 13155,
+        "amount_due": 11550.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -395,7 +395,7 @@
         "block": "A3",
         "description": "June, August and sep pending",
         "months_pending": 3,
-        "amount_due": 13155,
+        "amount_due": 11550.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -403,7 +403,7 @@
         "block": "A3",
         "description": "July, Aug and sep pending",
         "months_pending": 3,
-        "amount_due": 13155,
+        "amount_due": 11550.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -411,7 +411,7 @@
         "block": "A4",
         "description": "July, August and sep pending",
         "months_pending": 3,
-        "amount_due": 13155,
+        "amount_due": 13155.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -419,7 +419,7 @@
         "block": "A6",
         "description": "July Aug and sep pending",
         "months_pending": 3,
-        "amount_due": 13155,
+        "amount_due": 13155.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -427,7 +427,7 @@
         "block": "A6",
         "description": "May, June and August pending",
         "months_pending": 3,
-        "amount_due": 13155,
+        "amount_due": 13155.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -435,7 +435,7 @@
         "block": "A7",
         "description": "June. August and sep pending",
         "months_pending": 3,
-        "amount_due": 13155,
+        "amount_due": 13155.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -443,7 +443,7 @@
         "block": "B1",
         "description": "June, Aug, and sep pending",
         "months_pending": 3,
-        "amount_due": 11550,
+        "amount_due": 11550.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -451,7 +451,7 @@
         "block": "B3",
         "description": "July, Aug, and Sep pending",
         "months_pending": 3,
-        "amount_due": 13155,
+        "amount_due": 13155.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
@@ -459,7 +459,7 @@
         "block": "A4",
         "description": "May and August pending",
         "months_pending": 2,
-        "amount_due": 8770,
+        "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
@@ -467,7 +467,7 @@
         "block": "A6",
         "description": "Aug and sep pending",
         "months_pending": 2,
-        "amount_due": 8770,
+        "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
@@ -475,7 +475,7 @@
         "block": "A7",
         "description": "Aug and sep pending",
         "months_pending": 2,
-        "amount_due": 8770,
+        "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
@@ -483,7 +483,7 @@
         "block": "A7",
         "description": "Aug and sep pending",
         "months_pending": 2,
-        "amount_due": 8770,
+        "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
@@ -491,7 +491,7 @@
         "block": "A7",
         "description": "Aug and sep pending",
         "months_pending": 2,
-        "amount_due": 8770,
+        "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
@@ -499,7 +499,7 @@
         "block": "B1",
         "description": "Aug and sep pending",
         "months_pending": 2,
-        "amount_due": 7700,
+        "amount_due": 7700.0,
         "status": "2 Months (Reminder)"
       },
       {
@@ -507,7 +507,7 @@
         "block": "B4",
         "description": "Aug and sep pending",
         "months_pending": 2,
-        "amount_due": 8770,
+        "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
@@ -515,7 +515,7 @@
         "block": "B5",
         "description": "Aug and Sep pending",
         "months_pending": 2,
-        "amount_due": 8770,
+        "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
@@ -523,7 +523,7 @@
         "block": "B5",
         "description": "June and July pending",
         "months_pending": 2,
-        "amount_due": 8770,
+        "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
@@ -531,7 +531,7 @@
         "block": "B6",
         "description": "Aug and Sep Pending",
         "months_pending": 2,
-        "amount_due": 8770,
+        "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
@@ -539,7 +539,7 @@
         "block": "A1",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 3850,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -547,7 +547,7 @@
         "block": "A1",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 3850,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -555,7 +555,7 @@
         "block": "A1",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 3850,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -563,7 +563,7 @@
         "block": "A1",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 3850,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -571,7 +571,7 @@
         "block": "A2",
         "description": "Aug Month pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -579,7 +579,7 @@
         "block": "A2",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -587,7 +587,7 @@
         "block": "A2",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -595,7 +595,7 @@
         "block": "A3",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -603,7 +603,7 @@
         "block": "A3",
         "description": "May month pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -611,7 +611,7 @@
         "block": "A3",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -619,7 +619,7 @@
         "block": "A4",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -627,7 +627,7 @@
         "block": "A4",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -635,7 +635,7 @@
         "block": "A5",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -643,7 +643,7 @@
         "block": "A6",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -651,7 +651,7 @@
         "block": "A6",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -659,7 +659,7 @@
         "block": "A6",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -667,7 +667,7 @@
         "block": "B1",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 3850,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -675,7 +675,7 @@
         "block": "B1",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 3850,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -683,7 +683,7 @@
         "block": "B1",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 3850,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -691,7 +691,7 @@
         "block": "B1",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 3850,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -699,7 +699,7 @@
         "block": "B1",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 3850,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -707,7 +707,7 @@
         "block": "B2",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 3850,
+        "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -715,7 +715,7 @@
         "block": "B3",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -723,7 +723,7 @@
         "block": "B3",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -731,7 +731,7 @@
         "block": "B3",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -739,7 +739,7 @@
         "block": "B6",
         "description": "Aug Month pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
@@ -747,7 +747,7 @@
         "block": "B6",
         "description": "Sept Month Pending",
         "months_pending": 1,
-        "amount_due": 4385,
+        "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       }
     ]
