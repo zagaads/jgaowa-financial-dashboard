@@ -1418,11 +1418,14 @@ function handleUserQuery(userText) {
   if (statusText) statusText.textContent = "Analyzing financial records...";
 
   setTimeout(() => {
-    const answer = processFinancialQuery(userText);
-    appendAssistantMessage(answer);
+    const result = processFinancialQuery(userText);
+    const htmlText = (typeof result === 'object' && result.html) ? result.html : result;
+    const speechText = (typeof result === 'object' && result.speech) ? result.speech : htmlText;
+
+    appendAssistantMessage(htmlText, speechText);
     if (statusText) statusText.textContent = "Ready • Click mic to speak";
     if (isVoiceAudioEnabled) {
-      speakText(answer);
+      speakText(speechText);
     }
   }, 200);
 }
@@ -1444,21 +1447,23 @@ function appendUserMessage(text) {
   stream.scrollTop = stream.scrollHeight;
 }
 
-function appendAssistantMessage(text) {
+function appendAssistantMessage(htmlContent, speechContent) {
   const stream = document.getElementById('voice-chat-stream');
   if (!stream) return;
   const msgEl = document.createElement('div');
   msgEl.className = 'flex items-start gap-2.5';
   
-  // Clean text for display
+  const speechToPlay = speechContent || htmlContent.replace(/<[^>]*>?/gm, ' ');
+  const safeSpeechAttr = encodeURIComponent(speechToPlay);
+
   msgEl.innerHTML = `
     <div class="w-6 h-6 rounded-md bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center shrink-0 mt-0.5">
       <i data-lucide="bot" class="w-3.5 h-3.5"></i>
     </div>
-    <div class="p-3 rounded-2xl rounded-tl-sm bg-slate-900 border border-slate-800 text-slate-200 max-w-[85%] leading-relaxed text-[11.5px] space-y-2">
-      <div>${text}</div>
+    <div class="p-3 rounded-2xl rounded-tl-sm bg-slate-900 border border-slate-800 text-slate-200 max-w-[90%] leading-relaxed text-[11.5px] space-y-2">
+      <div class="space-y-2 overflow-x-auto">${htmlContent}</div>
       <div class="pt-1.5 border-t border-slate-800 flex items-center gap-2">
-        <button onclick="speakText(decodeURIComponent('${encodeURIComponent(text)}'))" class="text-[10px] text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+        <button onclick="speakText(decodeURIComponent('${safeSpeechAttr}'))" class="text-[10px] text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
           <i data-lucide="volume-2" class="w-3 h-3"></i> Listen Again
         </button>
       </div>
@@ -1473,14 +1478,20 @@ function speakText(text) {
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
 
-  // Strip currency symbols for cleaner speech
-  const spokenText = text.replace(/₹/g, 'Rupees ').replace(/%/g, ' percent');
-  const utterance = new SpeechSynthesisUtterance(spokenText);
+  // Strip HTML tags and format currency / percentages for natural speech
+  let clean = text.replace(/<[^>]*>?/gm, ' ')
+                  .replace(/₹\s*([\d,.]+)\s*L(?:akhs?)?/gi, '$1 Lakh Rupees')
+                  .replace(/₹\s*([\d,.]+)\s*Cr(?:ores?)?/gi, '$1 Crore Rupees')
+                  .replace(/₹/g, 'Rupees ')
+                  .replace(/%/g, ' percent')
+                  .replace(/\s+/g, ' ')
+                  .trim();
+                  
+  const utterance = new SpeechSynthesisUtterance(clean);
   utterance.rate = 1.0;
   utterance.pitch = 1.0;
   utterance.lang = 'en-IN';
 
-  // Optional: pick an English voice if available
   const voices = window.speechSynthesis.getVoices();
   const preferredVoice = voices.find(v => v.lang.includes('en-IN') || v.lang.includes('en-GB') || v.name.includes('Google') || v.name.includes('Natural'));
   if (preferredVoice) utterance.voice = preferredVoice;
@@ -1489,127 +1500,532 @@ function speakText(text) {
 }
 
 // ------------------------------------------------------------------
-// STRICT FINANCIAL DATA QUERY RESOLVER
+// COMPREHENSIVE FINANCIAL DATA AI & VOICE RESOLVER
 // ------------------------------------------------------------------
 function processFinancialQuery(rawQuery) {
   const data = financialData || (typeof EMBEDDED_JGAOWA_DATA !== 'undefined' ? EMBEDDED_JGAOWA_DATA : {});
   const q = (rawQuery || '').toLowerCase().trim();
   
+  const s = data.summary || {};
   const lift = data.lift_project || {};
   const blocks = lift.blocks || [];
   const defs = lift.defaulters || [];
   const painting = data.painting_project || {};
   const records = data.monthly_records || [];
 
-  // 1. Check for specific flat search (e.g. A6-137, B2-116, A1-101) FIRST
-  const flatMatch = q.match(/\b([ab][1-7]-?\d{1,4})\b/i);
+  const fmtRs = val => '₹' + Math.round(val || 0).toLocaleString('en-IN');
+  const fmtLakh = val => '₹' + ((val || 0) / 100000).toFixed(2) + ' Lakhs';
+
+  const renderFlatChips = (flatList, maxShow = 66) => {
+    if (!flatList || flatList.length === 0) return '<div class="text-xs text-slate-400">None</div>';
+    const chips = flatList.slice(0, maxShow).map(d => {
+      const moText = d.months_pending ? `${d.months_pending}Mo` : '';
+      const amtText = d.amount_due ? `₹${(d.amount_due).toLocaleString('en-IN')}` : '';
+      return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] font-mono text-cyan-200 shadow-sm">
+        <strong class="text-white">${d.flat}</strong>
+        ${moText ? `<span class="text-[9.5px] px-1 py-0.2 rounded bg-rose-500/20 text-rose-300 font-sans font-medium">${moText}</span>` : ''}
+        ${amtText ? `<span class="text-slate-400 text-[10px]">${amtText}</span>` : ''}
+      </span>`;
+    }).join(' ');
+    
+    const moreText = flatList.length > maxShow ? `<div class="text-[10px] text-slate-400 mt-1 italic">+ ${flatList.length - maxShow} more flats...</div>` : '';
+    return `<div class="flex flex-wrap gap-1 mt-1.5 max-h-48 overflow-y-auto pr-1 custom-scroll">${chips}</div>${moreText}`;
+  };
+
+  // 1. SPECIFIC FLAT LOOKUP (e.g. A6-137, B2-116, A1-303, B5-334)
+  const flatMatch = q.match(/\b([ab][1-7])[- ]?(\d{1,4})\b/i);
   if (flatMatch) {
-    const flatQuery = flatMatch[1].toUpperCase().replace(/\s+/g, '');
-    const cleanQuery = flatQuery.includes('-') ? flatQuery : (flatQuery.slice(0, 2) + '-' + flatQuery.slice(2));
+    const flatPrefix = flatMatch[1].toUpperCase();
+    const flatNum = flatMatch[2];
+    const flatQueryClean = `${flatPrefix}-${flatNum}`;
+    const flatQueryCompact = `${flatPrefix}${flatNum}`;
     
     const matchingDef = defs.find(d => {
-      const dFlat = (d.flat || '').toUpperCase().replace(/\s+/g, '');
-      return dFlat === flatQuery || dFlat === cleanQuery;
+      const dNorm = (d.flat || '').toUpperCase().replace(/[\s-]/g, '');
+      return dNorm === flatQueryCompact;
     });
 
     if (matchingDef) {
       const mo = matchingDef.months_pending || 1;
-      const amt = matchingDef.amount_due || (mo * 3750);
+      const amt = matchingDef.amount_due || (mo * (['A1','A2','A3','B1','B2'].includes(matchingDef.block) ? 3850 : 4385));
       const status = matchingDef.status || 'Pending';
-      const desc = matchingDef.description || '';
-      return `Flat ${matchingDef.flat} (Tower ${matchingDef.block}) has ${mo} months of pending lift EMIs amounting to ₹${amt.toLocaleString('en-IN')}. Notice Status: ${status}. Detail: ${desc}.`;
+      const desc = matchingDef.description || 'Pending EMI';
+      const blk = matchingDef.block || flatPrefix;
+      const rate = ['A1','A2','A3','B1','B2'].includes(blk) ? 3850 : 4385;
+
+      return {
+        html: `
+          <div class="p-2.5 rounded-xl bg-rose-950/30 border border-rose-500/40 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-sm text-white flex items-center gap-1.5 font-mono">
+                <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-400 inline"></i> Flat ${matchingDef.flat}
+              </span>
+              <span class="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-semibold">${status}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-[11px] pt-1 border-t border-rose-900/50">
+              <div><span class="text-slate-400">Tower / Block:</span> <strong class="text-white">${blk}</strong></div>
+              <div><span class="text-slate-400">Monthly EMI:</span> <strong class="text-white">${fmtRs(rate)}</strong></div>
+              <div><span class="text-slate-400">Months Overdue:</span> <strong class="text-rose-400">${mo} Months</strong></div>
+              <div><span class="text-slate-400">Total Due:</span> <strong class="text-rose-300 font-mono text-xs">${fmtRs(amt)}</strong></div>
+            </div>
+            <div class="text-[10px] text-slate-300 bg-slate-900/80 p-1.5 rounded border border-slate-800">
+              <span class="text-slate-400 font-medium">Excel Roster Remark:</span> ${desc}
+            </div>
+          </div>
+        `,
+        speech: `Flat ${matchingDef.flat} in Tower ${blk} has ${mo} months of pending lift EMIs with total unpaid dues of ${fmtRs(amt)}. Notice status is ${status}.`
+      };
     } else {
-      return `Flat ${cleanQuery} has no pending lift dues recorded in the defaulters roster. All EMIs are fully up to date.`;
+      const rate = ['A1','A2','A3','B1','B2'].includes(flatPrefix) ? 3850 : 4385;
+      return {
+        html: `
+          <div class="p-2.5 rounded-xl bg-emerald-950/30 border border-emerald-500/40 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-sm text-white flex items-center gap-1.5 font-mono">
+                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 inline"></i> Flat ${flatQueryClean}
+              </span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-semibold">Fully Paid (0 Dues)</span>
+            </div>
+            <p class="text-slate-300 text-[11px] pt-1">
+              Flat <strong>${flatQueryClean}</strong> (Tower ${flatPrefix}) has no pending lift dues recorded in the defaulters roster. All 5 monthly EMIs (${fmtRs(rate)}/month) are fully up to date.
+            </p>
+          </div>
+        `,
+        speech: `Flat ${flatQueryClean} in Tower ${flatPrefix} has no pending lift dues. All 5 installments are fully paid up to date.`
+      };
     }
   }
 
-  // 2. Tower-specific query (Tower A1 to Tower B6)
-  const towerMatch = q.match(/\b(?:tower|block)?\s*([ab][1-7])\b/i);
-  if (towerMatch && (q.includes('tower') || q.includes('block') || q.includes('status') || q.includes('collection') || q.includes('pending') || q.includes('emi') || q.includes('paid'))) {
-    const tName = towerMatch[1].toUpperCase();
-    const blk = blocks.find(b => (b.block || '').toUpperCase() === tName);
+  // 2. FLATS THAT HAVE NOT PAID ANY EMI (0 EMIS PAID / ALL 5 MONTHS PENDING)
+  const isZeroEmiQuery = (
+    q.includes('not paid any') || q.includes('never paid') || q.includes('zero emi') ||
+    q.includes('0 emi') || q.includes('no emi') || q.includes('not paid emi') ||
+    q.includes('all 5 month') || q.includes('5 month') || q.includes('5 mo') ||
+    q.includes('final notice') || (q.includes('not paid') && (q.includes('any') || q.includes('flat') || q.includes('list')))
+  );
+
+  if (isZeroEmiQuery) {
+    const fiveMoDefs = defs.filter(d => (d.months_pending || 0) >= 5);
+    const sumFiveMo = fiveMoDefs.reduce((acc, d) => acc + (d.amount_due || 0), 0);
+    const countFiveMo = fiveMoDefs.length;
+    const flatNames = fiveMoDefs.map(d => d.flat).join(', ');
+
+    return {
+      html: `
+        <div class="space-y-2">
+          <div class="p-2.5 rounded-xl bg-rose-950/40 border border-rose-500/50">
+            <div class="flex items-center justify-between">
+              <h5 class="font-bold text-white text-xs flex items-center gap-1.5">
+                <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-400"></i>
+                Flats with 0 EMIs Paid (All 5 Months Pending)
+              </h5>
+              <span class="px-2 py-0.5 rounded bg-rose-500/30 text-rose-200 text-[10px] font-bold font-mono">${countFiveMo} Flats</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-rose-900/60 text-[11px]">
+              <div><span class="text-slate-400">Total Unpaid Dues Sum:</span> <strong class="text-rose-300 font-mono text-xs block">${fmtRs(sumFiveMo)} (${fmtLakh(sumFiveMo)})</strong></div>
+              <div><span class="text-slate-400">Total Pending EMIs:</span> <strong class="text-white block font-mono">${countFiveMo * 5} EMIs</strong></div>
+            </div>
+          </div>
+          <div>
+            <div class="text-[10.5px] font-semibold text-slate-300 flex items-center justify-between">
+              <span>List of Flat Numbers & Amounts Due (${countFiveMo} Flats):</span>
+            </div>
+            ${renderFlatChips(fiveMoDefs)}
+          </div>
+        </div>
+      `,
+      speech: `There are ${countFiveMo} flats that have not paid any EMI across all 5 months, with total unpaid dues of ${fmtLakh(sumFiveMo)}. The flats are: ${flatNames}.`
+    };
+  }
+
+  // 3. SPECIFIC MONTH OVERDUE TIERS (4 Mo, 3 Mo, 2 Mo, 1 Mo)
+  const monthTierMatch = q.match(/\b([1-4])\s*(?:month|mo|installment)s?\b/i);
+  if (monthTierMatch && (q.includes('defaulter') || q.includes('pending') || q.includes('list') || q.includes('flat') || q.includes('who') || q.includes('how many') || q.includes('due'))) {
+    const targetMo = parseInt(monthTierMatch[1]);
+    const tierDefs = defs.filter(d => (d.months_pending || 0) === targetMo);
+    const sumTier = tierDefs.reduce((acc, d) => acc + (d.amount_due || 0), 0);
+    const countTier = tierDefs.length;
+    const flatNames = tierDefs.map(d => d.flat).join(', ');
+
+    return {
+      html: `
+        <div class="space-y-2">
+          <div class="p-2.5 rounded-xl bg-amber-950/30 border border-amber-500/40">
+            <div class="flex items-center justify-between">
+              <h5 class="font-bold text-white text-xs flex items-center gap-1.5">
+                <i data-lucide="clock" class="w-4 h-4 text-amber-400"></i>
+                ${targetMo}-Month Overdue Defaulters List
+              </h5>
+              <span class="px-2 py-0.5 rounded bg-amber-500/30 text-amber-200 text-[10px] font-bold font-mono">${countTier} Flats</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-amber-900/60 text-[11px]">
+              <div><span class="text-slate-400">Total Unpaid Sum:</span> <strong class="text-amber-300 font-mono text-xs block">${fmtRs(sumTier)} (${fmtLakh(sumTier)})</strong></div>
+              <div><span class="text-slate-400">Pending EMIs:</span> <strong class="text-white block font-mono">${countTier * targetMo} EMIs</strong></div>
+            </div>
+          </div>
+          <div>
+            <div class="text-[10.5px] font-semibold text-slate-300">
+              List of Flat Numbers (${countTier} Flats):
+            </div>
+            ${renderFlatChips(tierDefs)}
+          </div>
+        </div>
+      `,
+      speech: `There are ${countTier} flats with exactly ${targetMo} months of overdue lift EMIs, totaling ${fmtLakh(sumTier)} in unpaid dues. Flats: ${flatNames}.`
+    };
+  }
+
+  // 4. TOTAL SUM OF ALL UNPAID DUES / DEFAULTERS SUMMARY
+  const isSumOrDefaultersQuery = (
+    (q.includes('sum') || q.includes('total') || q.includes('calculate') || q.includes('how much')) && 
+    (q.includes('unpaid') || q.includes('pending') || q.includes('defaulter') || q.includes('due') || q.includes('arrear') || q.includes('emi'))
+  ) || (q.includes('all defaulter') || q.includes('defaulter list') || q.includes('defaulter roster') || q.includes('how many defaulter'));
+
+  if (isSumOrDefaultersQuery) {
+    const totDefs = defs.length;
+    const totDuesSum = defs.reduce((acc, d) => acc + (d.amount_due || 0), 0);
+    const totPendingEmis = lift.total_pending_emis || defs.reduce((acc, d) => acc + (d.months_pending || 0), 0);
+
+    const c5 = defs.filter(d => (d.months_pending || 0) >= 5);
+    const c4 = defs.filter(d => (d.months_pending || 0) === 4);
+    const c3 = defs.filter(d => (d.months_pending || 0) === 3);
+    const c2 = defs.filter(d => (d.months_pending || 0) === 2);
+    const c1 = defs.filter(d => (d.months_pending || 0) === 1);
+
+    const s5 = c5.reduce((a, b) => a + (b.amount_due || 0), 0);
+    const s4 = c4.reduce((a, b) => a + (b.amount_due || 0), 0);
+    const s3 = c3.reduce((a, b) => a + (b.amount_due || 0), 0);
+    const s2 = c2.reduce((a, b) => a + (b.amount_due || 0), 0);
+    const s1 = c1.reduce((a, b) => a + (b.amount_due || 0), 0);
+
+    return {
+      html: `
+        <div class="space-y-2">
+          <div class="p-2.5 rounded-xl bg-slate-900 border border-rose-500/40">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-white flex items-center gap-1.5">
+                <i data-lucide="calculator" class="w-4 h-4 text-rose-400"></i> Total Defaulters & Unpaid Dues Sum
+              </span>
+              <span class="text-xs font-mono font-bold text-rose-300">${fmtRs(totDuesSum)}</span>
+            </div>
+            <div class="text-[10px] text-slate-400 mt-0.5">
+              ${totDefs} Unique Flats &bull; ${totPendingEmis} Pending EMIs &bull; ${fmtLakh(totDuesSum)} Total Unpaid
+            </div>
+            <div class="mt-2 pt-2 border-t border-slate-800 space-y-1 text-[10.5px]">
+              <div class="flex justify-between items-center text-rose-300">
+                <span>🔴 5 Months (Final Notice):</span>
+                <strong class="font-mono">${c5.length} Flats &bull; ${fmtRs(s5)}</strong>
+              </div>
+              <div class="flex justify-between items-center text-rose-400">
+                <span>🟠 4 Months (Final Notice):</span>
+                <strong class="font-mono">${c4.length} Flat &bull; ${fmtRs(s4)}</strong>
+              </div>
+              <div class="flex justify-between items-center text-amber-300">
+                <span>🟡 3 Months (Urgent Notice):</span>
+                <strong class="font-mono">${c3.length} Flats &bull; ${fmtRs(s3)}</strong>
+              </div>
+              <div class="flex justify-between items-center text-yellow-300">
+                <span>🔵 2 Months (Reminder):</span>
+                <strong class="font-mono">${c2.length} Flats &bull; ${fmtRs(s2)}</strong>
+              </div>
+              <div class="flex justify-between items-center text-slate-300">
+                <span>⚪ 1 Month (Pending):</span>
+                <strong class="font-mono">${c1.length} Flats &bull; ${fmtRs(s1)}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="text-[10px] text-slate-400">
+            💡 <em>Tip: Ask "List 5 month defaulters" or "Status of Tower A2" to see specific flat lists!</em>
+          </div>
+        </div>
+      `,
+      speech: `The total sum of all unpaid lift dues across all ${totDefs} defaulter flats is ${fmtLakh(totDuesSum)} representing ${totPendingEmis} pending EMIs. This includes ${c5.length} flats on 5-month final notice owing ${fmtLakh(s5)}.`
+    };
+  }
+
+  // 5. COMBINED / MULTI-TOWER QUERIES OR SINGLE TOWER QUERIES
+  let matchedTowers = Array.from(new Set((q.match(/\b([ab][1-7])\b/gi) || []).map(t => t.toUpperCase())));
+  if (q.includes('all a') || q.includes('a towers') || q.includes('a blocks') || q.includes('all a blocks')) {
+    matchedTowers = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7'];
+  } else if (q.includes('all b') || q.includes('b towers') || q.includes('b blocks') || q.includes('all b blocks')) {
+    matchedTowers = ['B1', 'B2', 'B3', 'B4', 'B5', 'B6'];
+  }
+
+  if (matchedTowers.length > 1) {
+    const combBlocks = blocks.filter(b => matchedTowers.includes(b.block));
+    const combFlats = combBlocks.reduce((a, b) => a + (b.flats_count || 0), 0);
+    const combTarget = combBlocks.reduce((a, b) => a + (b.target || 0), 0);
+    const combCollected = combBlocks.reduce((a, b) => a + (b.collected || 0), 0);
+    const combPctAmount = combTarget > 0 ? ((combCollected / combTarget) * 100).toFixed(1) : 0;
+    const combTotalEmis = combBlocks.reduce((a, b) => a + (b.total_emis || 0), 0);
+    const combPaidEmis = combBlocks.reduce((a, b) => a + (b.paid_emis || 0), 0);
+    const combPendingEmis = combBlocks.reduce((a, b) => a + (b.pending_emis || 0), 0);
+    const combPctEmiPaid = combTotalEmis > 0 ? ((combPaidEmis / combTotalEmis) * 100).toFixed(1) : 0;
+
+    const combDefs = defs.filter(d => matchedTowers.includes(d.block));
+    const combDuesSum = combDefs.reduce((a, b) => a + (b.amount_due || 0), 0);
+
+    return {
+      html: `
+        <div class="space-y-2">
+          <div class="p-2.5 rounded-xl bg-slate-900 border border-cyan-500/40">
+            <div class="flex items-center justify-between">
+              <h5 class="font-bold text-white text-xs flex items-center gap-1.5">
+                <i data-lucide="layers" class="w-4 h-4 text-cyan-400"></i>
+                Combined Summary: Towers ${matchedTowers.join(', ')}
+              </h5>
+              <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-mono font-bold">${combFlats} Flats</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-slate-800 text-[11px]">
+              <div><span class="text-slate-400">Total Collected:</span> <strong class="text-emerald-400 font-mono block">${fmtRs(combCollected)} (${combPctAmount}%)</strong></div>
+              <div><span class="text-slate-400">Total Demand (5M):</span> <strong class="text-white font-mono block">${fmtRs(combTarget)}</strong></div>
+              <div><span class="text-slate-400">EMIs Paid:</span> <strong class="text-cyan-300 font-mono block">${combPaidEmis} / ${combTotalEmis} (${combPctEmiPaid}%)</strong></div>
+              <div><span class="text-slate-400">Combined Pending Dues:</span> <strong class="text-rose-400 font-mono block">${fmtRs(combDuesSum)} (${combDefs.length} Flats)</strong></div>
+            </div>
+          </div>
+          ${combDefs.length > 0 ? `
+            <div>
+              <div class="text-[10.5px] font-semibold text-slate-300">
+                Pending Defaulter Flats in these Towers (${combDefs.length} Flats):
+              </div>
+              ${renderFlatChips(combDefs)}
+            </div>
+          ` : '<div class="text-[10.5px] text-emerald-400">No pending dues in these towers!</div>'}
+        </div>
+      `,
+      speech: `Combined for Towers ${matchedTowers.join(' and ')}: ${combFlats} flats with total collected of ${fmtLakh(combCollected)} (${combPctAmount}% of demand). ${combPaidEmis} of ${combTotalEmis} EMIs are paid (${combPctEmiPaid}%). There are ${combDefs.length} pending flats with total unpaid dues of ${fmtRs(combDuesSum)}.`
+    };
+  }
+
+  // 6. SINGLE TOWER STATUS (e.g. Tower A1, Tower B2, Block A6)
+  if (matchedTowers.length === 1) {
+    const tName = matchedTowers[0];
+    const blk = blocks.find(b => b.block === tName);
     if (blk) {
       const pctPaid = blk.pct_paid || 0;
       const pctUnpaid = blk.pct_unpaid || (100 - pctPaid);
       const paidEMIs = blk.paid_emis || 0;
       const pendEMIs = blk.pending_emis || 0;
-      const totEMIs = blk.total_emis || (blk.flats_count * 4);
+      const totEMIs = blk.total_emis || (blk.flats_count * 5);
       const coll = blk.collected || 0;
-      const target = blk.target || (blk.flats_count * 15000);
+      const target = blk.target || (blk.flats_count * (['A1','A2','A3','B1','B2'].includes(tName) ? 19250 : 21925));
       const pctAmt = blk.pct_amount || Math.round((coll / target) * 1000) / 10;
-      return `Tower ${tName} has achieved ${pctPaid}% EMI installment collection (${paidEMIs} of ${totEMIs} EMIs paid). Pending EMIs: ${pendEMIs} (${pctUnpaid.toFixed(1)}%). Total collected is ₹${coll.toLocaleString('en-IN')} against total demand of ₹${target.toLocaleString('en-IN')} (${pctAmt}% collected).`;
+      const rate = ['A1','A2','A3','B1','B2'].includes(tName) ? 3850 : 4385;
+
+      const towerDefs = defs.filter(d => d.block === tName);
+      const towerDuesSum = towerDefs.reduce((a, b) => a + (b.amount_due || 0), 0);
+
+      return {
+        html: `
+          <div class="space-y-2">
+            <div class="p-2.5 rounded-xl bg-slate-900 border border-cyan-500/40">
+              <div class="flex items-center justify-between">
+                <h5 class="font-bold text-white text-xs flex items-center gap-1.5">
+                  <i data-lucide="building-2" class="w-4 h-4 text-cyan-400"></i>
+                  Tower ${tName} Performance & Status
+                </h5>
+                <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-mono font-bold">${blk.flats_count} Flats</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-slate-800 text-[11px]">
+                <div><span class="text-slate-400">Monthly EMI Rate:</span> <strong class="text-white font-mono block">${fmtRs(rate)} / flat</strong></div>
+                <div><span class="text-slate-400">Monthly Target:</span> <strong class="text-white font-mono block">${fmtRs(blk.monthly_target)}</strong></div>
+                <div><span class="text-slate-400">Total Collected:</span> <strong class="text-emerald-400 font-mono block">${fmtRs(coll)} (${pctAmt}%)</strong></div>
+                <div><span class="text-slate-400">Total 5M Demand:</span> <strong class="text-white font-mono block">${fmtRs(target)}</strong></div>
+                <div><span class="text-slate-400">EMIs Paid:</span> <strong class="text-cyan-300 font-mono block">${paidEMIs} / ${totEMIs} (${pctPaid}%)</strong></div>
+                <div><span class="text-slate-400">Unpaid Dues Sum:</span> <strong class="text-rose-400 font-mono block">${fmtRs(towerDuesSum)} (${pendEMIs} EMIs)</strong></div>
+              </div>
+            </div>
+            ${towerDefs.length > 0 ? `
+              <div>
+                <div class="text-[10.5px] font-semibold text-slate-300">
+                  Pending Flats in Tower ${tName} (${towerDefs.length} Flats):
+                </div>
+                ${renderFlatChips(towerDefs)}
+              </div>
+            ` : '<div class="text-[10.5px] text-emerald-400">All flats in this tower have paid all EMIs!</div>'}
+          </div>
+        `,
+        speech: `Tower ${tName} has ${blk.flats_count} flats with monthly EMI of ${fmtRs(rate)}. Total collected is ${fmtLakh(coll)} (${pctAmt}% of demand). ${paidEMIs} of ${totEMIs} EMIs are paid (${pctPaid}%). There are ${towerDefs.length} pending flats with total dues of ${fmtRs(towerDuesSum)}.`
+      };
     }
   }
 
-  // 3. Lift Modernization Project Totals
-  if (q.includes('lift') && (q.includes('total') || q.includes('collection') || q.includes('summary') || q.includes('progress') || q.includes('percentage') || q.includes('demand') || q.includes('overall') || q.includes('project') || q.split(' ').length <= 4)) {
-    const totColl = lift.total_collected || 5456109;
-    const totTarget = lift.total_target_amount || lift.total_target || 7355900;
-    const unspent = lift.unspent_balance || (totColl - (lift.vendor_expenses || 2697000));
-    const vendorExp = lift.vendor_expenses || 2697000;
+  // 7. LIFT MODERNIZATION PROJECT TOTALS
+  if (q.includes('lift') || q.includes('modernization') || q.includes('elevator')) {
+    const totColl = lift.total_collected || 5799116;
+    const totTarget = lift.total_target_amount || 7355900;
+    const unspent = lift.unspent_balance || 2852116;
+    const vendorExp = lift.vendor_expenses || 2947000;
     const pctColl = ((totColl / totTarget) * 100).toFixed(1);
-    const totEMIs = lift.total_demand_emis || blocks.reduce((acc, b) => acc + (b.total_emis || 0), 0) || 1780;
-    const paidEMIs = lift.total_paid_emis || blocks.reduce((acc, b) => acc + (b.paid_emis || 0), 0) || 1631;
+    const totEMIs = lift.total_demand_emis || 1780;
+    const paidEMIs = lift.total_paid_emis || 1611;
+    const pendingEMIs = lift.total_pending_emis || 169;
     const pctEMIs = lift.overall_emi_pct || ((paidEMIs / totEMIs) * 100).toFixed(1);
-    return `For the Lift Modernization Project across 13 towers (356 flats), total demand so far is ₹${(totTarget/100000).toFixed(2)} Lakhs (Column Q). Total collected is ₹${(totColl/100000).toFixed(2)} Lakhs (${pctColl}% of demand). Vendor expenses paid are ₹${(vendorExp/100000).toFixed(2)} Lakhs, leaving an unspent balance of ₹${(unspent/100000).toFixed(2)} Lakhs. Across the society, ${paidEMIs} of ${totEMIs} total EMIs (${pctEMIs}%) are paid.`;
+
+    return {
+      html: `
+        <div class="p-2.5 rounded-xl bg-slate-900 border border-cyan-500/40 space-y-2">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-white text-xs flex items-center gap-1.5">
+              <i data-lucide="arrow-up-circle" class="w-4 h-4 text-cyan-400"></i>
+              Lift Modernization Project Status
+            </h5>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-bold">${pctEMIs}% EMIs Paid</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[11px] pt-2 border-t border-slate-800">
+            <div><span class="text-slate-400">Total Demand (Col Q):</span> <strong class="text-white font-mono block">${fmtRs(totTarget)} (${fmtLakh(totTarget)})</strong></div>
+            <div><span class="text-slate-400">Total Collected:</span> <strong class="text-emerald-400 font-mono block">${fmtRs(totColl)} (${fmtLakh(totColl)})</strong></div>
+            <div><span class="text-slate-400">Vendor Expenses Paid:</span> <strong class="text-amber-400 font-mono block">${fmtRs(vendorExp)} (${fmtLakh(vendorExp)})</strong></div>
+            <div><span class="text-slate-400">Unspent Lift Balance:</span> <strong class="text-cyan-300 font-mono block">${fmtRs(unspent)} (${fmtLakh(unspent)})</strong></div>
+            <div><span class="text-slate-400">Paid EMIs:</span> <strong class="text-white font-mono block">${paidEMIs} / ${totEMIs} EMIs</strong></div>
+            <div><span class="text-slate-400">Pending EMIs:</span> <strong class="text-rose-400 font-mono block">${pendingEMIs} EMIs (${defs.length} Flats)</strong></div>
+          </div>
+        </div>
+      `,
+      speech: `For the Lift Modernization Project across 13 towers (356 flats), total demand is ${fmtLakh(totTarget)}. Total collected is ${fmtLakh(totColl)} (${pctColl}% of demand). Vendor expenses paid are ${fmtLakh(vendorExp)}, leaving an unspent fund balance of ${fmtLakh(unspent)}. Across the society, ${paidEMIs} of ${totEMIs} total EMIs (${pctEMIs}%) are paid.`
+    };
   }
 
-  // 4. Defaulters & Overdue queries
-  if (q.includes('defaulter') || q.includes('pending') || q.includes('unpaid') || q.includes('due') || q.includes('overdue')) {
-    const c4 = defs.filter(d => (d.months_pending || 0) >= 4).length;
-    const c3 = defs.filter(d => (d.months_pending || 0) === 3).length;
-    const c2 = defs.filter(d => (d.months_pending || 0) === 2).length;
-    const c1 = defs.filter(d => (d.months_pending || 0) <= 1).length;
-    const totDef = defs.length || 65;
+  // 8. BANK LIQUIDITY & BALANCES
+  if (q.includes('bank') || q.includes('cash') || q.includes('liquidity') || q.includes('balance') || q.includes('icici') || q.includes('idfc') || q.includes('reserve')) {
+    const totLiq = s.current_liquid_funds || 3108041.47;
+    const banks = [
+      { name: 'ICICI Bank Ltd (Current A/c)', amt: 1045000.0, note: 'Primary Operational Account' },
+      { name: 'IDFC First Bank (Savings)', amt: 161257.32, note: 'Maintenance & Capex Pool' },
+      { name: 'ICICI Bank (SB A/c)', amt: 104354.55, note: 'Interest Reserve Account' },
+      { name: 'Cash in Hand & Transits', amt: 1797429.60, note: 'Operational Cash & Float' }
+    ];
 
-    if (q.includes('4') || q.includes('four') || q.includes('final')) {
-      return `There are ${c4} flats with 4 months of overdue lift EMIs on Final Notice, owing ₹15,000 each.`;
-    } else if (q.includes('3') || q.includes('three')) {
-      return `There are ${c3} flats with 3 months of overdue lift EMIs on Urgent Notice, owing ₹11,250 each.`;
-    } else if (q.includes('2') || q.includes('two')) {
-      return `There are ${c2} flats with 2 months of pending lift EMIs (Reminder Notice), owing ₹7,500 each.`;
-    } else if (q.includes('1') || q.includes('one')) {
-      return `There are ${c1} flats with 1 month of pending lift EMI, owing ₹3,750 each.`;
-    } else {
-      return `There are a total of ${totDef} flats in the pending dues roster: ${c4} flats on 4-Month Final Notice, ${c3} flats on 3-Month Urgent Notice, ${c2} flats on 2-Month Reminder, and ${c1} flats on 1-Month Pending status.`;
-    }
+    return {
+      html: `
+        <div class="p-2.5 rounded-xl bg-slate-900 border border-emerald-500/40 space-y-2">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-white text-xs flex items-center gap-1.5">
+              <i data-lucide="landmark" class="w-4 h-4 text-emerald-400"></i>
+              Total Liquid Reserve & Bank Breakdown
+            </h5>
+            <span class="text-xs font-mono font-bold text-emerald-300">${fmtRs(totLiq)}</span>
+          </div>
+          <div class="text-[10px] text-slate-400">
+            Reconciled across 3 Bank Accounts + Cash Float (${fmtLakh(totLiq)})
+          </div>
+          <div class="pt-2 border-t border-slate-800 space-y-1 text-[10.5px]">
+            ${banks.map(b => `
+              <div class="flex justify-between items-center text-slate-300">
+                <span>${b.name}:</span>
+                <strong class="font-mono text-cyan-300">${fmtRs(b.amt)}</strong>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `,
+      speech: `Total liquid reserves stand at ${fmtLakh(totLiq)} reconciled across ICICI Bank Current Account, IDFC First Bank, ICICI Savings, and Cash in Hand.`
+    };
   }
 
-  // 5. Bank Liquidity & Cash Balances
-  if (q.includes('bank') || q.includes('cash') || q.includes('liquidity') || q.includes('balance') || q.includes('icici') || q.includes('idfc') || q.includes('fund')) {
-    const latestRec = records.length > 0 ? records[records.length - 1] : {};
-    const bb = latestRec.bank_balances || {};
-    const iciciCur = bb.icici_current || 561201.81;
-    const iciciSb = bb.icici_sb || 111888.55;
-    const idfc = bb.idfc_first || 499098.90;
-    const cash = bb.cash_in_hand || 48823.00;
-    const totLiq = iciciCur + iciciSb + idfc + cash;
-
-    return `As of the latest statement (${latestRec.month || 'Feb 2026'}), total liquid funds stand at ₹${(totLiq/100000).toFixed(2)} Lakhs. Account breakdown: ICICI Current Account: ₹${(iciciCur/100000).toFixed(2)}L, IDFC First Bank: ₹${(idfc/100000).toFixed(2)}L, ICICI Savings: ₹${(iciciSb/100000).toFixed(2)}L, and Cash in Hand: ₹${(cash/1000).toFixed(1)}K.`;
-  }
-
-  // 6. Painting Project
+  // 9. PAINTING PROJECT
   if (q.includes('painting') || q.includes('paint')) {
     const bgt = painting.budget || 1850000;
     const spent = painting.spent || 1480000;
     const ret = painting.retention_balance || 370000;
     const pct = painting.completion_pct || 80;
-    return `The 10-Block Painting Project has a total budget of ₹${(bgt/100000).toFixed(2)} Lakhs. Amount spent so far is ₹${(spent/100000).toFixed(2)} Lakhs (${pct}% complete), with a contractor retention balance of ₹${(ret/100000).toFixed(2)} Lakhs held.`;
+    const coll = painting.total_collected || 6507000;
+
+    return {
+      html: `
+        <div class="p-2.5 rounded-xl bg-slate-900 border border-amber-500/40 space-y-2">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-white text-xs flex items-center gap-1.5">
+              <i data-lucide="paint-brush" class="w-4 h-4 text-amber-400"></i>
+              10-Block Painting Capex Project
+            </h5>
+            <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-mono font-bold">${pct}% Completed</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[11px] pt-2 border-t border-slate-800">
+            <div><span class="text-slate-400">Total Capex Budget:</span> <strong class="text-white font-mono block">${fmtRs(bgt)} (${fmtLakh(bgt)})</strong></div>
+            <div><span class="text-slate-400">Amount Spent:</span> <strong class="text-emerald-400 font-mono block">${fmtRs(spent)} (${fmtLakh(spent)})</strong></div>
+            <div><span class="text-slate-400">Contractor Retention:</span> <strong class="text-cyan-300 font-mono block">${fmtRs(ret)} (${fmtLakh(ret)})</strong></div>
+            <div><span class="text-slate-400">Painting Reserve Pool:</span> <strong class="text-amber-300 font-mono block">${fmtRs(coll)} (${fmtLakh(coll)})</strong></div>
+          </div>
+        </div>
+      `,
+      speech: `The 10-Block Painting Project has a total budget of ${fmtLakh(bgt)}. Amount spent so far is ${fmtLakh(spent)} (${pct}% complete), with contractor retention balance of ${fmtLakh(ret)} held.`
+    };
   }
 
-  // 7. 23-Month Receipts & Payments Statement
-  if (q.includes('receipt') || q.includes('payment') || q.includes('expense') || q.includes('statement') || q.includes('income') || q.includes('month') || q.includes('23')) {
-    const totRec = records.reduce((acc, r) => acc + (r.receipts_total || 0), 0);
-    const totPay = records.reduce((acc, r) => acc + (r.payments_total || 0), 0);
-    const latestRec = records.length > 0 ? records[records.length - 1] : {};
-    return `Over the 23-month multi-year statement (April 2024 to February 2026), total society collections were ₹${(totRec/100000).toFixed(2)} Lakhs and total expenses were ₹${(totPay/100000).toFixed(2)} Lakhs. In ${latestRec.month || 'Feb 2026'}, receipts were ₹${(latestRec.receipts_total || 0).toLocaleString('en-IN')} and payments were ₹${(latestRec.payments_total || 0).toLocaleString('en-IN')}.`;
+  // 10. MONTHLY RECEIPTS & PAYMENTS / SPECIFIC MONTH QUERY
+  const monthNames = ['april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', 'january', 'february', 'march'];
+  const matchedMonth = monthNames.find(m => q.includes(m));
+  if (matchedMonth && records.length > 0) {
+    const rec = records.find(r => (r.month || '').toLowerCase().includes(matchedMonth));
+    if (rec) {
+      const net = (rec.receipts_total || 0) - (rec.payments_total || 0);
+      return {
+        html: `
+          <div class="p-2.5 rounded-xl bg-slate-900 border border-cyan-500/40 space-y-2">
+            <div class="flex items-center justify-between">
+              <h5 class="font-bold text-white text-xs flex items-center gap-1.5">
+                <i data-lucide="calendar" class="w-4 h-4 text-cyan-400"></i> Financial Statement for ${rec.month}
+              </h5>
+              <span class="px-2 py-0.5 rounded ${net >= 0 ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'} text-[10px] font-mono font-bold">
+                Net: ${net >= 0 ? '+' : ''}${fmtRs(net)}
+              </span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-[11px] pt-2 border-t border-slate-800">
+              <div><span class="text-slate-400">Opening Balance:</span> <strong class="text-white font-mono block">${fmtRs(rec.opening_balance)}</strong></div>
+              <div><span class="text-slate-400">Closing Balance:</span> <strong class="text-cyan-300 font-mono block">${fmtRs(rec.closing_balance)}</strong></div>
+              <div><span class="text-slate-400">Total Receipts:</span> <strong class="text-emerald-400 font-mono block">${fmtRs(rec.receipts_total)}</strong></div>
+              <div><span class="text-slate-400">Total Payments:</span> <strong class="text-rose-400 font-mono block">${fmtRs(rec.payments_total)}</strong></div>
+            </div>
+          </div>
+        `,
+        speech: `In ${rec.month}, society receipts were ${fmtRs(rec.receipts_total)} and payments were ${fmtRs(rec.payments_total)}, giving a closing balance of ${fmtRs(rec.closing_balance)}.`
+      };
+    }
   }
 
-  // 8. General Overview / Snapshot
-  if (q.includes('overview') || q.includes('summary') || q.includes('financial') || q.includes('status') || q.includes('how are we doing')) {
-    return `Janapriya Greenwood Financial Snapshot: Total liquid bank balance is ₹12.21 Lakhs across ICICI and IDFC. Lift modernization collection has achieved 81.6% (₹48.05 Lakhs collected) with 89.5% of total EMIs paid. There are 65 flats in the pending dues roster, and painting project completion is at 80%.`;
+  // 11. GENERAL FINANCIAL SNAPSHOT / 27-MONTH OVERVIEW
+  if (q.includes('overview') || q.includes('summary') || q.includes('receipt') || q.includes('payment') || q.includes('expense') || q.includes('income') || q.includes('how are we doing')) {
+    const totRec = s.total_receipts_23m || 65789523.82;
+    const totPay = s.total_payments_23m || 65377031.00;
+    const totLiq = s.current_liquid_funds || 3108041.47;
+    const liftColl = lift.total_collected || 5799116;
+
+    return {
+      html: `
+        <div class="p-2.5 rounded-xl bg-slate-900 border border-cyan-500/40 space-y-2">
+          <div class="flex items-center justify-between">
+            <h5 class="font-bold text-white text-xs flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-4 h-4 text-cyan-400"></i> JGAOWA Comprehensive Financial Snapshot
+            </h5>
+            <span class="text-[10px] text-slate-400">${s.total_months || 27} Active Months</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[11px] pt-2 border-t border-slate-800">
+            <div><span class="text-slate-400">Liquid Reserves:</span> <strong class="text-cyan-300 font-mono block">${fmtLakh(totLiq)}</strong></div>
+            <div><span class="text-slate-400">Lift Collected:</span> <strong class="text-emerald-400 font-mono block">${fmtLakh(liftColl)} (${lift.overall_emi_pct || 90.5}%)</strong></div>
+            <div><span class="text-slate-400">Total Receipts:</span> <strong class="text-white font-mono block">${fmtLakh(totRec)}</strong></div>
+            <div><span class="text-slate-400">Total Payments:</span> <strong class="text-white font-mono block">${fmtLakh(totPay)}</strong></div>
+          </div>
+        </div>
+      `,
+      speech: `Janapriya Greenwood Financial Snapshot: Total liquid reserve is ${fmtLakh(totLiq)}. Lift modernization collection has achieved ${lift.overall_emi_pct || 90.5}% EMI compliance (${fmtLakh(liftColl)} collected). Multi-year receipts stand at ${fmtLakh(totRec)} and expenses at ${fmtLakh(totPay)}.`
+    };
   }
 
-  // Guardrail for external / out-of-scope questions
-  return `I am the JGAOWA Financial Board Voice Assistant. I can only answer questions regarding Janapriya Greenwood's apartment accounts, lift installment collections, bank balances, painting project, and defaulters.`;
+  // Guardrail fallback with interactive suggestion buttons
+  return {
+    html: `
+      <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-300 space-y-1.5">
+        <p>I can answer questions about:</p>
+        <div class="flex flex-wrap gap-1 mt-1 text-[10px]">
+          <button onclick="handleQuickVoiceQuery('How many flats are not paid any emi?')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-cyan-900 text-cyan-300 border border-slate-700">Flats not paid any EMI</button>
+          <button onclick="handleQuickVoiceQuery('Sum of all unpaid dues')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-cyan-900 text-cyan-300 border border-slate-700">Sum of all unpaid dues</button>
+          <button onclick="handleQuickVoiceQuery('Tower A1 and A2 combined')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-cyan-900 text-cyan-300 border border-slate-700">Tower A1 & A2 Combined</button>
+          <button onclick="handleQuickVoiceQuery('Status of flat A1-303')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-cyan-900 text-cyan-300 border border-slate-700">Status of Flat A1-303</button>
+          <button onclick="handleQuickVoiceQuery('Total bank liquidity')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-cyan-900 text-cyan-300 border border-slate-700">Bank Liquidity</button>
+        </div>
+      </div>
+    `,
+    speech: `I am the JGAOWA Financial Board Voice Assistant. Ask me about flats that have not paid any EMI, total sum of unpaid dues, tower combinations, bank balances, or flat numbers.`
+  };
 }
