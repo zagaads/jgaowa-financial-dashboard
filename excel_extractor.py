@@ -114,6 +114,17 @@ def extract_and_update_all():
         wb_lift = openpyxl.load_workbook(f_lift, data_only=True)
         ws_lift = wb_lift['Summary']
 
+        num_months_lift = 6
+        try:
+            for c in range(25, 34):
+                if ws_lift.cell(1, c).value and 'month' in str(ws_lift.cell(1, c).value).lower():
+                    v = ws_lift.cell(1, c + 1).value
+                    if v and int(v) > 0:
+                        num_months_lift = int(v)
+                        break
+        except Exception:
+            num_months_lift = 6
+
         tower_monthly_rates = {
             "A1": 3850, "A2": 3850, "A3": 3850, "A4": 4385, "A5": 4385, "A6": 4385, "A7": 4385,
             "B1": 3850, "B2": 3850, "B3": 4385, "B4": 4385, "B5": 4385, "B6": 4385
@@ -127,7 +138,7 @@ def extract_and_update_all():
                 t_key = str(t_cell).strip().upper()
                 flats = int(ws_lift.cell(r, 27).value or 24)
                 pending_emis = int(ws_lift.cell(r, 28).value or 0)
-                total_emis = int(ws_lift.cell(r, 29).value or (flats * 5))
+                total_emis = int(ws_lift.cell(r, 29).value or (flats * num_months_lift))
                 pct_paid = round(float(ws_lift.cell(r, 30).value or 0), 2)
                 rate = parse_num(ws_lift.cell(r, 31).value) or tower_monthly_rates.get(t_key, 3850 if t_key in ["A1", "A2", "A3", "B1", "B2"] else 4385)
                 tower_monthly_rates[t_key] = rate
@@ -151,7 +162,7 @@ def extract_and_update_all():
             emi_data = emi_table_lookup.get(b_str, {})
             flats = emi_data.get("flats", 24)
             pending_emis = emi_data.get("pending_emis", 0)
-            total_emis = emi_data.get("total_emis", flats * 5)
+            total_emis = emi_data.get("total_emis", flats * num_months_lift)
             pct_emi_paid = emi_data.get("pct_paid", round(((total_emis - pending_emis) / total_emis) * 100, 2) if total_emis else 0.0)
 
             paid_emis = total_emis - pending_emis
@@ -182,20 +193,22 @@ def extract_and_update_all():
                 cell_val = ws_lift.cell(r, c).value
                 if cell_val and isinstance(cell_val, str):
                     val_str = cell_val.strip()
-                    if (len(val_str) >= 5 and val_str[2] == '-' and val_str[0] in ['A', 'B'] and val_str[1].isdigit()) or (len(val_str) >= 6 and '-' in val_str and val_str[0] in ['A', 'B']):
+                    if (len(val_str) >= 5 and '-' in val_str and val_str[0] in ['A', 'B']):
                         desc_val = ws_lift.cell(r, c + 1).value or "Pending Lift Installment"
                         mo_val = ws_lift.cell(r, c + 2).value
                         
                         mo = 1
                         try:
-                            if mo_val is not None:
+                            if mo_val is not None and str(mo_val).strip().isdigit():
                                 mo = int(mo_val)
                             else:
-                                if "5" in str(desc_val) or "all 5" in str(desc_val).lower(): mo = 5
-                                elif "4" in str(desc_val) or "all 4" in str(desc_val).lower(): mo = 4
-                                elif "3" in str(desc_val) or "july, aug" in str(desc_val).lower(): mo = 3
-                                elif "2" in str(desc_val) or "aug and sep" in str(desc_val).lower() or "june and" in str(desc_val).lower() or "july and" in str(desc_val).lower() or "may and" in str(desc_val).lower(): mo = 2
-                                elif "1" in str(desc_val) or "sept" in str(desc_val).lower() or "aug" in str(desc_val).lower() or "may" in str(desc_val).lower(): mo = 1
+                                desc_lower = str(desc_val).lower()
+                                if "6" in desc_lower or "all 6" in desc_lower or "may to oct" in desc_lower: mo = 6
+                                elif "5" in desc_lower or "all 5" in desc_lower or "may to sep" in desc_lower: mo = 5
+                                elif "4" in desc_lower or "all 4" in desc_lower or "july to oct" in desc_lower: mo = 4
+                                elif "3" in desc_lower or "july, aug" in desc_lower: mo = 3
+                                elif "2" in desc_lower or "sep and oct" in desc_lower or "aug and oct" in desc_lower or "may and oct" in desc_lower: mo = 2
+                                elif "1" in desc_lower or "oct" in desc_lower or "sept" in desc_lower or "aug" in desc_lower or "may" in desc_lower: mo = 1
                         except:
                             mo = 1
 
@@ -204,7 +217,8 @@ def extract_and_update_all():
                         amt_due = mo * rate
 
                         status_label = f"Overdue ({mo} Mo)"
-                        if mo >= 5: status_label = "All 5 Months (Final Notice)"
+                        if mo >= 6: status_label = "All 6 Months (Final Notice)"
+                        elif mo == 5: status_label = "5 Months (Final Notice)"
                         elif mo == 4: status_label = "4 Months (Final Notice)"
                         elif mo == 3: status_label = "3 Months (Urgent Notice)"
                         elif mo == 2: status_label = "2 Months (Reminder)"
@@ -229,19 +243,29 @@ def extract_and_update_all():
 
         unique_defaulters.sort(key=lambda x: (-x["months_pending"], x["block"], x["flat"]))
 
-        vendor_exp = 2947000.0
-        unspent_bal = 2852116.0
+        vendor_exp = 3265240.0
+        unspent_bal = 4036070.0
         tot_coll_exact = parse_num(ws_lift.cell(16, 15).value) or sum(b["collected"] for b in blocks_exact)
         tot_target_exact = parse_num(ws_lift.cell(16, 17).value) or sum(b["target"] for b in blocks_exact)
         
         try:
-            for r in range(35, min(45, ws_lift.max_row + 1)):
+            for r in range(30, min(55, ws_lift.max_row + 1)):
                 for c in range(1, ws_lift.max_column + 1):
                     v = ws_lift.cell(r, c).value
-                    if v and "2947000" in str(v):
-                        vendor_exp = parse_num(v)
-                    elif v and "2852116" in str(v):
-                        unspent_bal = parse_num(v)
+                    if v and isinstance(v, str):
+                        v_lower = v.strip().lower()
+                        if 'balance' in v_lower:
+                            for dc in [1, 2, 3]:
+                                val = ws_lift.cell(r, c + dc).value
+                                if val is not None and isinstance(val, (int, float)) and val > 100000:
+                                    unspent_bal = float(val)
+                                    break
+                        elif 'expenses' in v_lower:
+                            for dc in [1, 2, 3]:
+                                val = ws_lift.cell(r, c + dc).value
+                                if val is not None and isinstance(val, (int, float)) and val > 100000:
+                                    vendor_exp = float(val)
+                                    break
             if unspent_bal == 0 and tot_coll_exact > 0:
                 unspent_bal = tot_coll_exact - vendor_exp
         except Exception as e_bal:

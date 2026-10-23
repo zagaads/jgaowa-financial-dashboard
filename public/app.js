@@ -722,13 +722,15 @@ function renderDefaultersTable() {
   const bFilter = document.getElementById('defaulter-block-filter')?.value || 'ALL';
   const sortMode = document.getElementById('defaulter-sort-select')?.value || 'most_pending';
 
-  // Count pills across all defaulters (5Mo down to 1Mo)
-  const c5 = allDefs.filter(d => (d.months_pending || 0) >= 5).length;
+  // Count pills across all defaulters (6Mo down to 1Mo)
+  const c6 = allDefs.filter(d => (d.months_pending || 0) >= 6).length;
+  const c5 = allDefs.filter(d => (d.months_pending || 0) === 5).length;
   const c4 = allDefs.filter(d => (d.months_pending || 0) === 4).length;
   const c3 = allDefs.filter(d => (d.months_pending || 0) === 3).length;
   const c2 = allDefs.filter(d => (d.months_pending || 0) === 2).length;
   const c1 = allDefs.filter(d => (d.months_pending || 0) <= 1).length;
 
+  setElText('pill-count-6mo', `${c6} Flats`);
   setElText('pill-count-5mo', `${c5} Flats`);
   setElText('pill-count-4mo', `${c4} Flats`);
   setElText('pill-count-3mo', `${c3} Flats`);
@@ -770,9 +772,14 @@ function renderDefaultersTable() {
         let moColor = 'text-slate-200';
         let dotColor = 'bg-slate-500';
 
-        if (mo >= 5) {
+        if (mo >= 6) {
+          cardBg = 'bg-red-950/60 border-red-500/80 hover:border-red-400';
+          badgeBg = 'bg-red-500/30 text-red-200 border-red-500/60 font-bold';
+          moColor = 'text-red-400 font-extrabold';
+          dotColor = 'bg-red-500';
+        } else if (mo === 5) {
           cardBg = 'bg-red-950/40 border-red-500/60 hover:border-red-500';
-          badgeBg = 'bg-red-500/20 text-red-300 border-red-500/50';
+          badgeBg = 'bg-red-500/20 text-red-300 border-red-500/50 font-bold';
           moColor = 'text-red-400 font-bold';
           dotColor = 'bg-red-500';
         } else if (mo === 4) {
@@ -793,7 +800,7 @@ function renderDefaultersTable() {
         }
 
         // Urgency dots
-        const dotsHtml = Array.from({ length: 4 }).map((_, i) => 
+        const dotsHtml = Array.from({ length: 6 }).map((_, i) => 
           `<span class="w-1.5 h-1.5 rounded-full ${i < mo ? dotColor : 'bg-slate-800'}"></span>`
         ).join('');
 
@@ -817,7 +824,7 @@ function renderDefaultersTable() {
               <span class="text-[10px] text-slate-400 block font-sans">Pending Dues</span>
               <div class="flex items-baseline justify-between">
                 <span class="text-sm font-bold font-mono ${moColor}">${formatINR(amt)}</span>
-                <div class="flex items-center gap-0.5" title="${mo} of 4 Installments Overdue">
+                <div class="flex items-center gap-0.5" title="${mo} of 6 Installments Overdue">
                   ${dotsHtml}
                 </div>
               </div>
@@ -1587,28 +1594,29 @@ function processFinancialQuery(rawQuery) {
               <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-semibold">Fully Paid (0 Dues)</span>
             </div>
             <p class="text-slate-300 text-[11px] pt-1">
-              Flat <strong>${flatQueryClean}</strong> (Tower ${flatPrefix}) has no pending lift dues recorded in the defaulters roster. All 5 monthly EMIs (${fmtRs(rate)}/month) are fully up to date.
+              Flat <strong>${flatQueryClean}</strong> (Tower ${flatPrefix}) has no pending lift dues recorded in the defaulters roster. All 6 monthly EMIs (${fmtRs(rate)}/month) are fully up to date.
             </p>
           </div>
         `,
-        speech: `Flat ${flatQueryClean} in Tower ${flatPrefix} has no pending lift dues. All 5 installments are fully paid up to date.`
+        speech: `Flat ${flatQueryClean} in Tower ${flatPrefix} has no pending lift dues. All 6 installments are fully paid up to date.`
       };
     }
   }
 
-  // 2. FLATS THAT HAVE NOT PAID ANY EMI (0 EMIS PAID / ALL 5 MONTHS PENDING)
+  // 2. FLATS THAT HAVE NOT PAID ANY EMI (0 EMIS PAID / ALL 6 MONTHS PENDING: MAY TO OCT)
   const isZeroEmiQuery = (
     q.includes('not paid any') || q.includes('never paid') || q.includes('zero emi') ||
     q.includes('0 emi') || q.includes('no emi') || q.includes('not paid emi') ||
-    q.includes('all 5 month') || q.includes('5 month') || q.includes('5 mo') ||
+    q.includes('all 6 month') || q.includes('6 month') || q.includes('6 mo') ||
+    q.includes('all 5 month') ||
     q.includes('final notice') || (q.includes('not paid') && (q.includes('any') || q.includes('flat') || q.includes('list')))
   );
 
   if (isZeroEmiQuery) {
-    const fiveMoDefs = defs.filter(d => (d.months_pending || 0) >= 5);
-    const sumFiveMo = fiveMoDefs.reduce((acc, d) => acc + (d.amount_due || 0), 0);
-    const countFiveMo = fiveMoDefs.length;
-    const flatNames = fiveMoDefs.map(d => d.flat).join(', ');
+    const sixMoDefs = defs.filter(d => (d.months_pending || 0) >= 6);
+    const sumSixMo = sixMoDefs.reduce((acc, d) => acc + (d.amount_due || 0), 0);
+    const countSixMo = sixMoDefs.length;
+    const flatNames = sixMoDefs.map(d => d.flat).join(', ');
 
     return {
       html: `
@@ -1617,29 +1625,29 @@ function processFinancialQuery(rawQuery) {
             <div class="flex items-center justify-between">
               <h5 class="font-bold text-white text-xs flex items-center gap-1.5">
                 <i data-lucide="alert-octagon" class="w-4 h-4 text-rose-400"></i>
-                Flats with 0 EMIs Paid (All 5 Months Pending)
+                Flats with 0 EMIs Paid (All 6 Months Pending: May to Oct)
               </h5>
-              <span class="px-2 py-0.5 rounded bg-rose-500/30 text-rose-200 text-[10px] font-bold font-mono">${countFiveMo} Flats</span>
+              <span class="px-2 py-0.5 rounded bg-rose-500/30 text-rose-200 text-[10px] font-bold font-mono">${countSixMo} Flats</span>
             </div>
             <div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-rose-900/60 text-[11px]">
-              <div><span class="text-slate-400">Total Unpaid Dues Sum:</span> <strong class="text-rose-300 font-mono text-xs block">${fmtRs(sumFiveMo)} (${fmtLakh(sumFiveMo)})</strong></div>
-              <div><span class="text-slate-400">Total Pending EMIs:</span> <strong class="text-white block font-mono">${countFiveMo * 5} EMIs</strong></div>
+              <div><span class="text-slate-400">Total Unpaid Dues Sum:</span> <strong class="text-rose-300 font-mono text-xs block">${fmtRs(sumSixMo)} (${fmtLakh(sumSixMo)})</strong></div>
+              <div><span class="text-slate-400">Total Pending EMIs:</span> <strong class="text-white block font-mono">${countSixMo * 6} EMIs</strong></div>
             </div>
           </div>
           <div>
             <div class="text-[10.5px] font-semibold text-slate-300 flex items-center justify-between">
-              <span>List of Flat Numbers & Amounts Due (${countFiveMo} Flats):</span>
+              <span>List of Flat Numbers & Amounts Due (${countSixMo} Flats):</span>
             </div>
-            ${renderFlatChips(fiveMoDefs)}
+            ${renderFlatChips(sixMoDefs)}
           </div>
         </div>
       `,
-      speech: `There are ${countFiveMo} flats that have not paid any EMI across all 5 months, with total unpaid dues of ${fmtLakh(sumFiveMo)}. The flats are: ${flatNames}.`
+      speech: `There are ${countSixMo} flats that have not paid any EMI across all 6 months (May to October), with total unpaid dues of ${fmtLakh(sumSixMo)}. The flats are: ${flatNames}.`
     };
   }
 
   // 3. SPECIFIC MONTH OVERDUE TIERS (4 Mo, 3 Mo, 2 Mo, 1 Mo)
-  const monthTierMatch = q.match(/\b([1-4])\s*(?:month|mo|installment)s?\b/i);
+  const monthTierMatch = q.match(/\b([1-6])\s*(?:month|mo|installment)s?\b/i);
   if (monthTierMatch && (q.includes('defaulter') || q.includes('pending') || q.includes('list') || q.includes('flat') || q.includes('who') || q.includes('how many') || q.includes('due'))) {
     const targetMo = parseInt(monthTierMatch[1]);
     const tierDefs = defs.filter(d => (d.months_pending || 0) === targetMo);
@@ -1686,12 +1694,14 @@ function processFinancialQuery(rawQuery) {
     const totDuesSum = defs.reduce((acc, d) => acc + (d.amount_due || 0), 0);
     const totPendingEmis = lift.total_pending_emis || defs.reduce((acc, d) => acc + (d.months_pending || 0), 0);
 
-    const c5 = defs.filter(d => (d.months_pending || 0) >= 5);
+    const c6 = defs.filter(d => (d.months_pending || 0) >= 6);
+    const c5 = defs.filter(d => (d.months_pending || 0) === 5);
     const c4 = defs.filter(d => (d.months_pending || 0) === 4);
     const c3 = defs.filter(d => (d.months_pending || 0) === 3);
     const c2 = defs.filter(d => (d.months_pending || 0) === 2);
     const c1 = defs.filter(d => (d.months_pending || 0) === 1);
 
+    const s6 = c6.reduce((a, b) => a + (b.amount_due || 0), 0);
     const s5 = c5.reduce((a, b) => a + (b.amount_due || 0), 0);
     const s4 = c4.reduce((a, b) => a + (b.amount_due || 0), 0);
     const s3 = c3.reduce((a, b) => a + (b.amount_due || 0), 0);
@@ -1713,12 +1723,16 @@ function processFinancialQuery(rawQuery) {
             </div>
             <div class="mt-2 pt-2 border-t border-slate-800 space-y-1 text-[10.5px]">
               <div class="flex justify-between items-center text-rose-300">
+                <span>🔴 6 Months (All 6 Mo):</span>
+                <strong class="font-mono">${c6.length} Flats &bull; ${fmtRs(s6)}</strong>
+              </div>
+              <div class="flex justify-between items-center text-rose-400">
                 <span>🔴 5 Months (Final Notice):</span>
                 <strong class="font-mono">${c5.length} Flats &bull; ${fmtRs(s5)}</strong>
               </div>
               <div class="flex justify-between items-center text-rose-400">
                 <span>🟠 4 Months (Final Notice):</span>
-                <strong class="font-mono">${c4.length} Flat &bull; ${fmtRs(s4)}</strong>
+                <strong class="font-mono">${c4.length} Flats &bull; ${fmtRs(s4)}</strong>
               </div>
               <div class="flex justify-between items-center text-amber-300">
                 <span>🟡 3 Months (Urgent Notice):</span>
@@ -1739,7 +1753,7 @@ function processFinancialQuery(rawQuery) {
           </div>
         </div>
       `,
-      speech: `The total sum of all unpaid lift dues across all ${totDefs} defaulter flats is ${fmtLakh(totDuesSum)} representing ${totPendingEmis} pending EMIs. This includes ${c5.length} flats on 5-month final notice owing ${fmtLakh(s5)}.`
+      speech: `The total sum of all unpaid lift dues across all ${totDefs} defaulter flats is ${fmtLakh(totDuesSum)} representing ${totPendingEmis} pending EMIs. This includes ${c6.length} flats on 6-month final notice owing ${fmtLakh(s6)}.`
     };
   }
 
