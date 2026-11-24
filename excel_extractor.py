@@ -27,7 +27,12 @@ def extract_and_update_all():
         # ==========================================
         # 1. Receipts & Payments
         # ==========================================
-        f_rp = os.path.join(FOLDER, "Receipts_&_Payments_-_Apr'24_to_Feb'26.xlsx")
+        rp_cands = [f for f in os.listdir(FOLDER) if f.startswith("Receipts_&_Payments_-_Apr") and f.endswith(".xlsx")]
+        if rp_cands:
+            rp_cands.sort(key=lambda x: os.path.getmtime(os.path.join(FOLDER, x)), reverse=True)
+            f_rp = os.path.join(FOLDER, rp_cands[0])
+        else:
+            f_rp = os.path.join(FOLDER, "Receipts_&_Payments_-_Apr'24_to_Oct26.xlsx")
         wb_rp = openpyxl.load_workbook(f_rp, data_only=True)
         ws_rp = wb_rp['Table 1']
 
@@ -217,7 +222,8 @@ def extract_and_update_all():
                         amt_due = mo * rate
 
                         status_label = f"Overdue ({mo} Mo)"
-                        if mo >= 6: status_label = "All 6 Months (Final Notice)"
+                        if mo >= 7: status_label = "All 7 Months (Final Notice)"
+                        elif mo == 6: status_label = "6 Months (Final Notice)"
                         elif mo == 5: status_label = "5 Months (Final Notice)"
                         elif mo == 4: status_label = "4 Months (Final Notice)"
                         elif mo == 3: status_label = "3 Months (Urgent Notice)"
@@ -233,18 +239,17 @@ def extract_and_update_all():
                             "status": status_label
                         })
 
-        unique_defaulters = []
-        seen_flats = set()
+        unique_defaulters_dict = {}
         for d in defaulters_raw:
             f_norm = d["flat"].upper().replace(" ", "")
-            if f_norm not in seen_flats:
-                seen_flats.add(f_norm)
-                unique_defaulters.append(d)
+            if f_norm not in unique_defaulters_dict or d["months_pending"] > unique_defaulters_dict[f_norm]["months_pending"]:
+                unique_defaulters_dict[f_norm] = d
 
+        unique_defaulters = list(unique_defaulters_dict.values())
         unique_defaulters.sort(key=lambda x: (-x["months_pending"], x["block"], x["flat"]))
 
-        vendor_exp = 3265240.0
-        unspent_bal = 4036070.0
+        vendor_exp = 3760900.0
+        unspent_bal = 4786965.0
         tot_coll_exact = parse_num(ws_lift.cell(16, 15).value) or sum(b["collected"] for b in blocks_exact)
         tot_target_exact = parse_num(ws_lift.cell(16, 17).value) or sum(b["target"] for b in blocks_exact)
         

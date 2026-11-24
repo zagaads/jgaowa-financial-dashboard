@@ -1,223 +1,223 @@
 {
-  "last_updated": "2026-10-23 18:04:54",
-  "version": 1792758894,
+  "last_updated": "2026-11-24 20:24:11",
+  "version": 1795532051,
   "society": {
     "name": "Janapriya Greenwood Apartment Owners Welfare Association",
     "short_name": "JGAOWA",
     "address": "Janapriya Greenwood, Bangalore - 560057",
-    "financial_year": "FY 2024-2026 (27-Month Comprehensive)"
+    "financial_year": "FY 2024-2026 (31-Month Comprehensive)"
   },
   "summary": {
     "total_flats": 356,
     "total_blocks": 13,
-    "total_months": 27,
-    "current_liquid_funds": 3108041.4699999997,
-    "closing_cash_bank": 3108041.4699999997,
-    "total_receipts_23m": 65789523.82,
-    "total_receipts_fy": 65789523.82,
-    "total_payments_23m": 65377031.0,
-    "total_payments_fy": 65377031.0,
-    "avg_monthly_receipts": 2436649.03,
-    "avg_monthly_payments": 2421371.52,
+    "total_months": 31,
+    "current_liquid_funds": 5579043.5600000005,
+    "closing_cash_bank": 5579043.5600000005,
+    "total_receipts_23m": 84741394.46,
+    "total_receipts_fy": 84741394.46,
+    "total_payments_23m": 85784209.52,
+    "total_payments_fy": 85784209.52,
+    "avg_monthly_receipts": 2733593.37,
+    "avg_monthly_payments": 2767232.57,
     "active_capex_projects": [
       "Lift Modernization",
       "10-Block Painting"
     ],
-    "latest_active_month": "June'26"
+    "latest_active_month": "Oct'26"
   },
   "lift_project": {
     "total_flats": 356,
-    "total_demand_emis": 2136,
-    "total_paid_emis": 1988,
+    "total_demand_emis": 2492,
+    "total_paid_emis": 2344,
     "total_pending_emis": 148,
-    "overall_emi_pct": 93.07,
-    "overall_pending_pct": 6.93,
-    "total_target_amount": 8827080.0,
-    "total_collected": 7301310.0,
-    "vendor_expenses": 3265240.0,
-    "unspent_balance": 4036070.0,
-    "overall_amount_pct": 82.7,
+    "overall_emi_pct": 94.06,
+    "overall_pending_pct": 5.94,
+    "total_target_amount": 10298260.0,
+    "total_collected": 8547865.0,
+    "vendor_expenses": 3760900.0,
+    "unspent_balance": 4786965.0,
+    "overall_amount_pct": 83.0,
     "blocks": [
       {
         "block": "A1",
         "flats_count": 28,
-        "total_emis": 168,
-        "paid_emis": 161,
+        "total_emis": 196,
+        "paid_emis": 189,
         "pending_emis": 7,
-        "pct_paid": 95.83,
-        "pct_unpaid": 4.17,
-        "collected": 666564.0,
+        "pct_paid": 96.43,
+        "pct_unpaid": 3.57,
+        "collected": 755614.0,
         "monthly_target": 107800.0,
-        "target": 646800.0,
-        "pct_amount": 103.1,
+        "target": 754600.0,
+        "pct_amount": 100.1,
         "status": "Excellent (95%+)"
       },
       {
         "block": "A2",
         "flats_count": 32,
-        "total_emis": 192,
-        "paid_emis": 176,
+        "total_emis": 224,
+        "paid_emis": 208,
         "pending_emis": 16,
-        "pct_paid": 91.67,
-        "pct_unpaid": 8.33,
-        "collected": 688427.0,
+        "pct_paid": 92.86,
+        "pct_unpaid": 7.14,
+        "collected": 817727.0,
         "monthly_target": 123200.0,
-        "target": 739200.0,
-        "pct_amount": 93.1,
+        "target": 862400.0,
+        "pct_amount": 94.8,
         "status": "Healthy (90%+)"
       },
       {
         "block": "A3",
         "flats_count": 32,
-        "total_emis": 192,
-        "paid_emis": 169,
+        "total_emis": 224,
+        "paid_emis": 201,
         "pending_emis": 23,
-        "pct_paid": 88.02,
-        "pct_unpaid": 11.98,
-        "collected": 685380.0,
+        "pct_paid": 89.73,
+        "pct_unpaid": 10.27,
+        "collected": 824055.0,
         "monthly_target": 123200.0,
-        "target": 739200.0,
-        "pct_amount": 92.7,
+        "target": 862400.0,
+        "pct_amount": 95.6,
         "status": "Moderate (80%+)"
       },
       {
         "block": "A4",
         "flats_count": 24,
-        "total_emis": 144,
-        "paid_emis": 135,
+        "total_emis": 168,
+        "paid_emis": 159,
         "pending_emis": 9,
-        "pct_paid": 93.75,
-        "pct_unpaid": 6.25,
-        "collected": 518933.0,
+        "pct_paid": 94.64,
+        "pct_unpaid": 5.36,
+        "collected": 605883.0,
         "monthly_target": 105240.0,
-        "target": 631440.0,
+        "target": 736680.0,
         "pct_amount": 82.2,
         "status": "Healthy (90%+)"
       },
       {
         "block": "A5",
         "flats_count": 24,
-        "total_emis": 144,
-        "paid_emis": 142,
+        "total_emis": 168,
+        "paid_emis": 166,
         "pending_emis": 2,
-        "pct_paid": 98.61,
-        "pct_unpaid": 1.39,
-        "collected": 721603.0,
+        "pct_paid": 98.81,
+        "pct_unpaid": 1.19,
+        "collected": 814438.0,
         "monthly_target": 105240.0,
-        "target": 631440.0,
-        "pct_amount": 114.3,
+        "target": 736680.0,
+        "pct_amount": 110.6,
         "status": "Excellent (95%+)"
       },
       {
         "block": "A6",
         "flats_count": 24,
-        "total_emis": 144,
-        "paid_emis": 128,
+        "total_emis": 168,
+        "paid_emis": 152,
         "pending_emis": 16,
-        "pct_paid": 88.89,
-        "pct_unpaid": 11.11,
-        "collected": 556999.0,
+        "pct_paid": 90.48,
+        "pct_unpaid": 9.52,
+        "collected": 686779.0,
         "monthly_target": 105240.0,
-        "target": 631440.0,
-        "pct_amount": 88.2,
-        "status": "Moderate (80%+)"
+        "target": 736680.0,
+        "pct_amount": 93.2,
+        "status": "Healthy (90%+)"
       },
       {
         "block": "A7",
         "flats_count": 20,
-        "total_emis": 120,
-        "paid_emis": 107,
+        "total_emis": 140,
+        "paid_emis": 127,
         "pending_emis": 13,
-        "pct_paid": 89.17,
-        "pct_unpaid": 10.83,
-        "collected": 468575.0,
+        "pct_paid": 90.71,
+        "pct_unpaid": 9.29,
+        "collected": 572680.0,
         "monthly_target": 87700.0,
-        "target": 526200.0,
-        "pct_amount": 89.0,
-        "status": "Moderate (80%+)"
+        "target": 613900.0,
+        "pct_amount": 93.3,
+        "status": "Healthy (90%+)"
       },
       {
         "block": "B1",
         "flats_count": 44,
-        "total_emis": 264,
-        "paid_emis": 253,
+        "total_emis": 308,
+        "paid_emis": 297,
         "pending_emis": 11,
-        "pct_paid": 95.83,
-        "pct_unpaid": 4.17,
-        "collected": 468449.0,
+        "pct_paid": 96.43,
+        "pct_unpaid": 3.57,
+        "collected": 533899.0,
         "monthly_target": 169400.0,
-        "target": 1016400.0,
-        "pct_amount": 46.1,
+        "target": 1185800.0,
+        "pct_amount": 45.0,
         "status": "Excellent (95%+)"
       },
       {
         "block": "B2",
         "flats_count": 32,
-        "total_emis": 192,
-        "paid_emis": 166,
+        "total_emis": 224,
+        "paid_emis": 198,
         "pending_emis": 26,
-        "pct_paid": 86.46,
-        "pct_unpaid": 13.54,
-        "collected": 379404.0,
+        "pct_paid": 88.39,
+        "pct_unpaid": 11.61,
+        "collected": 445104.0,
         "monthly_target": 123200.0,
-        "target": 739200.0,
-        "pct_amount": 51.3,
+        "target": 862400.0,
+        "pct_amount": 51.6,
         "status": "Moderate (80%+)"
       },
       {
         "block": "B3",
         "flats_count": 24,
-        "total_emis": 144,
-        "paid_emis": 139,
+        "total_emis": 168,
+        "paid_emis": 163,
         "pending_emis": 5,
-        "pct_paid": 96.53,
-        "pct_unpaid": 3.47,
-        "collected": 500320.0,
+        "pct_paid": 97.02,
+        "pct_unpaid": 2.98,
+        "collected": 589270.0,
         "monthly_target": 105240.0,
-        "target": 631440.0,
-        "pct_amount": 79.2,
+        "target": 736680.0,
+        "pct_amount": 80.0,
         "status": "Excellent (95%+)"
       },
       {
         "block": "B4",
         "flats_count": 24,
-        "total_emis": 144,
-        "paid_emis": 133,
+        "total_emis": 168,
+        "paid_emis": 157,
         "pending_emis": 11,
-        "pct_paid": 92.36,
-        "pct_unpaid": 7.64,
-        "collected": 613819.0,
+        "pct_paid": 93.45,
+        "pct_unpaid": 6.55,
+        "collected": 684229.0,
         "monthly_target": 105240.0,
-        "target": 631440.0,
-        "pct_amount": 97.2,
+        "target": 736680.0,
+        "pct_amount": 92.9,
         "status": "Healthy (90%+)"
       },
       {
         "block": "B5",
         "flats_count": 24,
-        "total_emis": 144,
-        "paid_emis": 141,
+        "total_emis": 168,
+        "paid_emis": 165,
         "pending_emis": 3,
-        "pct_paid": 97.92,
-        "pct_unpaid": 2.08,
-        "collected": 529458.0,
+        "pct_paid": 98.21,
+        "pct_unpaid": 1.79,
+        "collected": 618088.0,
         "monthly_target": 105240.0,
-        "target": 631440.0,
-        "pct_amount": 83.8,
+        "target": 736680.0,
+        "pct_amount": 83.9,
         "status": "Excellent (95%+)"
       },
       {
         "block": "B6",
         "flats_count": 24,
-        "total_emis": 144,
-        "paid_emis": 138,
+        "total_emis": 168,
+        "paid_emis": 162,
         "pending_emis": 6,
-        "pct_paid": 95.83,
-        "pct_unpaid": 4.17,
-        "collected": 503379.0,
+        "pct_paid": 96.43,
+        "pct_unpaid": 3.57,
+        "collected": 600099.0,
         "monthly_target": 105240.0,
-        "target": 631440.0,
-        "pct_amount": 79.7,
+        "target": 736680.0,
+        "pct_amount": 81.5,
         "status": "Excellent (95%+)"
       }
     ],
@@ -225,127 +225,143 @@
       {
         "flat": "A1-303",
         "block": "A1",
-        "description": "May to Oct pending",
-        "months_pending": 6,
-        "amount_due": 23100.0,
-        "status": "All 6 Months (Final Notice)"
+        "description": "May to Nov pending",
+        "months_pending": 7,
+        "amount_due": 26950.0,
+        "status": "All 7 Months (Final Notice)"
       },
       {
         "flat": "A2-315",
         "block": "A2",
-        "description": "May to Oct pending",
-        "months_pending": 6,
-        "amount_due": 23100.0,
-        "status": "All 6 Months (Final Notice)"
+        "description": "May to nov pending",
+        "months_pending": 7,
+        "amount_due": 26950.0,
+        "status": "All 7 Months (Final Notice)"
       },
       {
         "flat": "A3-318",
         "block": "A3",
-        "description": "From May to Oct Pending",
-        "months_pending": 6,
-        "amount_due": 23100.0,
-        "status": "All 6 Months (Final Notice)"
+        "description": "May to Nov pending",
+        "months_pending": 7,
+        "amount_due": 26950.0,
+        "status": "All 7 Months (Final Notice)"
       },
       {
         "flat": "B2-116",
         "block": "B2",
-        "description": "May to oct Month Pending",
-        "months_pending": 6,
-        "amount_due": 23100.0,
-        "status": "All 6 Months (Final Notice)"
+        "description": "May to Nov Month Pending",
+        "months_pending": 7,
+        "amount_due": 26950.0,
+        "status": "All 7 Months (Final Notice)"
       },
       {
         "flat": "B2-216",
         "block": "B2",
-        "description": "May to oct Month Pending",
-        "months_pending": 6,
-        "amount_due": 23100.0,
-        "status": "All 6 Months (Final Notice)"
+        "description": "May to Nov Month Pending",
+        "months_pending": 7,
+        "amount_due": 26950.0,
+        "status": "All 7 Months (Final Notice)"
       },
       {
         "flat": "B2-219",
         "block": "B2",
-        "description": "May to oct Month Pending",
-        "months_pending": 6,
-        "amount_due": 23100.0,
-        "status": "All 6 Months (Final Notice)"
+        "description": "May to Nov Month Pending",
+        "months_pending": 7,
+        "amount_due": 26950.0,
+        "status": "All 7 Months (Final Notice)"
       },
       {
         "flat": "B2-316",
         "block": "B2",
-        "description": "May to oct Month Pending",
-        "months_pending": 6,
-        "amount_due": 23100.0,
-        "status": "All 6 Months (Final Notice)"
-      },
-      {
-        "flat": "A7-346",
-        "block": "A7",
-        "description": "June. August,sep and oct pending",
-        "months_pending": 5,
-        "amount_due": 21925.0,
-        "status": "5 Months (Final Notice)"
+        "description": "May to Nov Month Pending",
+        "months_pending": 7,
+        "amount_due": 26950.0,
+        "status": "All 7 Months (Final Notice)"
       },
       {
         "flat": "B4-126",
         "block": "B4",
-        "description": "May to sep pending",
-        "months_pending": 5,
-        "amount_due": 21925.0,
-        "status": "5 Months (Final Notice)"
+        "description": "May to Nov pending",
+        "months_pending": 7,
+        "amount_due": 30695.0,
+        "status": "All 7 Months (Final Notice)"
       },
       {
         "flat": "B4-228",
         "block": "B4",
-        "description": "May to sep pending",
+        "description": "May to Nov pending",
+        "months_pending": 7,
+        "amount_due": 30695.0,
+        "status": "All 7 Months (Final Notice)"
+      },
+      {
+        "flat": "A3-320",
+        "block": "A3",
+        "description": "May and oct pending",
+        "months_pending": 6,
+        "amount_due": 23100.0,
+        "status": "6 Months (Final Notice)"
+      },
+      {
+        "flat": "A2-414",
+        "block": "A2",
+        "description": "July to Nov Pending",
+        "months_pending": 5,
+        "amount_due": 19250.0,
+        "status": "5 Months (Final Notice)"
+      },
+      {
+        "flat": "A3-417",
+        "block": "A3",
+        "description": "July to Nov pending",
+        "months_pending": 5,
+        "amount_due": 19250.0,
+        "status": "5 Months (Final Notice)"
+      },
+      {
+        "flat": "A3-421",
+        "block": "A3",
+        "description": "July to Nov pending",
+        "months_pending": 5,
+        "amount_due": 19250.0,
+        "status": "5 Months (Final Notice)"
+      },
+      {
+        "flat": "A4-428",
+        "block": "A4",
+        "description": "July to Nov pending",
         "months_pending": 5,
         "amount_due": 21925.0,
         "status": "5 Months (Final Notice)"
       },
       {
-        "flat": "A2-414",
-        "block": "A2",
-        "description": "July to Oct pending",
-        "months_pending": 4,
-        "amount_due": 15400.0,
-        "status": "4 Months (Final Notice)"
+        "flat": "A7-346",
+        "block": "A7",
+        "description": "June, Aug,Sep,Oct and Nov pending",
+        "months_pending": 5,
+        "amount_due": 21925.0,
+        "status": "5 Months (Final Notice)"
       },
       {
-        "flat": "A3-417",
-        "block": "A3",
-        "description": "July to oct pending",
-        "months_pending": 4,
-        "amount_due": 15400.0,
-        "status": "4 Months (Final Notice)"
+        "flat": "B1-410",
+        "block": "B1",
+        "description": "June, Aug, Sep,Oct and nov Pending",
+        "months_pending": 5,
+        "amount_due": 19250.0,
+        "status": "5 Months (Final Notice)"
       },
       {
-        "flat": "A3-420",
-        "block": "A3",
-        "description": "June, Aug, Sep and oct pending",
-        "months_pending": 4,
-        "amount_due": 15400.0,
-        "status": "4 Months (Final Notice)"
+        "flat": "B3-422",
+        "block": "B3",
+        "description": "July to Nov pending",
+        "months_pending": 5,
+        "amount_due": 21925.0,
+        "status": "5 Months (Final Notice)"
       },
       {
-        "flat": "A3-421",
-        "block": "A3",
-        "description": "July to Oct pending",
-        "months_pending": 4,
-        "amount_due": 15400.0,
-        "status": "4 Months (Final Notice)"
-      },
-      {
-        "flat": "A4-428",
+        "flat": "A4-426",
         "block": "A4",
-        "description": "July, August, sep and oct pending",
-        "months_pending": 4,
-        "amount_due": 17540.0,
-        "status": "4 Months (Final Notice)"
-      },
-      {
-        "flat": "A6-140",
-        "block": "A6",
-        "description": "July to oct pending",
+        "description": "May, Aug, Oct and Nov pending",
         "months_pending": 4,
         "amount_due": 17540.0,
         "status": "4 Months (Final Notice)"
@@ -353,47 +369,39 @@
       {
         "flat": "A6-440",
         "block": "A6",
-        "description": "May, June,August and oct pending",
+        "description": "May, June, Aug and Oct pending",
         "months_pending": 4,
         "amount_due": 17540.0,
         "status": "4 Months (Final Notice)"
       },
       {
-        "flat": "B1-410",
+        "flat": "B1-205",
         "block": "B1",
-        "description": "June, Aug. Sep and oct pending",
+        "description": "Aug ,sep, oct and Nov pending",
         "months_pending": 4,
         "amount_due": 15400.0,
         "status": "4 Months (Final Notice)"
       },
       {
-        "flat": "B3-422",
-        "block": "B3",
-        "description": "July to oct pending",
+        "flat": "B6-139",
+        "block": "B6",
+        "description": "Aug, Sep, Oct and Nov pending",
         "months_pending": 4,
         "amount_due": 17540.0,
         "status": "4 Months (Final Notice)"
       },
       {
-        "flat": "A4-426",
-        "block": "A4",
-        "description": "May, August and Oct pending",
-        "months_pending": 3,
-        "amount_due": 13155.0,
-        "status": "3 Months (Urgent Notice)"
-      },
-      {
         "flat": "A6-338",
         "block": "A6",
-        "description": "May, June and August pending",
+        "description": "May, June and August Pending",
         "months_pending": 3,
         "amount_due": 13155.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
-        "flat": "A7-142",
-        "block": "A7",
-        "description": "Aug, sep and oct pending",
+        "flat": "A6-437",
+        "block": "A6",
+        "description": "Sep, oct and nov pending",
         "months_pending": 3,
         "amount_due": 13155.0,
         "status": "3 Months (Urgent Notice)"
@@ -407,81 +415,97 @@
         "status": "3 Months (Urgent Notice)"
       },
       {
-        "flat": "B1-205",
+        "flat": "B1-106",
         "block": "B1",
-        "description": "Aug ,sep and oct pending",
+        "description": "Sep, oct and Nov pending",
         "months_pending": 3,
         "amount_due": 11550.0,
         "status": "3 Months (Urgent Notice)"
       },
       {
-        "flat": "B6-139",
-        "block": "B6",
-        "description": "Aug, Sep and oct pending",
-        "months_pending": 3,
-        "amount_due": 13155.0,
-        "status": "3 Months (Urgent Notice)"
-      },
-      {
-        "flat": "A2-208",
-        "block": "A2",
-        "description": "Aug and Oct pending",
+        "flat": "A1-404",
+        "block": "A1",
+        "description": "oct and nov pending",
         "months_pending": 2,
         "amount_due": 7700.0,
         "status": "2 Months (Reminder)"
       },
       {
-        "flat": "A2-310",
-        "block": "A2",
-        "description": "Sep and Oct pending",
-        "months_pending": 2,
-        "amount_due": 7700.0,
-        "status": "2 Months (Reminder)"
-      },
-      {
-        "flat": "A3-320",
+        "flat": "A3-420",
         "block": "A3",
-        "description": "May and Oct pending",
+        "description": "Oct and nov pending",
         "months_pending": 2,
         "amount_due": 7700.0,
         "status": "2 Months (Reminder)"
       },
       {
-        "flat": "A6-437",
-        "block": "A6",
-        "description": "Sep and oct pending",
+        "flat": "A4-329",
+        "block": "A4",
+        "description": "Oct and nov pending",
         "months_pending": 2,
         "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
-        "flat": "B1-106",
-        "block": "B1",
-        "description": "Sep and oct pending",
+        "flat": "A6-137",
+        "block": "A6",
+        "description": "Oct and Nov pending",
         "months_pending": 2,
-        "amount_due": 7700.0,
+        "amount_due": 8770.0,
         "status": "2 Months (Reminder)"
       },
       {
-        "flat": "A1-404",
+        "flat": "A6-240",
+        "block": "A6",
+        "description": "Oct and Nov pending",
+        "months_pending": 2,
+        "amount_due": 8770.0,
+        "status": "2 Months (Reminder)"
+      },
+      {
+        "flat": "A7-345",
+        "block": "A7",
+        "description": "Oct and Nov pending",
+        "months_pending": 2,
+        "amount_due": 8770.0,
+        "status": "2 Months (Reminder)"
+      },
+      {
+        "flat": "B3-421",
+        "block": "B3",
+        "description": "Oct and Nov Pending",
+        "months_pending": 2,
+        "amount_due": 8770.0,
+        "status": "2 Months (Reminder)"
+      },
+      {
+        "flat": "B5-132",
+        "block": "B5",
+        "description": "Oct and Nov Pending",
+        "months_pending": 2,
+        "amount_due": 8770.0,
+        "status": "2 Months (Reminder)"
+      },
+      {
+        "flat": "B5-332",
+        "block": "B5",
+        "description": "Oct and Nov Pending",
+        "months_pending": 2,
+        "amount_due": 8770.0,
+        "status": "2 Months (Reminder)"
+      },
+      {
+        "flat": "A1-407",
         "block": "A1",
-        "description": "Oct Pending",
+        "description": "Nov Pending",
         "months_pending": 1,
         "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "A2-213",
+        "flat": "A2-112",
         "block": "A2",
-        "description": "Oct pending",
-        "months_pending": 1,
-        "amount_due": 3850.0,
-        "status": "1 Month (Pending)"
-      },
-      {
-        "flat": "A2-214",
-        "block": "A2",
-        "description": "Oct pending",
+        "description": "Nov pending",
         "months_pending": 1,
         "amount_due": 3850.0,
         "status": "1 Month (Pending)"
@@ -489,39 +513,15 @@
       {
         "flat": "A3-321",
         "block": "A3",
-        "description": "Oct pending",
+        "description": "Nov pending",
         "months_pending": 1,
         "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "A3-322",
-        "block": "A3",
-        "description": "Oct pending",
-        "months_pending": 1,
-        "amount_due": 3850.0,
-        "status": "1 Month (Pending)"
-      },
-      {
-        "flat": "A4-124",
+        "flat": "A4-427",
         "block": "A4",
-        "description": "Oct pending",
-        "months_pending": 1,
-        "amount_due": 4385.0,
-        "status": "1 Month (Pending)"
-      },
-      {
-        "flat": "A4-329",
-        "block": "A4",
-        "description": "Oct pending",
-        "months_pending": 1,
-        "amount_due": 4385.0,
-        "status": "1 Month (Pending)"
-      },
-      {
-        "flat": "A5-332",
-        "block": "A5",
-        "description": "Oct pending",
+        "description": "Nov pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
@@ -529,79 +529,63 @@
       {
         "flat": "A5-430",
         "block": "A5",
-        "description": "Oct pending",
+        "description": "oct pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "A6-137",
+        "flat": "A6-340",
         "block": "A6",
-        "description": "Oct pending",
+        "description": "Nov pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "A6-240",
-        "block": "A6",
-        "description": "Oct pending",
-        "months_pending": 1,
-        "amount_due": 4385.0,
-        "status": "1 Month (Pending)"
-      },
-      {
-        "flat": "A7-145",
+        "flat": "A7-245",
         "block": "A7",
-        "description": "Oct pending",
+        "description": "Nov pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "A7-345",
+        "flat": "A7-344",
         "block": "A7",
-        "description": "Oct pending",
+        "description": "Nov pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "B1-307",
+        "flat": "B1-408",
         "block": "B1",
-        "description": "Oct pending",
+        "description": "Nov Pending",
         "months_pending": 1,
         "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "B1A-402",
-        "block": "B1",
-        "description": "Oct pending",
-        "months_pending": 1,
-        "amount_due": 3850.0,
-        "status": "1 Month (Pending)"
-      },
-      {
-        "flat": "B2-214",
+        "flat": "B2-415",
         "block": "B2",
-        "description": "Oct pending",
+        "description": "Nov pending",
         "months_pending": 1,
         "amount_due": 3850.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "B2-218",
-        "block": "B2",
-        "description": "Oct pending",
-        "months_pending": 1,
-        "amount_due": 3850.0,
-        "status": "1 Month (Pending)"
-      },
-      {
-        "flat": "B3-421",
+        "flat": "B3-224",
         "block": "B3",
-        "description": "Oct pending",
+        "description": "Nov pending",
+        "months_pending": 1,
+        "amount_due": 4385.0,
+        "status": "1 Month (Pending)"
+      },
+      {
+        "flat": "B3-320",
+        "block": "B3",
+        "description": "Nov pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
@@ -609,31 +593,31 @@
       {
         "flat": "B4-227",
         "block": "B4",
-        "description": "Oct pending",
+        "description": "Nov pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "B5-132",
+        "flat": "B5-333",
         "block": "B5",
-        "description": "Oct pending",
+        "description": "July Pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "B5-135",
+        "flat": "B5-434",
         "block": "B5",
-        "description": "Oct pending",
+        "description": "Nov pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
       },
       {
-        "flat": "B5-332",
-        "block": "B5",
-        "description": "Oct pending",
+        "flat": "B6-142",
+        "block": "B6",
+        "description": "Nov Pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
@@ -642,22 +626,6 @@
         "flat": "B6-241",
         "block": "B6",
         "description": "Aug Pending",
-        "months_pending": 1,
-        "amount_due": 4385.0,
-        "status": "1 Month (Pending)"
-      },
-      {
-        "flat": "B6-339",
-        "block": "B6",
-        "description": "Oct pending",
-        "months_pending": 1,
-        "amount_due": 4385.0,
-        "status": "1 Month (Pending)"
-      },
-      {
-        "flat": "B6-343",
-        "block": "B6",
-        "description": "Oct pending",
         "months_pending": 1,
         "amount_due": 4385.0,
         "status": "1 Month (Pending)"
@@ -5009,6 +4977,666 @@
         "idfc_first": 2274755.9,
         "cash_in_hand": 138101.0
       }
+    },
+    {
+      "month": "July'26",
+      "opening_balance": 4293199.8100000005,
+      "receipts_total": 4653945.24,
+      "payments_total": 7378815.78,
+      "closing_balance": 1568329.2700000005,
+      "receipts": [
+        {
+          "item": "Membership Fee Received",
+          "amount": 3000.0
+        },
+        {
+          "item": "Lift project collection",
+          "amount": 1265124.0
+        },
+        {
+          "item": "Maintenance Charges Received",
+          "amount": 1000118.0
+        },
+        {
+          "item": "Late Fee Received (Main)",
+          "amount": 8700.0
+        },
+        {
+          "item": "Late Fee Received (Lift)",
+          "amount": 10000.0
+        },
+        {
+          "item": "AdOnMo Income",
+          "amount": 7973.0
+        },
+        {
+          "item": "Bank Interest",
+          "amount": 13588.0
+        },
+        {
+          "item": "Income From Club House-Classes",
+          "amount": 6300.0
+        },
+        {
+          "item": "NOC for Residences",
+          "amount": 2000.0
+        },
+        {
+          "item": "Scrap Sale and Vehicle Stickers",
+          "amount": 70.0
+        },
+        {
+          "item": "Sponsorships Income",
+          "amount": 10000.0
+        },
+        {
+          "item": "Tilt Cycle Income",
+          "amount": 99.62
+        },
+        {
+          "item": "Nett Receipts (B)",
+          "amount": 2326972.62
+        }
+      ],
+      "payments": [
+        {
+          "item": "Painting Charges and Expenses",
+          "amount": 11500.0
+        },
+        {
+          "item": "Lift Project Payments",
+          "amount": 2697000.0
+        },
+        {
+          "item": "STP Maintenance / Electrician Chargs",
+          "amount": 37657.0
+        },
+        {
+          "item": "Security Charges",
+          "amount": 296187.0
+        },
+        {
+          "item": "Plumber/Helper/House Keeping Charges",
+          "amount": 184422.0
+        },
+        {
+          "item": "Gardening Expenses-Contract",
+          "amount": 32342.0
+        },
+        {
+          "item": "Garbage Clearing Charges",
+          "amount": 30195.0
+        },
+        {
+          "item": "Pest Control",
+          "amount": 21384.0
+        },
+        {
+          "item": "Electricity Charges",
+          "amount": 109332.0
+        },
+        {
+          "item": "Water Softner Operating costs:",
+          "amount": 46000.0
+        },
+        {
+          "item": "HP-Laptop  15s 12th Gen Intel Core",
+          "amount": 17500.0
+        },
+        {
+          "item": "Bio Metric Attendance Machine",
+          "amount": 11500.0
+        },
+        {
+          "item": "Salary Advance- Manager",
+          "amount": 30000.0
+        },
+        {
+          "item": "Bank Charges",
+          "amount": 60.89
+        },
+        {
+          "item": "Diesel for A & B Block DG",
+          "amount": 19758.0
+        },
+        {
+          "item": "Petrol & Conveyance",
+          "amount": 2000.0
+        },
+        {
+          "item": "Printing & Stationaries",
+          "amount": 1333.0
+        },
+        {
+          "item": "Staff Welfare",
+          "amount": 5412.0
+        },
+        {
+          "item": "Telephone & Internet",
+          "amount": 219.0
+        },
+        {
+          "item": "Water Expenses",
+          "amount": 4000.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - BUILDING",
+          "amount": 30492.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - CAMERA",
+          "amount": 6500.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - ELECTRICAL",
+          "amount": 49772.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - Plumbing",
+          "amount": 6700.0
+        },
+        {
+          "item": "salary - Accountant",
+          "amount": 18000.0
+        },
+        {
+          "item": "Salary - Property Manager",
+          "amount": 20142.0
+        },
+        {
+          "item": "Nett Payments (C )",
+          "amount": 3689407.89
+        }
+      ],
+      "bank_balances": {
+        "icici_current": 575867.36,
+        "icici_sb": 114804.55,
+        "idfc_first": 3412849.9,
+        "cash_in_hand": 189678.0
+      }
+    },
+    {
+      "month": "Aug'26",
+      "opening_balance": 2930764.5400000005,
+      "receipts_total": 4473148.34,
+      "payments_total": 1771671.58,
+      "closing_balance": 5632241.300000001,
+      "receipts": [
+        {
+          "item": "Membership Fee Received",
+          "amount": 2000.0
+        },
+        {
+          "item": "Lift project collection",
+          "amount": 1184228.0
+        },
+        {
+          "item": "Salary Advance repaid",
+          "amount": 6000.0
+        },
+        {
+          "item": "Maintenance Charges Received",
+          "amount": 988842.0
+        },
+        {
+          "item": "Late Fee Received (Main)",
+          "amount": 6200.0
+        },
+        {
+          "item": "Late Fee Received (Lift)",
+          "amount": 11500.0
+        },
+        {
+          "item": "AdOnMo Income",
+          "amount": 7973.0
+        },
+        {
+          "item": "Bank Interest",
+          "amount": 14258.0
+        },
+        {
+          "item": "Income From Club House-Classes",
+          "amount": 1900.0
+        },
+        {
+          "item": "NOC for Residences",
+          "amount": 1500.0
+        },
+        {
+          "item": "Scrap Sale and Vehicle Stickers",
+          "amount": 60.0
+        },
+        {
+          "item": "Sponsorships Income",
+          "amount": 12000.0
+        },
+        {
+          "item": "Tilt Cycle Income",
+          "amount": 113.17
+        },
+        {
+          "item": "Nett Receipts (B)",
+          "amount": 2236574.17
+        }
+      ],
+      "payments": [
+        {
+          "item": "STP Maintenance / Electrician Chargs",
+          "amount": 37657.0
+        },
+        {
+          "item": "Security Charges",
+          "amount": 301430.0
+        },
+        {
+          "item": "Plumber/Helper/House Keeping Charges",
+          "amount": 290470.0
+        },
+        {
+          "item": "Gardening Expenses-Contract",
+          "amount": 32975.0
+        },
+        {
+          "item": "Garbage Clearing Charges",
+          "amount": 26250.0
+        },
+        {
+          "item": "Pest Control",
+          "amount": 21384.0
+        },
+        {
+          "item": "Water Softner Operating costs:",
+          "amount": 23000.0
+        },
+        {
+          "item": "TDS Contract",
+          "amount": 8850.0
+        },
+        {
+          "item": "Water Softner",
+          "amount": 350.0
+        },
+        {
+          "item": "Bank Charges",
+          "amount": 109.78999999999999
+        },
+        {
+          "item": "Diesel for A & B Block DG",
+          "amount": 19758.0
+        },
+        {
+          "item": "Festival Celebration Expenses",
+          "amount": 28139.0
+        },
+        {
+          "item": "AGM/EGM Expenses",
+          "amount": 12165.0
+        },
+        {
+          "item": "Petrol & Conveyance",
+          "amount": 2000.0
+        },
+        {
+          "item": "Printing & Stationaries",
+          "amount": 3229.0
+        },
+        {
+          "item": "Staff Welfare",
+          "amount": 3682.0
+        },
+        {
+          "item": "Telephone & Internet",
+          "amount": 219.0
+        },
+        {
+          "item": "Water Expenses",
+          "amount": 2000.0
+        },
+        {
+          "item": "Repair & Maintenance - Lift",
+          "amount": 600.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - BUILDING",
+          "amount": 14850.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - ELECTRICAL",
+          "amount": 24268.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - Plumbing",
+          "amount": 12950.0
+        },
+        {
+          "item": "Work Order Amount Paid (Refunded)",
+          "amount": 1500.0
+        },
+        {
+          "item": "salary - Accountant",
+          "amount": 18000.0
+        },
+        {
+          "item": "Nett Payments (C )",
+          "amount": 885835.79
+        }
+      ],
+      "bank_balances": {
+        "icici_current": 628112.09,
+        "icici_sb": 114804.55,
+        "idfc_first": 1994561.9,
+        "cash_in_hand": 193286.0
+      }
+    },
+    {
+      "month": "Sep'26",
+      "opening_balance": 4281502.920000001,
+      "receipts_total": 5160808.86,
+      "payments_total": 2565727.58,
+      "closing_balance": 6876584.200000001,
+      "receipts": [
+        {
+          "item": "Membership Fee Received",
+          "amount": 5000.0
+        },
+        {
+          "item": "Lift project collection",
+          "amount": 1277081.0
+        },
+        {
+          "item": "Salary Advance repaid",
+          "amount": 6000.0
+        },
+        {
+          "item": "Maintenance Charges Received",
+          "amount": 1201972.0
+        },
+        {
+          "item": "Late Fee Received (Main)",
+          "amount": 10300.0
+        },
+        {
+          "item": "Late Fee Received (Lift)",
+          "amount": 17000.0
+        },
+        {
+          "item": "AdOnMo Income",
+          "amount": 7973.0
+        },
+        {
+          "item": "Bank Interest",
+          "amount": 25447.0
+        },
+        {
+          "item": "Income From Club House-Classes",
+          "amount": 14500.0
+        },
+        {
+          "item": "Scrap Sale and Vehicle Stickers",
+          "amount": 30.0
+        },
+        {
+          "item": "Sponsorships Income",
+          "amount": 15000.0
+        },
+        {
+          "item": "Tilt Cycle Income",
+          "amount": 101.43
+        },
+        {
+          "item": "Nett Receipts (B)",
+          "amount": 2580404.43
+        }
+      ],
+      "payments": [
+        {
+          "item": "Lift Project Payments",
+          "amount": 250000.0
+        },
+        {
+          "item": "STP Maintenance / Electrician Chargs",
+          "amount": 37657.0
+        },
+        {
+          "item": "Security Charges",
+          "amount": 297323.0
+        },
+        {
+          "item": "Plumber/Helper/House Keeping Charges",
+          "amount": 296204.0
+        },
+        {
+          "item": "Garbage Clearing Charges",
+          "amount": 26250.0
+        },
+        {
+          "item": "Pest Control",
+          "amount": 21384.0
+        },
+        {
+          "item": "Electricity Charges",
+          "amount": 227210.0
+        },
+        {
+          "item": "Water Softner Operating costs:",
+          "amount": 23000.0
+        },
+        {
+          "item": "TDS Contract",
+          "amount": 37036.0
+        },
+        {
+          "item": "Bank Charges",
+          "amount": 109.78999999999999
+        },
+        {
+          "item": "Festival Celebration Expenses",
+          "amount": 791.0
+        },
+        {
+          "item": "AGM/EGM Expenses",
+          "amount": 2200.0
+        },
+        {
+          "item": "Printing & Stationaries",
+          "amount": 1410.0
+        },
+        {
+          "item": "Staff Welfare",
+          "amount": 2642.0
+        },
+        {
+          "item": "Water Expenses",
+          "amount": 2000.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - BUILDING",
+          "amount": 18100.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - ELECTRICAL",
+          "amount": 10290.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - Plumbing",
+          "amount": 3757.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - Generator",
+          "amount": 7500.0
+        },
+        {
+          "item": "salary - Accountant",
+          "amount": 18000.0
+        },
+        {
+          "item": "Nett Payments (C )",
+          "amount": 1282863.79
+        }
+      ],
+      "bank_balances": {
+        "icici_current": 760420.47,
+        "icici_sb": 114804.55,
+        "idfc_first": 3204547.9,
+        "cash_in_hand": 201730.0
+      }
+    },
+    {
+      "month": "Oct'26",
+      "opening_balance": 5579043.560000001,
+      "receipts_total": 4663968.2,
+      "payments_total": 8690963.58,
+      "closing_balance": 1552048.1800000016,
+      "receipts": [
+        {
+          "item": "Membership Fee Received",
+          "amount": 3000.0
+        },
+        {
+          "item": "Lift project collection",
+          "amount": 1237172.0
+        },
+        {
+          "item": "Salary Advance repaid",
+          "amount": 6000.0
+        },
+        {
+          "item": "Maintenance Charges Received",
+          "amount": 1032474.0
+        },
+        {
+          "item": "Late Fee Received (Main)",
+          "amount": 14850.0
+        },
+        {
+          "item": "Late Fee Received (Lift)",
+          "amount": 10000.0
+        },
+        {
+          "item": "AdOnMo Income",
+          "amount": 7973.0
+        },
+        {
+          "item": "Bank Interest",
+          "amount": 14913.0
+        },
+        {
+          "item": "Income From Club House-Classes",
+          "amount": 1500.0
+        },
+        {
+          "item": "Scrap Sale and Vehicle Stickers",
+          "amount": 30.0
+        },
+        {
+          "item": "Sponsorships Income",
+          "amount": 4000.0
+        },
+        {
+          "item": "Tilt Cycle Income",
+          "amount": 72.1
+        },
+        {
+          "item": "Nett Receipts (B)",
+          "amount": 2331984.1
+        }
+      ],
+      "payments": [
+        {
+          "item": "Lift Project Payments",
+          "amount": 3182460.0
+        },
+        {
+          "item": "STP Maintenance / Electrician Chargs",
+          "amount": 38657.0
+        },
+        {
+          "item": "Security Charges",
+          "amount": 293787.0
+        },
+        {
+          "item": "Plumber/Helper/House Keeping Charges",
+          "amount": 281467.0
+        },
+        {
+          "item": "Garbage Clearing Charges",
+          "amount": 26250.0
+        },
+        {
+          "item": "Pest Control",
+          "amount": 21384.0
+        },
+        {
+          "item": "Electricity Charges",
+          "amount": 215298.0
+        },
+        {
+          "item": "TDS Contract",
+          "amount": 8150.0
+        },
+        {
+          "item": "Salary Advance- Kavery",
+          "amount": 10000.0
+        },
+        {
+          "item": "Water Softner",
+          "amount": 46000.0
+        },
+        {
+          "item": "Bank Charges",
+          "amount": 109.78999999999999
+        },
+        {
+          "item": "Diesel for A & B Block DG",
+          "amount": 39516.0
+        },
+        {
+          "item": "Festival Celebration Expenses",
+          "amount": 43086.0
+        },
+        {
+          "item": "Petrol & Conveyance",
+          "amount": 2000.0
+        },
+        {
+          "item": "Printing & Stationaries",
+          "amount": 509.0
+        },
+        {
+          "item": "Staff Welfare",
+          "amount": 4804.0
+        },
+        {
+          "item": "Water Expenses",
+          "amount": 2000.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - BUILDING",
+          "amount": 55000.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - ELECTRICAL",
+          "amount": 45050.0
+        },
+        {
+          "item": "REPAIRS & MAINTENANCE - Plumbing",
+          "amount": 11954.0
+        },
+        {
+          "item": "salary - Accountant",
+          "amount": 18000.0
+        },
+        {
+          "item": "Nett Payments (C )",
+          "amount": 4345481.79
+        }
+      ],
+      "bank_balances": {
+        "icici_current": 860321.11,
+        "icici_sb": 114804.55,
+        "idfc_first": 4269369.9,
+        "cash_in_hand": 334548.0
+      }
     }
   ],
   "matrix_rows": [
@@ -5041,7 +5669,11 @@
         "Mar'26": 3000.0,
         "Apr'26": 0.0,
         "May'26": 3000.0,
-        "June'26": 2000.0
+        "June'26": 2000.0,
+        "July'26": 3000.0,
+        "Aug'26": 2000.0,
+        "Sep'26": 5000.0,
+        "Oct'26": 3000.0
       }
     },
     {
@@ -5073,7 +5705,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -5105,7 +5741,11 @@
         "Mar'26": 0.0,
         "Apr'26": 40000.0,
         "May'26": 1855003.0,
-        "June'26": 1211537.0
+        "June'26": 1211537.0,
+        "July'26": 1265124.0,
+        "Aug'26": 1184228.0,
+        "Sep'26": 1277081.0,
+        "Oct'26": 1237172.0
       }
     },
     {
@@ -5137,7 +5777,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -5169,7 +5813,11 @@
         "Mar'26": 3000.0,
         "Apr'26": 1000.0,
         "May'26": 12000.0,
-        "June'26": 2000.0
+        "June'26": 2000.0,
+        "July'26": 0.0,
+        "Aug'26": 6000.0,
+        "Sep'26": 6000.0,
+        "Oct'26": 6000.0
       }
     },
     {
@@ -5201,7 +5849,11 @@
         "Mar'26": 989331.0,
         "Apr'26": 871025.52,
         "May'26": 928353.0,
-        "June'26": 943354.0
+        "June'26": 943354.0,
+        "July'26": 1000118.0,
+        "Aug'26": 988842.0,
+        "Sep'26": 1201972.0,
+        "Oct'26": 1032474.0
       }
     },
     {
@@ -5233,7 +5885,11 @@
         "Mar'26": 2000.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -5265,7 +5921,11 @@
         "Mar'26": 10700.0,
         "Apr'26": 7000.0,
         "May'26": 9600.0,
-        "June'26": 8300.0
+        "June'26": 8300.0,
+        "July'26": 8700.0,
+        "Aug'26": 6200.0,
+        "Sep'26": 10300.0,
+        "Oct'26": 14850.0
       }
     },
     {
@@ -5297,7 +5957,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 8000.0
+        "June'26": 8000.0,
+        "July'26": 10000.0,
+        "Aug'26": 11500.0,
+        "Sep'26": 17000.0,
+        "Oct'26": 10000.0
       }
     },
     {
@@ -5329,7 +5993,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -5361,7 +6029,11 @@
         "Mar'26": 7973.0,
         "Apr'26": 7973.0,
         "May'26": 7973.0,
-        "June'26": 7973.0
+        "June'26": 7973.0,
+        "July'26": 7973.0,
+        "Aug'26": 7973.0,
+        "Sep'26": 7973.0,
+        "Oct'26": 7973.0
       }
     },
     {
@@ -5393,7 +6065,11 @@
         "Mar'26": 8874.0,
         "Apr'26": 1911.0,
         "May'26": 7714.0,
-        "June'26": 19871.0
+        "June'26": 19871.0,
+        "July'26": 13588.0,
+        "Aug'26": 14258.0,
+        "Sep'26": 25447.0,
+        "Oct'26": 14913.0
       }
     },
     {
@@ -5425,7 +6101,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -5457,7 +6137,11 @@
         "Mar'26": 6500.0,
         "Apr'26": 4000.0,
         "May'26": 500.0,
-        "June'26": 2000.0
+        "June'26": 2000.0,
+        "July'26": 6300.0,
+        "Aug'26": 1900.0,
+        "Sep'26": 14500.0,
+        "Oct'26": 1500.0
       }
     },
     {
@@ -5489,7 +6173,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -5521,7 +6209,11 @@
         "Mar'26": 501.0,
         "Apr'26": 500.0,
         "May'26": 2000.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 2000.0,
+        "Aug'26": 1500.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -5553,7 +6245,11 @@
         "Mar'26": 440.0,
         "Apr'26": 130.0,
         "May'26": 420.0,
-        "June'26": 200.0
+        "June'26": 200.0,
+        "July'26": 70.0,
+        "Aug'26": 60.0,
+        "Sep'26": 30.0,
+        "Oct'26": 30.0
       }
     },
     {
@@ -5585,7 +6281,11 @@
         "Mar'26": 5000.0,
         "Apr'26": 16801.0,
         "May'26": 14500.0,
-        "June'26": 7200.0
+        "June'26": 7200.0,
+        "July'26": 10000.0,
+        "Aug'26": 12000.0,
+        "Sep'26": 15000.0,
+        "Oct'26": 4000.0
       }
     },
     {
@@ -5617,7 +6317,11 @@
         "Mar'26": 1650.0,
         "Apr'26": 116.92,
         "May'26": 146.25,
-        "June'26": 139.42
+        "June'26": 139.42,
+        "July'26": 99.62,
+        "Aug'26": 113.17,
+        "Sep'26": 101.43,
+        "Oct'26": 72.1
       }
     },
     {
@@ -5649,7 +6353,11 @@
         "Mar'26": 1038969.0,
         "Apr'26": 950457.4400000001,
         "May'26": 2841209.25,
-        "June'26": 2212574.42
+        "June'26": 2212574.42,
+        "July'26": 2326972.62,
+        "Aug'26": 2236574.17,
+        "Sep'26": 2580404.43,
+        "Oct'26": 2331984.1
       }
     },
     {
@@ -5681,7 +6389,47 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 10000.0,
-        "June'26": 4000.0
+        "June'26": 4000.0,
+        "July'26": 11500.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
+      }
+    },
+    {
+      "line_item": "Lift Project Payments",
+      "monthly_values": {
+        "Apr'24": 0.0,
+        "May'24": 0.0,
+        "Jun'24": 0.0,
+        "Jul'24": 0.0,
+        "Aug'24": 0.0,
+        "Sep'24": 0.0,
+        "Oct'24": 0.0,
+        "Nov'24": 0.0,
+        "Dec'24": 0.0,
+        "Jan'25": 0.0,
+        "Feb'25": 0.0,
+        "Mar'25": 0.0,
+        "Apr'25": 0.0,
+        "May'25": 0.0,
+        "Jun'25": 0.0,
+        "Jul'25": 0.0,
+        "Aug'25": 0.0,
+        "Sep'25": 0.0,
+        "Oct'25": 0.0,
+        "Nov'25": 0.0,
+        "Dec'25": 0.0,
+        "Jan'26": 0.0,
+        "Feb'26": 0.0,
+        "Mar'26": 0.0,
+        "Apr'26": 0.0,
+        "May'26": 0.0,
+        "June'26": 0.0,
+        "July'26": 2697000.0,
+        "Aug'26": 0.0,
+        "Sep'26": 250000.0,
+        "Oct'26": 3182460.0
       }
     },
     {
@@ -5713,7 +6461,11 @@
         "Mar'26": 37657.0,
         "Apr'26": 37657.0,
         "May'26": 67657.0,
-        "June'26": 38317.0
+        "June'26": 38317.0,
+        "July'26": 37657.0,
+        "Aug'26": 37657.0,
+        "Sep'26": 37657.0,
+        "Oct'26": 38657.0
       }
     },
     {
@@ -5745,7 +6497,11 @@
         "Mar'26": 232922.0,
         "Apr'26": 281916.0,
         "May'26": 282285.0,
-        "June'26": 318371.0
+        "June'26": 318371.0,
+        "July'26": 296187.0,
+        "Aug'26": 301430.0,
+        "Sep'26": 297323.0,
+        "Oct'26": 293787.0
       }
     },
     {
@@ -5777,7 +6533,11 @@
         "Mar'26": 126951.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -5809,7 +6569,11 @@
         "Mar'26": 194401.0,
         "Apr'26": 190703.0,
         "May'26": 201552.0,
-        "June'26": 207730.0
+        "June'26": 207730.0,
+        "July'26": 184422.0,
+        "Aug'26": 290470.0,
+        "Sep'26": 296204.0,
+        "Oct'26": 281467.0
       }
     },
     {
@@ -5841,7 +6605,11 @@
         "Mar'26": 33041.0,
         "Apr'26": 32054.0,
         "May'26": 59618.0,
-        "June'26": 38842.0
+        "June'26": 38842.0,
+        "July'26": 32342.0,
+        "Aug'26": 32975.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -5873,7 +6641,11 @@
         "Mar'26": 24750.0,
         "Apr'26": 24750.0,
         "May'26": 24750.0,
-        "June'26": 24750.0
+        "June'26": 24750.0,
+        "July'26": 30195.0,
+        "Aug'26": 26250.0,
+        "Sep'26": 26250.0,
+        "Oct'26": 26250.0
       }
     },
     {
@@ -5905,7 +6677,11 @@
         "Mar'26": 17820.0,
         "Apr'26": 17820.0,
         "May'26": 17820.0,
-        "June'26": 17820.0
+        "June'26": 17820.0,
+        "July'26": 21384.0,
+        "Aug'26": 21384.0,
+        "Sep'26": 21384.0,
+        "Oct'26": 21384.0
       }
     },
     {
@@ -5937,7 +6713,11 @@
         "Mar'26": 186081.0,
         "Apr'26": 0.0,
         "May'26": 251289.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 109332.0,
+        "Aug'26": 0.0,
+        "Sep'26": 227210.0,
+        "Oct'26": 215298.0
       }
     },
     {
@@ -5969,7 +6749,11 @@
         "Mar'26": 46000.0,
         "Apr'26": 0.0,
         "May'26": 46000.0,
-        "June'26": 23818.0
+        "June'26": 23818.0,
+        "July'26": 46000.0,
+        "Aug'26": 23000.0,
+        "Sep'26": 23000.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6001,7 +6785,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6033,7 +6821,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6065,7 +6857,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6097,7 +6893,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6129,7 +6929,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 17500.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6161,7 +6965,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6193,7 +7001,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6225,7 +7037,47 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
+      }
+    },
+    {
+      "line_item": "Bio Metric Attendance Machine",
+      "monthly_values": {
+        "Apr'24": 0.0,
+        "May'24": 0.0,
+        "Jun'24": 0.0,
+        "Jul'24": 0.0,
+        "Aug'24": 0.0,
+        "Sep'24": 0.0,
+        "Oct'24": 0.0,
+        "Nov'24": 0.0,
+        "Dec'24": 0.0,
+        "Jan'25": 0.0,
+        "Feb'25": 0.0,
+        "Mar'25": 0.0,
+        "Apr'25": 0.0,
+        "May'25": 0.0,
+        "Jun'25": 0.0,
+        "Jul'25": 0.0,
+        "Aug'25": 0.0,
+        "Sep'25": 0.0,
+        "Oct'25": 0.0,
+        "Nov'25": 0.0,
+        "Dec'25": 0.0,
+        "Jan'26": 0.0,
+        "Feb'26": 0.0,
+        "Mar'26": 0.0,
+        "Apr'26": 0.0,
+        "May'26": 0.0,
+        "June'26": 0.0,
+        "July'26": 11500.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6257,7 +7109,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6289,7 +7145,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 24699.0,
-        "June'26": 22238.0
+        "June'26": 22238.0,
+        "July'26": 0.0,
+        "Aug'26": 8850.0,
+        "Sep'26": 37036.0,
+        "Oct'26": 8150.0
       }
     },
     {
@@ -6321,7 +7181,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6353,7 +7217,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6385,7 +7253,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 10000.0
       }
     },
     {
@@ -6417,7 +7289,47 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
+      }
+    },
+    {
+      "line_item": "Salary Advance- Manager",
+      "monthly_values": {
+        "Apr'24": 0.0,
+        "May'24": 0.0,
+        "Jun'24": 0.0,
+        "Jul'24": 0.0,
+        "Aug'24": 0.0,
+        "Sep'24": 0.0,
+        "Oct'24": 0.0,
+        "Nov'24": 0.0,
+        "Dec'24": 0.0,
+        "Jan'25": 0.0,
+        "Feb'25": 0.0,
+        "Mar'25": 0.0,
+        "Apr'25": 0.0,
+        "May'25": 0.0,
+        "Jun'25": 0.0,
+        "Jul'25": 0.0,
+        "Aug'25": 0.0,
+        "Sep'25": 0.0,
+        "Oct'25": 0.0,
+        "Nov'25": 0.0,
+        "Dec'25": 0.0,
+        "Jan'26": 0.0,
+        "Feb'26": 0.0,
+        "Mar'26": 0.0,
+        "Apr'26": 0.0,
+        "May'26": 0.0,
+        "June'26": 0.0,
+        "July'26": 30000.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6449,7 +7361,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6481,7 +7397,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 350.0,
+        "Sep'26": 0.0,
+        "Oct'26": 46000.0
       }
     },
     {
@@ -6513,7 +7433,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6545,7 +7469,11 @@
         "Mar'26": 264.42,
         "Apr'26": 169.0,
         "May'26": 335.90000000000003,
-        "June'26": 105.08
+        "June'26": 105.08,
+        "July'26": 60.89,
+        "Aug'26": 109.78999999999999,
+        "Sep'26": 109.78999999999999,
+        "Oct'26": 109.78999999999999
       }
     },
     {
@@ -6577,7 +7505,11 @@
         "Mar'26": 18196.0,
         "Apr'26": 18196.0,
         "May'26": 18818.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 19758.0,
+        "Aug'26": 19758.0,
+        "Sep'26": 0.0,
+        "Oct'26": 39516.0
       }
     },
     {
@@ -6609,7 +7541,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 28139.0,
+        "Sep'26": 791.0,
+        "Oct'26": 43086.0
       }
     },
     {
@@ -6641,7 +7577,11 @@
         "Mar'26": 7710.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 12165.0,
+        "Sep'26": 2200.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6673,7 +7613,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6705,7 +7649,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6737,7 +7685,11 @@
         "Mar'26": 2000.0,
         "Apr'26": 0.0,
         "May'26": 4000.0,
-        "June'26": 2000.0
+        "June'26": 2000.0,
+        "July'26": 2000.0,
+        "Aug'26": 2000.0,
+        "Sep'26": 0.0,
+        "Oct'26": 2000.0
       }
     },
     {
@@ -6769,7 +7721,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6801,7 +7757,11 @@
         "Mar'26": 4699.0,
         "Apr'26": 472.0,
         "May'26": 0.0,
-        "June'26": 1264.0
+        "June'26": 1264.0,
+        "July'26": 1333.0,
+        "Aug'26": 3229.0,
+        "Sep'26": 1410.0,
+        "Oct'26": 509.0
       }
     },
     {
@@ -6833,7 +7793,11 @@
         "Mar'26": 6211.0,
         "Apr'26": 0.0,
         "May'26": 1218.0,
-        "June'26": 9896.0
+        "June'26": 9896.0,
+        "July'26": 5412.0,
+        "Aug'26": 3682.0,
+        "Sep'26": 2642.0,
+        "Oct'26": 4804.0
       }
     },
     {
@@ -6865,7 +7829,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 787.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 219.0,
+        "Aug'26": 219.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6897,7 +7865,11 @@
         "Mar'26": 2000.0,
         "Apr'26": 0.0,
         "May'26": 4000.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 4000.0,
+        "Aug'26": 2000.0,
+        "Sep'26": 2000.0,
+        "Oct'26": 2000.0
       }
     },
     {
@@ -6929,7 +7901,11 @@
         "Mar'26": 0.0,
         "Apr'26": 4765.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6961,7 +7937,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 65000.0,
-        "June'26": 70600.0
+        "June'26": 70600.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -6993,7 +7973,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7025,7 +8009,11 @@
         "Mar'26": 6419.0,
         "Apr'26": 0.0,
         "May'26": 6500.0,
-        "June'26": 126951.0
+        "June'26": 126951.0,
+        "July'26": 0.0,
+        "Aug'26": 600.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7057,7 +8045,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7089,7 +8081,11 @@
         "Mar'26": 40602.0,
         "Apr'26": 5000.0,
         "May'26": 65039.0,
-        "June'26": 44850.0
+        "June'26": 44850.0,
+        "July'26": 30492.0,
+        "Aug'26": 14850.0,
+        "Sep'26": 18100.0,
+        "Oct'26": 55000.0
       }
     },
     {
@@ -7121,7 +8117,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 6500.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7153,7 +8153,11 @@
         "Mar'26": 730.0,
         "Apr'26": 1800.0,
         "May'26": 40703.0,
-        "June'26": 10176.0
+        "June'26": 10176.0,
+        "July'26": 49772.0,
+        "Aug'26": 24268.0,
+        "Sep'26": 10290.0,
+        "Oct'26": 45050.0
       }
     },
     {
@@ -7185,7 +8189,11 @@
         "Mar'26": 2850.0,
         "Apr'26": 48438.0,
         "May'26": 38800.0,
-        "June'26": 7100.0
+        "June'26": 7100.0,
+        "July'26": 6700.0,
+        "Aug'26": 12950.0,
+        "Sep'26": 3757.0,
+        "Oct'26": 11954.0
       }
     },
     {
@@ -7217,7 +8225,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 7500.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7249,7 +8261,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 1950.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7281,7 +8297,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7313,7 +8333,11 @@
         "Mar'26": 46340.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7345,7 +8369,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 2000.0
+        "June'26": 2000.0,
+        "July'26": 0.0,
+        "Aug'26": 1500.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7377,7 +8405,11 @@
         "Mar'26": 0.0,
         "Apr'26": 30000.0,
         "May'26": 0.0,
-        "June'26": 28200.0
+        "June'26": 28200.0,
+        "July'26": 18000.0,
+        "Aug'26": 18000.0,
+        "Sep'26": 18000.0,
+        "Oct'26": 18000.0
       }
     },
     {
@@ -7409,7 +8441,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7441,7 +8477,11 @@
         "Mar'26": 0.0,
         "Apr'26": 0.0,
         "May'26": 0.0,
-        "June'26": 0.0
+        "June'26": 0.0,
+        "July'26": 0.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7473,7 +8513,11 @@
         "Mar'26": 23000.0,
         "Apr'26": 23000.0,
         "May'26": 23000.0,
-        "June'26": 28388.0
+        "June'26": 28388.0,
+        "July'26": 20142.0,
+        "Aug'26": 0.0,
+        "Sep'26": 0.0,
+        "Oct'26": 0.0
       }
     },
     {
@@ -7505,7 +8549,11 @@
         "Mar'26": 1060644.42,
         "Apr'26": 716740.0,
         "May'26": 1255820.9,
-        "June'26": 1027416.08
+        "June'26": 1027416.08,
+        "July'26": 3689407.89,
+        "Aug'26": 885835.79,
+        "Sep'26": 1282863.79,
+        "Oct'26": 4345481.79
       }
     },
     {
@@ -7537,7 +8585,11 @@
         "Mar'26": 1288935.6800000002,
         "Apr'26": 1522653.12,
         "May'26": 3108041.47,
-        "June'26": 4293199.8100000005
+        "June'26": 4293199.8100000005,
+        "July'26": 2930764.5400000005,
+        "Aug'26": 4281502.920000001,
+        "Sep'26": 5579043.560000001,
+        "Oct'26": 3565545.870000002
       }
     },
     {
@@ -7569,7 +8621,11 @@
         "Mar'26": 611060.23,
         "Apr'26": 786408.67,
         "May'26": 580380.02,
-        "June'26": 575867.36
+        "June'26": 575867.36,
+        "July'26": 628112.09,
+        "Aug'26": 760420.47,
+        "Sep'26": 860321.11,
+        "Oct'26": 669824.42
       }
     },
     {
@@ -7601,7 +8657,11 @@
         "Mar'26": 114804.55,
         "Apr'26": 114804.55,
         "May'26": 114804.55,
-        "June'26": 114804.55
+        "June'26": 114804.55,
+        "July'26": 114804.55,
+        "Aug'26": 114804.55,
+        "Sep'26": 114804.55,
+        "Oct'26": 114804.55
       }
     },
     {
@@ -7633,7 +8693,11 @@
         "Mar'26": 502817.9,
         "Apr'26": 544728.9,
         "May'26": 2274755.9,
-        "June'26": 3412849.9
+        "June'26": 3412849.9,
+        "July'26": 1994561.9,
+        "Aug'26": 3204547.9,
+        "Sep'26": 4269369.9,
+        "Oct'26": 2348994.9
       }
     },
     {
@@ -7665,7 +8729,11 @@
         "Mar'26": 60253.0,
         "Apr'26": 76711.0,
         "May'26": 138101.0,
-        "June'26": 189678.0
+        "June'26": 189678.0,
+        "July'26": 193286.0,
+        "Aug'26": 201730.0,
+        "Sep'26": 334548.0,
+        "Oct'26": 431922.0
       }
     }
   ]
